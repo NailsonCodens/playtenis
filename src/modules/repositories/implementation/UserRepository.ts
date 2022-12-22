@@ -1,4 +1,5 @@
-import { User } from "../../models/User";
+import { User } from "../../entities/User";
+import { IUserDTO } from "../../useCases/users/IUserDTO";
 import { IUserRepository } from "../IUserRepository";
 
 class UserRepository implements IUserRepository {
@@ -8,14 +9,20 @@ class UserRepository implements IUserRepository {
     this.users = [];
   }
 
-  all(): User[] {
+  list(): User[] {
     return this.users;
   }
   findById(id: string): User {
     const user = this.users.find((user) => user.id === id);
     return user;
   }
-  create({ name, login, password }: User): void {
+
+  findByLogin(login: string): User {
+    const user = this.users.find((user) => user.login === login);
+    return user;
+  }
+
+  create({ name, login, password }: IUserDTO): void {
     const user = new User();
 
     Object.assign(user, {
@@ -26,7 +33,7 @@ class UserRepository implements IUserRepository {
 
     this.users.push(user);
   }
-  update({ id, name, login, password }: User): User {
+  update({ id, name, login, password }: IUserDTO): User {
     const user = this.findById(id);
 
     Object.assign(user, {

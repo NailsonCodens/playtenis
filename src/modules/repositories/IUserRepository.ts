@@ -1,10 +1,12 @@
-import { User } from "../models/User";
+import { User } from "../entities/User";
+import { IUserDTO } from "../useCases/users/IUserDTO";
 
 interface IUserRepository {
-  all(): User[];
   findById(id: string): User;
-  create({ name, login, password }: User): void;
-  update({ id, name, login, password }: User): User;
+  findByLogin(login: string): User;
+  list(): User[];
+  create({ name, login, password }: IUserDTO): void;
+  update({ id, name, login, password }: IUserDTO): User;
 }
 
 export { IUserRepository };
