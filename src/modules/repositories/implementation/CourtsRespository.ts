@@ -23,21 +23,23 @@ class CourtsRepository implements ICourtsRepository {
     return this.courts;
   }
 
-  async create({ name }: ICourtDTO): Promise<void> {
+  async create({ name, status }: ICourtDTO): Promise<void> {
     const court = new Courts();
 
     Object.assign(court, {
       name,
+      status,
     });
 
     this.courts.push(court);
   }
 
-  async update({ id, name }: ICourtDTO): Promise<void> {
+  async update({ id, name, status }: ICourtDTO): Promise<void> {
     const court = this.findById(id);
 
     Object.assign(court, {
       name,
+      status,
       updated_at: new Date(),
     });
   }
