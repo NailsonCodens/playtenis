@@ -11,7 +11,7 @@ generalRoutes.get("/", (request, response) => {
 });
 
 generalRoutes.use("/users", userRoute);
-generalRoutes.use("courts", courtRouter);
+generalRoutes.use("/courts", courtRouter);
 generalRoutes.use("/players", membersRoute);
 
 export { generalRoutes };
