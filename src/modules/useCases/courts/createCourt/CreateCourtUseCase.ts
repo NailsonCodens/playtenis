@@ -10,14 +10,14 @@ class CreateCourtUseCase {
     private courtsRepository: ICourtsRepository
   ) {}
 
-  async execute({ name }: ICourtDTO): Promise<void> {
+  async execute({ name, status }: ICourtDTO): Promise<void> {
     const courtAlredyExists = await this.courtsRepository.findByCourt(name);
 
     if (courtAlredyExists) {
       throw new Error("Esta quadra já está cadastrada.");
     }
 
-    this.courtsRepository.create({ name });
+    this.courtsRepository.create({ name, status });
   }
 }
 
