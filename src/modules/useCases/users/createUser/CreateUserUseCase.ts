@@ -1,13 +1,17 @@
+import { inject, injectable } from "tsyringe";
+
 import { IUserRepository } from "../../../repositories/IUserRepository";
 import { IUserDTO } from "../IUserDTO";
 
+@injectable()
 class CreateUserUseCase {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    @inject("UserRepository") private userRepository: IUserRepository
+  ) {}
 
-  execute({ name, surname, login, password }: IUserDTO): void {
-    const user = this.userRepository.findByLogin(login);
-    console.log(user);
-    if (user) {
+  async execute({ name, surname, login, password }: IUserDTO): Promise<void> {
+    const userAlredyExists = await this.userRepository.findByLogin(login);
+    if (userAlredyExists) {
       throw new Error(
         "Este usuário já existe, por favor tente com outro login"
       );
