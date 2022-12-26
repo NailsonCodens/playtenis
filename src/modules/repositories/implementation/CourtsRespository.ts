@@ -14,7 +14,7 @@ class CourtsRepository implements ICourtsRepository {
     return court;
   }
 
-  async findByCourt(name: string): Promise<Courts> {
+  async findByName(name: string): Promise<Courts> {
     const court = this.courts.find((court) => court.name === name);
     return court;
   }

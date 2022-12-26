@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { Courts } from "../../../entities/Courts";
-import { CourtsRepository } from "../../../repositories/implementation/CourtsRespoitory";
+import { CourtsRepository } from "../../../repositories/implementation/CourtsRespository";
 
 @injectable()
 class ListCourtUseCase {
