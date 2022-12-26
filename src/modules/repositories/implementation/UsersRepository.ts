@@ -1,29 +1,29 @@
-import { User } from "../../entities/Users";
+import { Users } from "../../entities/Users";
 import { IUserDTO } from "../../useCases/users/IUserDTO";
 import { IUserRepository } from "../IUserRepository";
 
-class UserRepository implements IUserRepository {
-  private users: User[];
+class UsersRepository implements IUserRepository {
+  private users: Users[];
 
   constructor() {
     this.users = [];
   }
 
-  list(): User[] {
+  list(): Users[] {
     return this.users;
   }
-  findById(id: string): User {
+  findById(id: string): Users {
     const user = this.users.find((user) => user.id === id);
     return user;
   }
 
-  findByLogin(login: string): User {
+  findByLogin(login: string): Users {
     const user = this.users.find((user) => user.login === login);
     return user;
   }
 
   create({ name, login, password }: IUserDTO): void {
-    const user = new User();
+    const user = new Users();
 
     Object.assign(user, {
       name,
@@ -33,7 +33,7 @@ class UserRepository implements IUserRepository {
 
     this.users.push(user);
   }
-  update({ id, name, login, password }: IUserDTO): User {
+  update({ id, name, login, password }: IUserDTO): Users {
     const user = this.findById(id);
 
     Object.assign(user, {
@@ -47,4 +47,4 @@ class UserRepository implements IUserRepository {
   }
 }
 
-export { UserRepository };
+export { UsersRepository };
