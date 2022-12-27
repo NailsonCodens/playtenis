@@ -9,11 +9,25 @@ class ModalitiesRepository implements IModalitiesRepository {
     this.modalities = [];
   }
 
-  create(data: ICreateModalityDTO): Promise<void> {
-    throw new Error("Method not implemented.");
+  async create({
+    name,
+    amount_players,
+    time,
+    status,
+  }: ICreateModalityDTO): Promise<void> {
+    const modality = new Modalities();
+
+    Object.assign(modality, {
+      name,
+      amount_players,
+      time,
+      status,
+    });
+
+    this.modalities.push(modality);
   }
-  list(): Promise<Modalities[]> {
-    throw new Error("Method not implemented.");
+  list(): Modalities[] {
+    return this.modalities;
   }
 }
 

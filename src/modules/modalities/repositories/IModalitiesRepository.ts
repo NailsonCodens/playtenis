@@ -3,7 +3,7 @@ import { Modalities } from "../entities/Modalities";
 
 interface IModalitiesRepository {
   create(data: ICreateModalityDTO): Promise<void>;
-  list(): Promise<Modalities[]>;
+  list(): Modalities[];
 }
 
 export { IModalitiesRepository };
