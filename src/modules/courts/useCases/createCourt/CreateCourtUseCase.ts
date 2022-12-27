@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { ICourtsRepository } from "../../../repositories/ICourtsRepository";
-import { ICourtDTO } from "../ICourtDTO";
+import { ICourtDTO } from "../../dtos/ICourtDTO";
+import { ICourtsRepository } from "../../repositories/ICourtsRepository";
 
 @injectable()
 class CreateCourtUseCase {

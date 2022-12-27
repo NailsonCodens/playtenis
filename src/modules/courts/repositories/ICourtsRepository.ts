@@ -1,5 +1,5 @@
+import { ICourtDTO } from "../dtos/ICourtDTO";
 import { Courts } from "../entities/Courts";
-import { ICourtDTO } from "../useCases/courts/ICourtDTO";
 
 interface ICourtsRepository {
   findById(id: string): Promise<Courts>;

@@ -1,5 +1,5 @@
+import { ICourtDTO } from "../../dtos/ICourtDTO";
 import { Courts } from "../../entities/Courts";
-import { ICourtDTO } from "../../useCases/courts/ICourtDTO";
 import { ICourtsRepository } from "../ICourtsRepository";
 
 class CourtsRepository implements ICourtsRepository {

@@ -1,5 +1,5 @@
+import { IUserDTO } from "../../dtos/IUserDTO";
 import { Users } from "../../entities/Users";
-import { IUserDTO } from "../../useCases/users/IUserDTO";
 import { IUserRepository } from "../IUserRepository";
 
 class UsersRepository implements IUserRepository {

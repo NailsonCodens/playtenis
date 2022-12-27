@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { IUserRepository } from "../../../repositories/IUserRepository";
-import { IUserDTO } from "../IUserDTO";
+import { IUserDTO } from "../../dtos/IUserDTO";
+import { IUserRepository } from "../../repositories/IUserRepository";
 
 @injectable()
 class CreateUserUseCase {

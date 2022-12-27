@@ -1,0 +1,3 @@
+class Modalities {}
+
+export { Modalities };

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { CreateCourtController } from "../modules/useCases/courts/createCourt/CreateCourtController";
+import { CreateCourtController } from "../modules/courts/useCases/createCourt/CreateCourtController";
 
 const courtRouter = Router();
 
