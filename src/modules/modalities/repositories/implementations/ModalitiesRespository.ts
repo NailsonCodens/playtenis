@@ -38,6 +38,11 @@ class ModalitiesRespository implements IModalitiesRepository {
     return modality;
   }
 
+  async findById(id: string): Promise<Modalities> {
+    const modality = await this.repository.findOneBy({ id });
+    return modality;
+  }
+
   async update({
     id,
     name,
