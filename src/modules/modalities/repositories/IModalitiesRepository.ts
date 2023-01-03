@@ -3,7 +3,8 @@ import { Modalities } from "../entities/Modalities";
 
 interface IModalitiesRepository {
   create(data: ICreateModalityDTO): Promise<void>;
-  list(): Modalities[];
+  list(): Promise<Modalities[]>;
+  findByName(name: string): Promise<Modalities>;
 }
 
 export { IModalitiesRepository };

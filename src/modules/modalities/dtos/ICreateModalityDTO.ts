@@ -2,7 +2,7 @@ interface ICreateModalityDTO {
   name: string;
   amount_players: string;
   time: number;
-  status: number;
+  status: string;
 }
 
 export { ICreateModalityDTO };
