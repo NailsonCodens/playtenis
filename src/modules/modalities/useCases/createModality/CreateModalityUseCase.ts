@@ -19,7 +19,7 @@ class CreateModalityUseCase {
     const modality = await this.modalitiesRepository.findByName(name);
 
     if (modality) {
-      throw new Error("This is modality alredy exists");
+      throw new Error("Esta modalidade já existe");
     }
 
     await this.modalitiesRepository.create({

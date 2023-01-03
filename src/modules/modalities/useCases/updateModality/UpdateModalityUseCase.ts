@@ -18,6 +18,12 @@ class UpdateModalityUseCase {
     time,
     status,
   }: ICreateModalityDTO): Promise<Modalities> {
+    const modalityAlredyExists = await this.modalitiesRepository.findById(id);
+
+    if (!modalityAlredyExists) {
+      throw new Error("Esta modalidade não existe");
+    }
+
     const updateModalityUseCase = await this.modalitiesRepository.update({
       id,
       name,
