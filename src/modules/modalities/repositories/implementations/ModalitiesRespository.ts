@@ -37,6 +37,29 @@ class ModalitiesRespository implements IModalitiesRepository {
     const modality = await this.repository.findOneBy({ name });
     return modality;
   }
+
+  async update({
+    id,
+    name,
+    amount_players,
+    time,
+    status,
+  }: ICreateModalityDTO): Promise<Modalities> {
+    await this.repository.update(id, {
+      name,
+      amount_players,
+      time,
+      status,
+    });
+
+    const updatedModality = await this.repository.findOneBy({ id });
+
+    return updatedModality;
+  }
+
+  async delete(id: string): Promise<void> {
+    console.log(id);
+  }
 }
 
 export { ModalitiesRespository };
