@@ -1,47 +1,54 @@
+import { Repository } from "typeorm";
+
+import { AppDataSource } from "../../../../database/data-source";
 import { ICourtDTO } from "../../dtos/ICourtDTO";
 import { Courts } from "../../entities/Courts";
 import { ICourtsRepository } from "../ICourtsRepository";
 
 class CourtsRepository implements ICourtsRepository {
-  private courts: Courts[];
+  private repository: Repository<Courts>;
 
   constructor() {
-    this.courts = [];
+    this.repository = AppDataSource.getRepository(Courts);
+  }
+
+  async list(): Promise<Courts[]> {
+    const courts = await this.repository.find();
+    return courts;
   }
 
   async findById(id: string): Promise<Courts> {
-    const court = this.courts.find((court) => court.id === id);
+    const court = await this.repository.findOneBy({ id });
     return court;
   }
 
   async findByName(name: string): Promise<Courts> {
-    const court = this.courts.find((court) => court.name === name);
+    const court = await this.repository.findOneBy({ name });
     return court;
   }
 
-  async all(): Promise<Courts[]> {
-    return this.courts;
-  }
-
   async create({ name, status }: ICourtDTO): Promise<void> {
-    const court = new Courts();
-
-    Object.assign(court, {
+    const court = this.repository.create({
       name,
       status,
     });
 
-    this.courts.push(court);
+    await this.repository.save(court);
   }
 
-  async update({ id, name, status }: ICourtDTO): Promise<void> {
-    const court = this.findById(id);
-
-    Object.assign(court, {
+  async update({ id, name, status }: ICourtDTO): Promise<Courts> {
+    await this.repository.update(id, {
       name,
       status,
-      updated_at: new Date(),
     });
+
+    const court = await this.repository.findOneBy({ id });
+
+    return court;
+  }
+
+  async delete(id: string): Promise<void> {
+    console.log(id);
   }
 }
 
