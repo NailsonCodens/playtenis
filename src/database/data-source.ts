@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
+import { Courts } from "../modules/courts/entities/Courts";
 import { Modalities } from "../modules/modalities/entities/Modalities";
 
 export const AppDataSource = new DataSource({
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   migrations: ["./src/database/migrations/*.ts"],
-  entities: [Modalities],
+  entities: [Modalities, Courts],
 });
 
 AppDataSource.initialize();
