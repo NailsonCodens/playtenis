@@ -10,7 +10,7 @@ class ListCourtUseCase {
   ) {}
 
   async execute(): Promise<Courts[]> {
-    const courts = await this.courtsRepository.all();
+    const courts = await this.courtsRepository.list();
 
     return courts;
   }
