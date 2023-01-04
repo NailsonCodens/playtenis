@@ -11,7 +11,7 @@ export class CreateCourts1672857888372 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "court",
+            name: "name",
             type: "varchar",
           },
           {
