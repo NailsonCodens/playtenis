@@ -12,6 +12,21 @@ class ModalitiesRespository implements IModalitiesRepository {
     this.repository = AppDataSource.getRepository(Modalities);
   }
 
+  async list(): Promise<Modalities[]> {
+    const modalities = await this.repository.find();
+    return modalities;
+  }
+
+  async findByName(name): Promise<Modalities> {
+    const modality = await this.repository.findOneBy({ name });
+    return modality;
+  }
+
+  async findById(id: string): Promise<Modalities> {
+    const modality = await this.repository.findOneBy({ id });
+    return modality;
+  }
+
   async create({
     name,
     amount_players,
@@ -26,21 +41,6 @@ class ModalitiesRespository implements IModalitiesRepository {
     });
 
     await this.repository.save(modality);
-  }
-
-  async list(): Promise<Modalities[]> {
-    const modalities = await this.repository.find();
-    return modalities;
-  }
-
-  async findByName(name): Promise<Modalities> {
-    const modality = await this.repository.findOneBy({ name });
-    return modality;
-  }
-
-  async findById(id: string): Promise<Modalities> {
-    const modality = await this.repository.findOneBy({ id });
-    return modality;
   }
 
   async update({
