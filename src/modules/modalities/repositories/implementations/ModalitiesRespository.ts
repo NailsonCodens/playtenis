@@ -63,7 +63,7 @@ class ModalitiesRespository implements IModalitiesRepository {
   }
 
   async delete(id: string): Promise<void> {
-    console.log(id);
+    await this.repository.softDelete(id);
   }
 }
 
