@@ -1,12 +1,12 @@
 import { inject, injectable } from "tsyringe";
 
-import { ModalitiesRespository } from "../../repositories/implementations/ModalitiesRespository";
+import { IModalitiesRepository } from "../../repositories/IModalitiesRepository";
 
 @injectable()
 class DeleteModalityUseCase {
   constructor(
     @inject("ModalitiesRespository")
-    private modalityRepository: ModalitiesRespository
+    private modalityRepository: IModalitiesRepository
   ) {}
 
   async execute({ id }): Promise<void> {
