@@ -8,10 +8,12 @@ const courtRouter = Router();
 
 const createCourtController = new CreateCourtController();
 const listCourtController = new ListCourtController();
+
 const deleteCourtController = new DeleteCourtControler();
 
 courtRouter.post("/", createCourtController.handle);
 courtRouter.get("/", listCourtController.handle);
+
 courtRouter.delete("/", deleteCourtController.handle);
 
 export { courtRouter };
