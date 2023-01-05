@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
 
 import { ICreateModalityDTO } from "../../dtos/ICreateModalityDTO";
-import { ModalitiesRespository } from "../../repositories/implementations/ModalitiesRespository";
+import { IModalitiesRepository } from "../../repositories/IModalitiesRepository";
 
 @injectable()
 class CreateModalityUseCase {
   constructor(
     @inject("ModalitiesRespository")
-    private modalitiesRepository: ModalitiesRespository
+    private modalitiesRepository: IModalitiesRepository
   ) {}
 
   async execute({
