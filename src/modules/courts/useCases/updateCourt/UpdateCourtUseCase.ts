@@ -1,12 +1,12 @@
 import { inject, injectable } from "tsyringe";
 
 import { Courts } from "../../entities/Courts";
-import { CourtsRepository } from "../../repositories/implementation/CourtsRespository";
+import { ICourtsRepository } from "../../repositories/ICourtsRepository";
 
 @injectable()
 class UpdateCourtUseCase {
   constructor(
-    @inject("CourtsRepository") private courtsRepository: CourtsRepository
+    @inject("CourtsRepository") private courtsRepository: ICourtsRepository
   ) {}
 
   async execute({ id, name, status }): Promise<Courts> {
