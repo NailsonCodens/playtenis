@@ -3,13 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity()
 class Coachs {
-  @Column()
+  @PrimaryColumn()
   id: string;
 
   @Column()
