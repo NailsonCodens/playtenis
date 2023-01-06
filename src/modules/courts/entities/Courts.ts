@@ -20,13 +20,13 @@ class Courts {
   status: string;
 
   @CreateDateColumn()
-  created_at: string;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: string;
+  updated_at: Date;
 
   @DeleteDateColumn()
-  deleted_at: string;
+  deleted_at: Date;
 
   constructor() {
     if (!this.id) {
