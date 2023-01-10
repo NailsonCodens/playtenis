@@ -1,7 +1,6 @@
+import { Courts } from "@modules/courts/entities/Courts";
+import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { inject, injectable } from "tsyringe";
-
-import { Courts } from "../../entities/Courts";
-import { ICourtsRepository } from "../../repositories/ICourtsRepository";
 
 @injectable()
 class ListCourtUseCase {

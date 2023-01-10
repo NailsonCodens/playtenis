@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { ICreateModalityDTO } from "../../dtos/ICreateModalityDTO";
-import { IModalitiesRepository } from "../../repositories/IModalitiesRepository";
+import { ICreateModalityDTO } from "@modules/modalities/dtos/ICreateModalityDTO";
+import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 
 @injectable()
 class CreateModalityUseCase {

@@ -3,7 +3,7 @@ import { container } from "tsyringe";
 
 import { CreateModalityUseCase } from "./CreateModalityUseCase";
 
-class CreateModalityControler {
+class CreateModalityController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, amount_players, time, status } = request.body;
 
@@ -15,4 +15,4 @@ class CreateModalityControler {
   }
 }
 
-export { CreateModalityControler };
+export { CreateModalityController };

@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 
-import { AppDataSource } from "../../../../database/data-source";
-import { ICreateModalityDTO } from "../../dtos/ICreateModalityDTO";
-import { Modalities } from "../../entities/Modalities";
+import { AppDataSource } from "@database/data-source";
+import { ICreateModalityDTO } from "@modules/modalities/dtos/ICreateModalityDTO";
+import { Modalities } from "@modules/modalities/entities/Modalities";
+
 import { IModalitiesRepository } from "../IModalitiesRepository";
 
 class ModalitiesRespository implements IModalitiesRepository {

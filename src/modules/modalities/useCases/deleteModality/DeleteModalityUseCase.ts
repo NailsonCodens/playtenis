@@ -1,6 +1,5 @@
+import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { inject, injectable } from "tsyringe";
-
-import { IModalitiesRepository } from "../../repositories/IModalitiesRepository";
 
 @injectable()
 class DeleteModalityUseCase {

@@ -1,8 +1,8 @@
+import { AppDataSource } from "@database/data-source";
+import { ICreateCoachDTO } from "@modules/coachs/dtos/ICreateCoachDTO";
+import { Coachs } from "@modules/coachs/entities/Coachs";
 import { Repository } from "typeorm";
 
-import { AppDataSource } from "../../../../database/data-source";
-import { ICreateCoachDTO } from "../../dtos/ICreateCoachDTO";
-import { Coachs } from "../../entities/Coachs";
 import { ICoachsRepository } from "../ICoachsRepository";
 
 class CoachsRepository implements ICoachsRepository {

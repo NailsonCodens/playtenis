@@ -1,6 +1,5 @@
+import { ListCoachController } from "@modules/coachs/useCases/listCoachs/ListCoachController";
 import { Router } from "express";
-
-import { ListCoachController } from "../modules/coachs/useCases/listCoachs/ListCoachController";
 
 const coachsRoutes = Router();
 

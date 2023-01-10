@@ -1,5 +1,6 @@
-import { IUserDTO } from "../../dtos/IUserDTO";
-import { Users } from "../../entities/Users";
+import { IUserDTO } from "@modules/accounts/dtos/IUserDTO";
+import { Users } from "@modules/accounts/entities/Users";
+
 import { IUserRepository } from "../IUserRepository";
 
 class UsersRepository implements IUserRepository {

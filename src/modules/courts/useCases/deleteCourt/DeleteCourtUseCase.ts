@@ -1,6 +1,5 @@
+import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { inject, injectable } from "tsyringe";
-
-import { ICourtsRepository } from "../../repositories/ICourtsRepository";
 
 @injectable()
 class DeleteCourtUseCase {

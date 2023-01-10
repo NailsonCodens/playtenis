@@ -1,8 +1,8 @@
+import { AppDataSource } from "@database/data-source";
+import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
+import { Courts } from "@modules/courts/entities/Courts";
 import { Repository } from "typeorm";
 
-import { AppDataSource } from "../../../../database/data-source";
-import { ICourtDTO } from "../../dtos/ICourtDTO";
-import { Courts } from "../../entities/Courts";
 import { ICourtsRepository } from "../ICourtsRepository";
 
 class CourtsRepository implements ICourtsRepository {

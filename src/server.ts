@@ -1,7 +1,8 @@
 import express from "express";
 
-import "./database/data-source";
-import "./shared/container";
+import "@database/data-source";
+import "@shared/container";
+
 import { generalRoutes } from "./routes/routes";
 
 const app = express();

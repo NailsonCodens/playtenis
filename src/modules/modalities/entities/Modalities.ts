@@ -10,27 +10,20 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity("modalities")
 class Modalities {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
-
-  @Column()
+  @Column("varchar")
   name: string;
-
-  @Column()
+  @Column("varchar")
   amount_players: string;
-
-  @Column()
+  @Column("varchar")
   time: number;
-
-  @Column()
+  @Column("varchar")
   status: string;
-
   @CreateDateColumn()
   created_at: Date;
-
   @UpdateDateColumn()
   updated_at: Date;
-
   @DeleteDateColumn()
   deleted_at: Date;
 

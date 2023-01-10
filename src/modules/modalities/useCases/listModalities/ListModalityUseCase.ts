@@ -1,7 +1,6 @@
+import { Modalities } from "@modules/modalities/entities/Modalities";
+import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { inject, injectable } from "tsyringe";
-
-import { Modalities } from "../../entities/Modalities";
-import { IModalitiesRepository } from "../../repositories/IModalitiesRepository";
 
 @injectable()
 class ListModalityUseCase {
