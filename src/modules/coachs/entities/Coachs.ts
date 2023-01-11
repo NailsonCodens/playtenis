@@ -10,10 +10,10 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity()
 class Coachs {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("varchar")
   name: string;
 
   @CreateDateColumn()
