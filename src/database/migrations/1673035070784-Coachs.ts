@@ -7,8 +7,12 @@ export class Coachs1673035070784 implements MigrationInterface {
         name: "coachs",
         columns: [
           {
-            name: "name",
+            name: "id",
             type: "uuid",
+          },
+          {
+            name: "name",
+            type: "varchar",
           },
           {
             name: "created_at",
