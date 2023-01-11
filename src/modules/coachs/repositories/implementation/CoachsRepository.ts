@@ -1,7 +1,8 @@
+import { Repository } from "typeorm";
+
 import { AppDataSource } from "@database/data-source";
 import { ICreateCoachDTO } from "@modules/coachs/dtos/ICreateCoachDTO";
 import { Coachs } from "@modules/coachs/entities/Coachs";
-import { Repository } from "typeorm";
 
 import { ICoachsRepository } from "../ICoachsRepository";
 
