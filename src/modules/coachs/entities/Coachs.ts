@@ -10,17 +10,17 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity()
 class Coachs {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("varchar")
   name: string;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
-  update_at: Date;
+  updated_at: Date;
 
   @DeleteDateColumn()
   deleted_at: Date;
