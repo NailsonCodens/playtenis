@@ -31,9 +31,16 @@ class CoachsRepositoryInMemory implements ICoachsRepository {
     this.coachs.push(coach);
   }
 
-  update(data: ICreateCoachDTO): Promise<Coachs> {
-    throw new Error("Method not implemented.");
+  async update({ id, name }: ICreateCoachDTO): Promise<Coachs> {
+    const coach = this.coachs.findIndex((coach) => coach.id === id);
+
+    this.coachs[coach].name = name;
+
+    const coachUpdated = this.coachs.find((coach) => coach.id === id);
+
+    return coachUpdated;
   }
+
   delete(id: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
