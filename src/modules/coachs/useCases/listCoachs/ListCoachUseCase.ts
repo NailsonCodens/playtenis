@@ -1,6 +1,7 @@
+import { injectable, inject } from "tsyringe";
+
 import { Coachs } from "@modules/coachs/entities/Coachs";
 import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepository";
-import { injectable, inject } from "tsyringe";
 
 @injectable()
 class ListCoachUseCase {

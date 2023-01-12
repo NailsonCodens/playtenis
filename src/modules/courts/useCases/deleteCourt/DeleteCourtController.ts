@@ -13,7 +13,7 @@ class DeleteCourtControler {
 
     return response
       .status(201)
-      .json({ message: "Modalidade deletada com sucesso" });
+      .json({ message: "Quadra deletada com sucesso" });
   }
 }
 

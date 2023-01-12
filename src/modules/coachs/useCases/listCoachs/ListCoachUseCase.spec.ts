@@ -1,6 +1,6 @@
 import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory/CoachsRepositoryInMemory";
 
-import { CreateCoachUseCase } from "../createCoachs/CreateCoachUseCase";
+import { CreateCoachUseCase } from "../createCoach/CreateCoachUseCase";
 import { ListCoachUseCase } from "./ListCoachUseCase";
 
 describe("Suite List Coachs", () => {

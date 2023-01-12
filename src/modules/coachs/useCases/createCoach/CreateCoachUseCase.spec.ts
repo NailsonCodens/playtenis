@@ -21,9 +21,9 @@ describe("Suite Create Coach", () => {
   });
 
   it("Should not be able to create a coach if already exists", async () => {
-    const name = "Coach one";
-
     expect(async () => {
+      const name = "Coach one";
+
       await createCoachUseCase.execute({ name });
 
       await createCoachUseCase.execute({ name });
