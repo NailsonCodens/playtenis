@@ -13,7 +13,7 @@ class DeleteCoachController {
 
     return response
       .status(201)
-      .json({ message: "Modalidade deletada com sucesso" });
+      .json({ message: "Professor deletada com sucesso" });
   }
 }
 

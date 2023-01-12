@@ -5,7 +5,7 @@ import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepositor
 @injectable()
 class DeleteCoachUseCase {
   constructor(
-    @inject("coachsRepository") private coachsRepository: ICoachsRepository
+    @inject("CoachsRepository") private coachsRepository: ICoachsRepository
   ) {}
 
   async execute({ id }): Promise<void> {

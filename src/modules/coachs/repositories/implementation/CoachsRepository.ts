@@ -45,7 +45,7 @@ class CoachsRepository implements ICoachsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.repository.delete(id);
+    await this.repository.softDelete(id);
   }
 }
 
