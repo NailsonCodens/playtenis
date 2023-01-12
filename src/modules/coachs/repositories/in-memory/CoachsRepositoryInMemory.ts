@@ -41,8 +41,9 @@ class CoachsRepositoryInMemory implements ICoachsRepository {
     return coachUpdated;
   }
 
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async delete(id: string): Promise<void> {
+    const coachIndex = this.coachs.findIndex((coach) => coach.id === id);
+    this.coachs.splice(coachIndex, 1);
   }
 }
 
