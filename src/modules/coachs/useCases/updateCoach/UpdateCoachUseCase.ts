@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
 import { ICreateCoachDTO } from "@modules/coachs/dtos/ICreateCoachDTO";
 import { Coachs } from "@modules/coachs/entities/Coachs";
 import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepository";
@@ -14,7 +15,7 @@ class UpdateCoachUseCase {
     const coachAlredyExists = await this.coachRepository.findById(id);
 
     if (!coachAlredyExists) {
-      throw new Error("Este professor não existe");
+      throw new AppError("Este professor não existe");
     }
 
     const coach = await this.coachRepository.update({ id, name });

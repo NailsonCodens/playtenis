@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
 import { ICreateCoachDTO } from "@modules/coachs/dtos/ICreateCoachDTO";
 import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepository";
 
@@ -13,7 +14,7 @@ class CreateCoachUseCase {
     const user = await this.coachsRepository.findByName(name);
 
     if (user) {
-      throw new Error("Este professor já existe");
+      throw new AppError("Este professor já existe");
     }
 
     await this.coachsRepository.create({ name });

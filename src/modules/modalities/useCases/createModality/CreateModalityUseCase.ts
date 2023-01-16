@@ -1,10 +1,11 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
 import { ICreateModalityDTO } from "@modules/modalities/dtos/ICreateModalityDTO";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 
 @injectable()
-class CreateModalityUseCase {
+export class CreateModalityUseCase {
   constructor(
     @inject("ModalitiesRespository")
     private modalitiesRepository: IModalitiesRepository
@@ -19,7 +20,7 @@ class CreateModalityUseCase {
     const modality = await this.modalitiesRepository.findByName(name);
 
     if (modality) {
-      throw new Error("Esta modalidade já existe");
+      throw new AppError("Esta modalidade já existe");
     }
 
     await this.modalitiesRepository.create({
@@ -30,5 +31,3 @@ class CreateModalityUseCase {
     });
   }
 }
-
-export { CreateModalityUseCase };
