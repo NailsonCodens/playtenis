@@ -1,6 +1,7 @@
+import { inject, injectable } from "tsyringe";
+
 import { Modalities } from "@modules/modalities/entities/Modalities";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
-import { inject, injectable } from "tsyringe";
 
 import { ICreateModalityDTO } from "../../dtos/ICreateModalityDTO";
 
