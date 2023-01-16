@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 
@@ -14,7 +15,7 @@ class CreateCourtUseCase {
     const courtAlredyExists = await this.courtsRepository.findByName(name);
 
     if (courtAlredyExists) {
-      throw new Error("Esta quadra já está cadastrada.");
+      throw new AppError("Esta quadra já está cadastrada.");
     }
 
     this.courtsRepository.create({ name, status });

@@ -6,17 +6,12 @@ import { CreateModalityUseCase } from "../createModality/CreateModalityUseCase";
 import { DeleteModalityUseCase } from "./DeleteModalityUseCase";
 
 let deleteModalityUseCase: DeleteModalityUseCase;
-let createModalityUseCase: CreateModalityUseCase;
 let modalityRepositoryInMemory: ModalityRepositoryInMemory;
 
 describe("Suite Delete modality", () => {
   beforeEach(() => {
     modalityRepositoryInMemory = new ModalityRepositoryInMemory();
     deleteModalityUseCase = new DeleteModalityUseCase(
-      modalityRepositoryInMemory
-    );
-
-    createModalityUseCase = new CreateModalityUseCase(
       modalityRepositoryInMemory
     );
   });

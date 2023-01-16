@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
 import { Courts } from "@modules/courts/entities/Courts";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 
@@ -13,7 +14,7 @@ class UpdateCourtUseCase {
     const courtAlredyExistsWithId = await this.courtsRepository.findById(id);
 
     if (!courtAlredyExistsWithId) {
-      throw new Error("Esta quadra não existe");
+      throw new AppError("Esta quadra não existe");
     }
 
     const courtAlredyExistsWithName = await this.courtsRepository.findByName(
@@ -22,7 +23,7 @@ class UpdateCourtUseCase {
 
     if (courtAlredyExistsWithName !== null) {
       if (courtAlredyExistsWithName.id !== id) {
-        throw new Error("Já existe uma outra quadra com este nome");
+        throw new AppError("Já existe uma outra quadra com este nome");
       }
     }
 
