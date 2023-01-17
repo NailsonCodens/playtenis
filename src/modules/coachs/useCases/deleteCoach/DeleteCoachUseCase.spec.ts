@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 
+import { AppError } from "@errors/AppError";
 import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory/CoachsRepositoryInMemory";
 
 import { CreateCoachUseCase } from "../createCoach/CreateCoachUseCase";
@@ -41,6 +42,6 @@ describe("Suite Delete Coach", () => {
       const id = uuidV4();
 
       await deleteCoachUseCase.execute({ id });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

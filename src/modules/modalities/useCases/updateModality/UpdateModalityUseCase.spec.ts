@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 
+import { AppError } from "@errors/AppError";
 import { ModalityRepositoryInMemory } from "@modules/modalities/repositories/in-memory/ModalityRepositoryInMemory";
 
 import { UpdateModalityUseCase } from "./UpdateModalityUseCase";
@@ -61,6 +62,6 @@ describe("Suite Update Modality", () => {
         time: 120,
         status: "ok",
       });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

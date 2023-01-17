@@ -2,7 +2,6 @@ import { v4 as uuidV4 } from "uuid";
 
 import { ModalityRepositoryInMemory } from "@modules/modalities/repositories/in-memory/ModalityRepositoryInMemory";
 
-import { CreateModalityUseCase } from "../createModality/CreateModalityUseCase";
 import { DeleteModalityUseCase } from "./DeleteModalityUseCase";
 
 let deleteModalityUseCase: DeleteModalityUseCase;

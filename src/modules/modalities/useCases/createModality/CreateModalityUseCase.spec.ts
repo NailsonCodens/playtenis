@@ -1,3 +1,4 @@
+import { AppError } from "@errors/AppError";
 import { ModalityRepositoryInMemory } from "@modules/modalities/repositories/in-memory/ModalityRepositoryInMemory";
 
 import { CreateModalityUseCase } from "./CreateModalityUseCase";
@@ -45,6 +46,6 @@ describe("Suite create modality", () => {
         time: 35,
         status: "ok",
       });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

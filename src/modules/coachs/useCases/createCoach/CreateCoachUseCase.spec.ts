@@ -1,3 +1,4 @@
+import { AppError } from "@errors/AppError";
 import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory/CoachsRepositoryInMemory";
 
 import { CreateCoachUseCase } from "./CreateCoachUseCase";
@@ -27,6 +28,6 @@ describe("Suite Create Coach", () => {
       await createCoachUseCase.execute({ name });
 
       await createCoachUseCase.execute({ name });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

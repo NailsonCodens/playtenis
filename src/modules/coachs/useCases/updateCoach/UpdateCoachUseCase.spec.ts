@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 
+import { AppError } from "@errors/AppError";
 import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory/CoachsRepositoryInMemory";
 
 import { CreateCoachUseCase } from "../createCoach/CreateCoachUseCase";
@@ -39,6 +40,6 @@ describe("Suite UpdateCoach", () => {
 
       const id = uuidV4();
       await updateCoachUseCase.execute({ id, name });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });
