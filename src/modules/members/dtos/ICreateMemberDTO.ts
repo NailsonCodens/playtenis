@@ -1,7 +1,7 @@
 interface ICreateMemberDTO {
   id?: string;
   name: string;
-  registratrion: string;
+  registration: string;
   status: string;
 }
 
