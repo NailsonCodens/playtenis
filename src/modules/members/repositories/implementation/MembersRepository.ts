@@ -46,8 +46,17 @@ class MembersRepository implements IMembersRepository {
     const members = await this.repository.find();
     return members;
   }
-  update(data: ICreateMemberDTO): Promise<Members> {
-    throw new Error("Method not implemented.");
+  async update({
+    id,
+    name,
+    registration,
+    status,
+  }: ICreateMemberDTO): Promise<Members> {
+    await this.repository.update(id, { name, registration, status });
+
+    const memberUpdated = await this.repository.findOneBy({ id });
+
+    return memberUpdated;
   }
 }
 

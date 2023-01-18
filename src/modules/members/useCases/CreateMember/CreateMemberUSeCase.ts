@@ -15,12 +15,17 @@ class CreateMemberUseCase {
     registration,
     status,
   }: ICreateMemberDTO): Promise<void> {
-    const memberAlready = await this.memberRepository.findByRegistration(
-      registration
-    );
+    const memberAlreadyWithRegistration =
+      await this.memberRepository.findByRegistration(registration);
 
-    if (memberAlready) {
+    if (memberAlreadyWithRegistration) {
       throw new AppError("Este associado já existe!");
+    }
+
+    const memberAlreadyWithName = await this.memberRepository.findByName(name);
+
+    if (memberAlreadyWithName) {
+      throw new AppError("um associado já existe com este nome!");
     }
 
     this.memberRepository.create({ name, registration, status });

@@ -21,8 +21,9 @@ class MembersRepositoryInMemory implements IMembersRepository {
 
     this.members.push(member);
   }
-  findById(id: string): Promise<Members> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Members> {
+    return this.members.find((member) => member.id === id);
   }
 
   async findByName(name: string): Promise<Members> {
@@ -36,8 +37,27 @@ class MembersRepositoryInMemory implements IMembersRepository {
   async list(): Promise<Members[]> {
     return this.members;
   }
-  update(data: ICreateMemberDTO): Promise<Members> {
-    throw new Error("Method not implemented.");
+
+  async update({
+    id,
+    name,
+    registration,
+    status,
+  }: ICreateMemberDTO): Promise<Members> {
+    const newMember = new Members();
+
+    Object.assign(newMember, {
+      id,
+      name,
+      registration,
+      status,
+    });
+
+    const member = this.members.findIndex((member) => member.id === id);
+
+    this.members[member] = newMember;
+
+    return newMember;
   }
 }
 
