@@ -1,9 +1,11 @@
 import { Router } from "express";
 
+import { CreateMemberController } from "@modules/members/useCases/CreateMember/CreateMemberController";
+
 const membersRoute = Router();
 
-membersRoute.get("/", (request, response) =>
-  response.status(201).json({ message: "players routes ok" })
-);
+const createMemberController = new CreateMemberController();
+
+membersRoute.post("/", createMemberController.handle);
 
 export { membersRoute };
