@@ -5,6 +5,7 @@ interface IMembersRepository {
   create(data: ICreateMemberDTO): Promise<void>;
   findById(id: string): Promise<Members>;
   findByName(name: string): Promise<Members>;
+  findByRegistration(registration: string): Promise<Members>;
   list(): Promise<Members[]>;
   update(data: ICreateMemberDTO): Promise<Members>;
 }
