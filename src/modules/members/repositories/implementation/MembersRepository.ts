@@ -1,20 +1,50 @@
+import { Repository } from "typeorm";
+
+import { AppDataSource } from "@database/data-source";
 import { ICreateMemberDTO } from "@modules/members/dtos/ICreateMemberDTO";
 import { Members } from "@modules/members/entities/Members";
 
 import { IMembersRepository } from "../IMembersRepository";
 
 class MembersRepository implements IMembersRepository {
-  create(data: ICreateMemberDTO): Promise<void> {
-    throw new Error("Method not implemented.");
+  private repository: Repository<Members>;
+
+  constructor() {
+    this.repository = AppDataSource.getRepository(Members);
   }
-  findById(id: string): Promise<Members> {
-    throw new Error("Method not implemented.");
+
+  async create({
+    name,
+    registration,
+    status,
+  }: ICreateMemberDTO): Promise<void> {
+    const member = await this.repository.create({
+      name,
+      registration,
+      status,
+    });
+
+    this.repository.save(member);
   }
-  findByName(name: string): Promise<Members> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Members> {
+    const member = await this.repository.findOneBy({ id });
+    return member;
   }
-  list(): Promise<Members[]> {
-    throw new Error("Method not implemented.");
+
+  async findByName(name: string): Promise<Members> {
+    const member = await this.repository.findOneBy({ name });
+    return member;
+  }
+
+  async findByRegistration(registration: string): Promise<Members> {
+    const member = await this.repository.findOneBy({ registration });
+    return member;
+  }
+
+  async list(): Promise<Members[]> {
+    const members = await this.repository.find();
+    return members;
   }
   update(data: ICreateMemberDTO): Promise<Members> {
     throw new Error("Method not implemented.");
