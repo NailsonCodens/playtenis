@@ -13,5 +13,6 @@ generalRoutes.use("/courts", courtRouter);
 generalRoutes.use("/players", membersRoute);
 generalRoutes.use("/modalities", modalitiesRoutes);
 generalRoutes.use("/coachs", coachsRoutes);
+generalRoutes.use("/members", membersRoute);
 
 export default generalRoutes;

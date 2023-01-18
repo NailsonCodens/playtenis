@@ -6,6 +6,8 @@ import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepositor
 import { CoachsRepository } from "@modules/coachs/repositories/implementation/CoachsRepository";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { CourtsRepository } from "@modules/courts/repositories/implementation/CourtsRespository";
+import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
+import { MembersRepository } from "@modules/members/repositories/implementation/MembersRepository";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { ModalitiesRespository } from "@modules/modalities/repositories/implementations/ModalitiesRespository";
 
@@ -24,4 +26,9 @@ container.registerSingleton<IModalitiesRepository>(
 container.registerSingleton<ICoachsRepository>(
   "CoachsRepository",
   CoachsRepository
+);
+
+container.registerSingleton<IMembersRepository>(
+  "MembersRepository",
+  MembersRepository
 );
