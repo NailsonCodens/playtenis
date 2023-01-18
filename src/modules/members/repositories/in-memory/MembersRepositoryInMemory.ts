@@ -4,15 +4,35 @@ import { Members } from "@modules/members/entities/Members";
 import { IMembersRepository } from "../IMembersRepository";
 
 class MembersRespositoryInMemory implements IMembersRepository {
-  create(data: ICreateMemberDTO): Promise<void> {
-    throw new Error("Method not implemented.");
+  private members: Members[] = [];
+
+  async create({
+    name,
+    registration,
+    status,
+  }: ICreateMemberDTO): Promise<void> {
+    const member = new Members();
+
+    Object.assign(member, {
+      name,
+      registration,
+      status,
+    });
+
+    this.members.push(member);
   }
   findById(id: string): Promise<Members> {
     throw new Error("Method not implemented.");
   }
-  findByName(name: string): Promise<Members> {
-    throw new Error("Method not implemented.");
+
+  async findByName(name: string): Promise<Members> {
+    return this.members.find((member) => member.name === name);
   }
+
+  async findByRegistration(registration: string): Promise<Members> {
+    return this.members.find((member) => member.registration === registration);
+  }
+
   list(): Promise<Members[]> {
     throw new Error("Method not implemented.");
   }
