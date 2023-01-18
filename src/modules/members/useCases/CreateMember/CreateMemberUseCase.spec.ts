@@ -1,14 +1,14 @@
 import { AppError } from "@errors/AppError";
-import { MembersRespositoryInMemory } from "@modules/members/repositories/in-memory/MembersRepositoryInMemory";
+import { MembersRepositoryInMemory } from "@modules/members/repositories/in-memory/MembersRepositoryInMemory";
 
 import { CreateMemberUseCase } from "./CreateMemberUSeCase";
 
 let createMemberUseCase: CreateMemberUseCase;
-let membersRepositoryInMemory: MembersRespositoryInMemory;
+let membersRepositoryInMemory: MembersRepositoryInMemory;
 
 describe("Suite create member", () => {
   beforeEach(() => {
-    membersRepositoryInMemory = new MembersRespositoryInMemory();
+    membersRepositoryInMemory = new MembersRepositoryInMemory();
     createMemberUseCase = new CreateMemberUseCase(membersRepositoryInMemory);
   });
 
