@@ -3,7 +3,7 @@ import { Members } from "@modules/members/entities/Members";
 
 import { IMembersRepository } from "../IMembersRepository";
 
-class MembersRespositoryInMemory implements IMembersRepository {
+class MembersRepositoryInMemory implements IMembersRepository {
   private members: Members[] = [];
 
   async create({
@@ -33,12 +33,12 @@ class MembersRespositoryInMemory implements IMembersRepository {
     return this.members.find((member) => member.registration === registration);
   }
 
-  list(): Promise<Members[]> {
-    throw new Error("Method not implemented.");
+  async list(): Promise<Members[]> {
+    return this.members;
   }
   update(data: ICreateMemberDTO): Promise<Members> {
     throw new Error("Method not implemented.");
   }
 }
 
-export { MembersRespositoryInMemory };
+export { MembersRepositoryInMemory };
