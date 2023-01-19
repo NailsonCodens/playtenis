@@ -1,8 +1,9 @@
+import { Router } from "express";
+
 import { CreateModalityController } from "@modules/modalities/useCases/createModality/CreateModalityController";
 import { DeleteModalityController } from "@modules/modalities/useCases/deleteModality/DeleteModalityController";
 import { ListModalityController } from "@modules/modalities/useCases/listModalities/ListModalityController";
 import { UpdateModalityController } from "@modules/modalities/useCases/updateModality/UpdateModalityController";
-import { Router } from "express";
 
 const modalitiesRoutes = Router();
 
