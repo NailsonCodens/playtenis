@@ -3,10 +3,10 @@ import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory
 
 import { CreateCoachUseCase } from "./CreateCoachUseCase";
 
-describe("Suite Create Coach", () => {
-  let createCoachUseCase: CreateCoachUseCase;
-  let coachsRepositoryInMemory: CoachsRepositoryInMemory;
+let createCoachUseCase: CreateCoachUseCase;
+let coachsRepositoryInMemory: CoachsRepositoryInMemory;
 
+describe("Suite Create Coach", () => {
   beforeEach(() => {
     coachsRepositoryInMemory = new CoachsRepositoryInMemory();
     createCoachUseCase = new CreateCoachUseCase(coachsRepositoryInMemory);
