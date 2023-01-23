@@ -20,10 +20,10 @@ describe("Suite list members use case", () => {
       status: "ok",
     });
 
-    const member = await membersRepositoryInMemory.findByName(name);
+    const memberExpected = await membersRepositoryInMemory.findByName(name);
 
-    const users = await listMembersUseCase.execute();
+    const member = await listMembersUseCase.execute();
 
-    expect(users).toEqual([member]);
+    expect(member).toEqual([memberExpected]);
   });
 });
