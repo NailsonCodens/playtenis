@@ -1,24 +1,23 @@
-import { Coachs } from "@modules/coachs/entities/Coachs";
-import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepository";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
 import { Courts } from "@modules/courts/entities/Courts";
+import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 
-class CourtsRepositoryInMemory implements ICoachsRepository {
+class CourtsRepositoryInMemory implements ICourtsRepository {
   private courts: Courts[] = [];
 
-  async findById(id: string): Promise<Coachs> {
-    const court = await this.courts.find((court) => court.id === id);
+  async findById(id: string): Promise<Courts> {
+    const court = this.courts.find((court) => court.id === id);
 
     return court;
   }
 
-  async findByName(name: string): Promise<Coachs> {
-    const court = await this.courts.find((court) => court.name === name);
+  async findByName(name: string): Promise<Courts> {
+    const court = this.courts.find((court) => court.name === name);
 
     return court;
   }
 
-  async list(): Promise<Coachs[]> {
+  async list(): Promise<Courts[]> {
     return this.courts;
   }
 
@@ -33,7 +32,7 @@ class CourtsRepositoryInMemory implements ICoachsRepository {
     this.courts.push(court);
   }
 
-  async update({ id, name, status }: ICourtDTO): Promise<Coachs> {
+  async update({ id, name, status }: ICourtDTO): Promise<Courts> {
     const courtUpdated = new Courts();
 
     Object.assign(courtUpdated, {
@@ -41,7 +40,7 @@ class CourtsRepositoryInMemory implements ICoachsRepository {
       status,
     });
 
-    const courtIndex = await this.courts.findIndex((court) => court.id === id);
+    const courtIndex = this.courts.findIndex((court) => court.id === id);
 
     this.courts[courtIndex] = courtUpdated;
 
@@ -49,7 +48,7 @@ class CourtsRepositoryInMemory implements ICoachsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    const courtIndex = await this.courts.findIndex((court) => court.id === id);
+    const courtIndex = this.courts.findIndex((court) => court.id === id);
 
     this.courts.splice(courtIndex, 1);
   }
