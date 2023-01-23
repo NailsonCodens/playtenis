@@ -39,7 +39,7 @@ describe("Suite Create Court", () => {
       const name = "Court 1";
 
       await updateCourtUseCase.execute({
-        id: "2123",
+        id: "non-existing-id",
         name,
         status: "ok",
       });
