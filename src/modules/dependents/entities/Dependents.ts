@@ -10,13 +10,13 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity("dependents")
 class Dependents {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("varchar")
   member_id: string;
 
-  @Column()
+  @Column("varchar")
   name: string;
 
   @CreateDateColumn()
