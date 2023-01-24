@@ -25,8 +25,12 @@ class DependentsRepositoryInMemory implements IDependentesRepository {
     return dependent;
   }
 
-  async list(member_id: string): Promise<Dependents> {
-    return this.dependents;
+  async list(member_id: string): Promise<Dependents[]> {
+    const dependents = this.dependents.filter(
+      (dependent) => dependent.member_id === member_id
+    );
+
+    return dependents;
   }
 }
 

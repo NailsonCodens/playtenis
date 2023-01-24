@@ -13,7 +13,7 @@ class DependentsRepository implements IDependentesRepository {
     this.repository = AppDataSource.getRepository(Dependents);
   }
 
-  async list(member_id: string): Promise<Dependents> {
+  async list(member_id: string): Promise<Dependents[]> {
     const dependents = await this.repository.find({
       where: {
         member_id,
