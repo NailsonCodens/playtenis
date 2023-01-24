@@ -1,15 +1,27 @@
+import { Repository } from "typeorm";
+
+import { AppDataSource } from "@database/data-source";
 import { ICreateDependentDTO } from "@modules/dependents/dtos/ICreateDependentDTO";
-import { Dependentes } from "@modules/dependents/entities/Dependents";
+import { Dependents } from "@modules/dependents/entities/Dependents";
 
 import { IDependentesRepository } from "../IDependentsRepository";
 
 class DependentsRepository implements IDependentesRepository {
-  create(data: ICreateDependentDTO): Promise<void> {
-    throw new Error("Method not implemented.");
+  private repository: Repository<Dependents>;
+
+  constructor() {
+    this.repository = AppDataSource.getRepository(Dependents);
   }
 
-  findByName(name: string): Promise<Dependentes> {
-    throw new Error("Method not implemented.");
+  async create({ member_id, name }: ICreateDependentDTO): Promise<void> {
+    const dependent = await this.repository.create({ member_id, name });
+
+    this.repository.save(dependent);
+  }
+
+  async findByName(name: string): Promise<Dependents> {
+    const dependent = await this.repository.findOneBy({ name });
+    return dependent;
   }
 }
 export { DependentsRepository };
