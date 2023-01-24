@@ -1,13 +1,13 @@
 import { ICreateDependentDTO } from "@modules/dependents/dtos/ICreateDependentDTO";
-import { Dependentes } from "@modules/dependents/entities/Dependents";
+import { Dependents } from "@modules/dependents/entities/Dependents";
 
 import { IDependentesRepository } from "../IDependentsRepository";
 
 class DependentsRepositoryInMemory implements IDependentesRepository {
-  private dependents: Dependentes[] = [];
+  private dependents: Dependents[] = [];
 
   async create({ member_id, name }: ICreateDependentDTO): Promise<void> {
-    const dependent = new Dependentes();
+    const dependent = new Dependents();
 
     Object.assign(dependent, {
       name,
@@ -17,12 +17,16 @@ class DependentsRepositoryInMemory implements IDependentesRepository {
     this.dependents.push(dependent);
   }
 
-  async findByName(name: string): Promise<Dependentes> {
+  async findByName(name: string): Promise<Dependents> {
     const dependent = this.dependents.find(
       (dependent) => dependent.name === name
     );
 
     return dependent;
+  }
+
+  async list(member_id: string): Promise<Dependents> {
+    return this.dependents;
   }
 }
 
