@@ -33,8 +33,7 @@ export class games1674733335990 implements MigrationInterface {
           },
           {
             name: "date_game",
-            type: "timestamp",
-            default: "now()",
+            type: "varchar",
           },
           {
             name: "created_at",
