@@ -60,6 +60,14 @@ class DependentsRepositoryInMemory implements IDependentsRepository {
 
     return dependent;
   }
+
+  async delete(id: string): Promise<void> {
+    const dependentIndex = this.dependents.findIndex(
+      (dependent) => dependent.id === id
+    );
+
+    this.dependents.splice(dependentIndex, 1);
+  }
 }
 
 export { DependentsRepositoryInMemory };
