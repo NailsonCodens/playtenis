@@ -1,0 +1,63 @@
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
+
+export class playersGame1674734326536 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: "players_games",
+        columns: [
+          {
+            name: "id",
+            type: "uuid",
+            isPrimary: true,
+          },
+          {
+            name: "player_id",
+            type: "uuid",
+          },
+          {
+            name: "game_id",
+            type: "uuid",
+          },
+          {
+            name: "created_at",
+            type: "timestamp",
+            default: "now()",
+          },
+          {
+            name: "updated_at",
+            type: "timestamp",
+            default: "now()",
+          },
+          {
+            name: "deleted_at",
+            type: "timestamp",
+            isNullable: true,
+          },
+        ],
+        foreignKeys: [
+          {
+            name: "FKGamePlayers",
+            referencedTableName: "games",
+            referencedColumnNames: ["id"],
+            columnNames: ["game_id"],
+            onDelete: "SET NULL",
+            onUpdate: "SET NULL",
+          },
+          {
+            name: "FKMemberPlayersGame",
+            referencedTableName: "members",
+            referencedColumnNames: ["id"],
+            columnNames: ["player_id"],
+            onDelete: "SET NULL",
+            onUpdate: "SET NULL",
+          },
+        ],
+      })
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable("players_games");
+  }
+}
