@@ -1,30 +1,44 @@
+import { Column, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
+@Entity("games")
 class Games {
+  @PrimaryColumn("uuid")
   id: string;
 
+  @Column("varchar")
   court_id: string;
 
+  @Column("varchar")
   modality_id: string;
 
-  modality_time: string;
+  @Column("varchar")
+  modality_time: number;
 
-  start_time_game: string;
+  @Column("varchar")
+  start_time_game: Date;
 
-  end_time_game: string;
+  @Column("varchar")
+  end_time_game: Date;
 
-  date_game: Date;
+  @Column("varchar")
+  date_game: string;
 
+  @Column("varchar")
   created_at: Date;
 
+  @Column("varchar")
   updated_at: Date;
 
+  @Column("varchar")
   deleted_at: Date;
 
-  contructor() {
+  constructor() {
     if (!this.id) {
       this.id = uuidV4();
     }
+
+    this.date_game = new Date().toISOString().slice(0, 10);
   }
 }
 
