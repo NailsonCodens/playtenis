@@ -6,7 +6,7 @@ import { ICoachsRepository } from "@modules/coachs/repositories/ICoachsRepositor
 import { CoachsRepository } from "@modules/coachs/repositories/implementation/CoachsRepository";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { CourtsRepository } from "@modules/courts/repositories/implementation/CourtsRespository";
-import { IDependentesRepository } from "@modules/dependents/repositories/IDependentsRepository";
+import { IDependentsRepository } from "@modules/dependents/repositories/IDependentsRepository";
 import { DependentsRepository } from "@modules/dependents/repositories/implementation/DependentsRepository";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 import { MembersRepository } from "@modules/members/repositories/implementation/MembersRepository";
@@ -35,7 +35,7 @@ container.registerSingleton<IMembersRepository>(
   MembersRepository
 );
 
-container.registerSingleton<IDependentesRepository>(
+container.registerSingleton<IDependentsRepository>(
   "DependentsRepository",
   DependentsRepository
 );
