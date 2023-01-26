@@ -8,6 +8,7 @@ interface IDependentsRepository {
   findById(id: string): Promise<Dependents>;
   list(member_id: string): Promise<Dependents[]>;
   update(data: ICreateDependentDTO): Promise<Dependents>;
+  delete(id: string): Promise<void>;
 }
 
 export { IDependentsRepository };
