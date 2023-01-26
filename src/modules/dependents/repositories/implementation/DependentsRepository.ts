@@ -52,5 +52,9 @@ class DependentsRepository implements IDependentsRepository {
 
     return depedent;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.softDelete(id);
+  }
 }
 export { DependentsRepository };
