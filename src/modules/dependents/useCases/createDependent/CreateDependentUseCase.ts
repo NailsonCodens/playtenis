@@ -1,14 +1,14 @@
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
-import { IDependentesRepository } from "@modules/dependents/repositories/IDependentsRepository";
+import { IDependentsRepository } from "@modules/dependents/repositories/IDependentsRepository";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 
 @injectable()
 class CreateDependentUseCase {
   constructor(
     @inject("DependentsRepository")
-    private dependentsRepository: IDependentesRepository,
+    private dependentsRepository: IDependentsRepository,
     @inject("MembersRepository")
     private memberRepository: IMembersRepository
   ) {}
