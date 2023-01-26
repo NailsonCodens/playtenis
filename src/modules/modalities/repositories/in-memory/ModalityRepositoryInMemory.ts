@@ -23,8 +23,9 @@ class ModalityRepositoryInMemory implements IModalitiesRepository {
 
     this.modalities.push(modality);
   }
-  list(): Promise<Modalities[]> {
-    throw new Error("Method not implemented.");
+
+  async list(): Promise<Modalities[]> {
+    return this.modalities;
   }
 
   async findByName(name: string): Promise<Modalities> {
@@ -35,14 +36,51 @@ class ModalityRepositoryInMemory implements IModalitiesRepository {
     return modality;
   }
 
-  findById(id: string): Promise<Modalities> {
-    throw new Error("Method not implemented.");
+  async findById(id: string): Promise<Modalities> {
+    const modality = await this.modalities.find(
+      (modality) => modality.id === id
+    );
+
+    return modality;
   }
-  update(data: ICreateModalityDTO): Promise<Modalities> {
-    throw new Error("Method not implemented.");
+
+  async update({
+    id,
+    name,
+    amount_players,
+    time,
+    status,
+  }: ICreateModalityDTO): Promise<Modalities> {
+    const modalityBefore = this.modalities.find(
+      (modality) => modality.id === id
+    );
+
+    Object.assign(modalityBefore, {
+      name,
+      amount_players,
+      time,
+      status,
+    });
+
+    const modality = this.modalities.findIndex(
+      (modality) => modality.id === id
+    );
+
+    this.modalities[modality] = modalityBefore;
+
+    const modalityAfter = this.modalities.find(
+      (modality) => modality.id === id
+    );
+
+    return modalityAfter;
   }
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async delete(id: string): Promise<void> {
+    const modalityToDelete = this.modalities.findIndex(
+      (modality) => modality.id === id
+    );
+
+    this.modalities.splice(modalityToDelete, 1);
   }
 }
 

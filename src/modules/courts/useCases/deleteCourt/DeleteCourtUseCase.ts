@@ -1,5 +1,7 @@
-import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { inject, injectable } from "tsyringe";
+
+import { AppError } from "@errors/AppError";
+import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 
 @injectable()
 class DeleteCourtUseCase {
@@ -11,7 +13,7 @@ class DeleteCourtUseCase {
     const courtAlredyExists = await this.courtsRepository.findById(id);
 
     if (!courtAlredyExists) {
-      throw new Error("Esta quadra não existe");
+      throw new AppError("Esta quadra não existe");
     }
 
     await this.courtsRepository.delete(id);

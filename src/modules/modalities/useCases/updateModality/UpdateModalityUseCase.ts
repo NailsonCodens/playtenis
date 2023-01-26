@@ -1,6 +1,8 @@
+import { inject, injectable } from "tsyringe";
+
+import { AppError } from "@errors/AppError";
 import { Modalities } from "@modules/modalities/entities/Modalities";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
-import { inject, injectable } from "tsyringe";
 
 import { ICreateModalityDTO } from "../../dtos/ICreateModalityDTO";
 
@@ -21,7 +23,7 @@ class UpdateModalityUseCase {
     const modalityAlredyExists = await this.modalitiesRepository.findById(id);
 
     if (!modalityAlredyExists) {
-      throw new Error("Esta modalidade não existe");
+      throw new AppError("Esta modalidade não existe");
     }
 
     const updateModalityUseCase = await this.modalitiesRepository.update({

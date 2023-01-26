@@ -1,11 +1,12 @@
+import { AppError } from "@errors/AppError";
 import { CoachsRepositoryInMemory } from "@modules/coachs/repositories/in-memory/CoachsRepositoryInMemory";
 
 import { CreateCoachUseCase } from "./CreateCoachUseCase";
 
-describe("Suite Create Coach", () => {
-  let createCoachUseCase: CreateCoachUseCase;
-  let coachsRepositoryInMemory: CoachsRepositoryInMemory;
+let createCoachUseCase: CreateCoachUseCase;
+let coachsRepositoryInMemory: CoachsRepositoryInMemory;
 
+describe("Suite Create Coach", () => {
   beforeEach(() => {
     coachsRepositoryInMemory = new CoachsRepositoryInMemory();
     createCoachUseCase = new CreateCoachUseCase(coachsRepositoryInMemory);
@@ -21,12 +22,12 @@ describe("Suite Create Coach", () => {
   });
 
   it("Should not be able to create a coach if already exists", async () => {
-    const name = "Coach one";
-
     expect(async () => {
+      const name = "Coach one";
+
       await createCoachUseCase.execute({ name });
 
       await createCoachUseCase.execute({ name });
-    }).rejects.toBeInstanceOf(Error);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });

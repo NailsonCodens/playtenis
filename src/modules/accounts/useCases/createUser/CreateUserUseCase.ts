@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "@errors/AppError";
+
 import { IUserDTO } from "../../dtos/IUserDTO";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
@@ -12,7 +14,7 @@ class CreateUserUseCase {
   async execute({ name, surname, login, password }: IUserDTO): Promise<void> {
     const userAlredyExists = await this.userRepository.findByLogin(login);
     if (userAlredyExists) {
-      throw new Error(
+      throw new AppError(
         "Este usuário já existe, por favor tente com outro login"
       );
     }

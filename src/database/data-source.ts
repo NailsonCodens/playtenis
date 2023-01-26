@@ -1,6 +1,9 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 
+import { Dependents } from "@modules/dependents/entities/Dependents";
+import { Members } from "@modules/members/entities/Members";
+
 import { Coachs } from "../modules/coachs/entities/Coachs";
 import { Courts } from "../modules/courts/entities/Courts";
 import { Modalities } from "../modules/modalities/entities/Modalities";
@@ -15,7 +18,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   migrations: ["./src/database/migrations/*.ts"],
-  entities: [Modalities, Courts, Coachs],
+  entities: [Modalities, Courts, Coachs, Members, Dependents],
 });
 
 AppDataSource.initialize();

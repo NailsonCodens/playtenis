@@ -10,13 +10,13 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity()
 class Courts {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("varchar")
   name: string;
 
-  @Column()
+  @Column("varchar")
   status: string;
 
   @CreateDateColumn()

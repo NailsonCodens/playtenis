@@ -9,7 +9,12 @@ class CreateModalityController {
 
     const createModalityUseCase = container.resolve(CreateModalityUseCase);
 
-    createModalityUseCase.execute({ name, amount_players, time, status });
+    await createModalityUseCase.execute({
+      name,
+      amount_players,
+      time,
+      status,
+    });
 
     return response.status(201).send();
   }
