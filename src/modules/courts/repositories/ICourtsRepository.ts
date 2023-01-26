@@ -4,6 +4,7 @@ import { Courts } from "../entities/Courts";
 interface ICourtsRepository {
   findById(id: string): Promise<Courts>;
   findByName(name: string): Promise<Courts>;
+  findByIdAndStatusOK(id: string): Promise<Courts>;
   list(): Promise<Courts[]>;
   create({ name }: ICourtDTO): Promise<void>;
   update({ id, name }: ICourtDTO): Promise<Courts>;
