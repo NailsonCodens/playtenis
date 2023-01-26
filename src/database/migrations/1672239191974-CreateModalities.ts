@@ -9,6 +9,7 @@ export class CreateModalities1672239191974 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "name",
