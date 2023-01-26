@@ -21,7 +21,7 @@ class UpdateMemberUseCase {
     const member = await this.membersRepository.findById(id);
 
     if (!member) {
-      throw new AppError("Este professor não existe");
+      throw new AppError("Este membro não existe");
     }
 
     const memberUpdated = await this.membersRepository.update({
