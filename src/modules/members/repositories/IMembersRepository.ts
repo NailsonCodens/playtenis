@@ -8,6 +8,7 @@ interface IMembersRepository {
   findByRegistration(registration: string): Promise<Members>;
   list(): Promise<Members[]>;
   update(data: ICreateMemberDTO): Promise<Members>;
+  delete(id: string): Promise<void>;
 }
 
 export { IMembersRepository };
