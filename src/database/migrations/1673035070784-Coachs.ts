@@ -9,6 +9,7 @@ export class Coachs1673035070784 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "name",
