@@ -59,6 +59,12 @@ class MembersRepositoryInMemory implements IMembersRepository {
 
     return newMember;
   }
+
+  async delete(id: string): Promise<void> {
+    const memberIndex = this.members.findIndex((member) => member.id === id);
+
+    this.members.splice(memberIndex, 1);
+  }
 }
 
 export { MembersRepositoryInMemory };
