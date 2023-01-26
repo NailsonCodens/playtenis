@@ -4,9 +4,9 @@ import { AppDataSource } from "@database/data-source";
 import { ICreateDependentDTO } from "@modules/dependents/dtos/ICreateDependentDTO";
 import { Dependents } from "@modules/dependents/entities/Dependents";
 
-import { IDependentesRepository } from "../IDependentsRepository";
+import { IDependentsRepository } from "../IDependentsRepository";
 
-class DependentsRepository implements IDependentesRepository {
+class DependentsRepository implements IDependentsRepository {
   private repository: Repository<Dependents>;
 
   constructor() {
@@ -31,6 +31,26 @@ class DependentsRepository implements IDependentesRepository {
   async findByName(name: string): Promise<Dependents> {
     const dependent = await this.repository.findOneBy({ name });
     return dependent;
+  }
+
+  async findById(id: string): Promise<Dependents> {
+    const dependent = await this.repository.findOneBy({ id });
+    return dependent;
+  }
+
+  async update({
+    id,
+    name,
+    member_id,
+  }: ICreateDependentDTO): Promise<Dependents> {
+    await this.repository.update(id, {
+      name,
+      member_id,
+    });
+
+    const depedent = await this.repository.findOneBy({ id });
+
+    return depedent;
   }
 }
 export { DependentsRepository };
