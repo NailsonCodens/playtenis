@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 
+import { AppError } from "@errors/AppError";
 import { ModalityRepositoryInMemory } from "@modules/modalities/repositories/in-memory/ModalityRepositoryInMemory";
 
 import { DeleteModalityUseCase } from "./DeleteModalityUseCase";
@@ -58,6 +59,8 @@ describe("Suite Delete modality", () => {
       const id = uuidV4();
 
       await deleteModalityUseCase.execute({ id });
-    });
+    }).rejects.toEqual(
+      new AppError("Esta modalidade não existe e não pode ser deletada.")
+    );
   });
 });
