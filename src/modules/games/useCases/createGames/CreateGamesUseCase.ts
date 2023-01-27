@@ -65,9 +65,6 @@ class CreateGamesUseCase {
       );
     }
 
-    // verificar se o cadastro de jogadores é o que a modalidade permite
-    // verificar quando o jogo da quadra terminar
-
     const game = await this.gamesRepository.create({
       court_id,
       modality_id,

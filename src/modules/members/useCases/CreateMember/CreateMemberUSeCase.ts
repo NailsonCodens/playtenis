@@ -14,11 +14,12 @@ class CreateMemberUseCase {
     name,
     registration,
     status,
+    type,
   }: ICreateMemberDTO): Promise<void> {
-    const memberAlreadyWithRegistration =
+    const playerAlreadyWithRegistration =
       await this.memberRepository.findByRegistration(registration);
 
-    if (memberAlreadyWithRegistration) {
+    if (playerAlreadyWithRegistration) {
       throw new AppError("Este associado já existe!");
     }
 
@@ -28,7 +29,7 @@ class CreateMemberUseCase {
       throw new AppError("um associado já existe com este nome!");
     }
 
-    this.memberRepository.create({ name, registration, status });
+    this.memberRepository.create({ name, registration, status, type });
   }
 }
 

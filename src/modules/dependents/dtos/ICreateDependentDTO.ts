@@ -1,6 +1,6 @@
 interface ICreateDependentDTO {
-  name: string;
   member_id: string;
+  player_id: string;
   id?: string;
 }
 

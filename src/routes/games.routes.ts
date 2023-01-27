@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { CreateGamesController } from "@modules/games/useCases/CreateGames/CreateGamesController";
+import { CreateGamesController } from "@modules/games/useCases/createGames/CreateGamesController";
 
 const gamesRouter = Router();
 

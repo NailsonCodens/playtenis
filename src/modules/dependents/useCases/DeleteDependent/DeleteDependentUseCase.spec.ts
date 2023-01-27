@@ -1,36 +1,41 @@
 import { AppError } from "@errors/AppError";
 import { DependentsRepositoryInMemory } from "@modules/dependents/repositories/in-memory/DependentsRepositoryInMemory";
+import { MembersRepositoryInMemory } from "@modules/members/repositories/in-memory/MembersRepositoryInMemory";
 
 import { DeleteDependentUseCase } from "./DeleteDependentUseCase";
 
 let deleteDependentUseCase: DeleteDependentUseCase;
 let dependentsRepositoryInMemory: DependentsRepositoryInMemory;
+let membersRepositoryInMemory: MembersRepositoryInMemory;
+
 describe("Suite Update Dependent tests", () => {
   beforeEach(() => {
     dependentsRepositoryInMemory = new DependentsRepositoryInMemory();
+    membersRepositoryInMemory = new MembersRepositoryInMemory();
+
     deleteDependentUseCase = new DeleteDependentUseCase(
-      dependentsRepositoryInMemory
+      dependentsRepositoryInMemory,
+      membersRepositoryInMemory
     );
   });
 
   it("Should be able to delete a dependent", async () => {
-    const member_id = "1234";
-    const name = "dependent delete";
+    const memberDelete = {
+      name: "coach1",
+      registration: "45566",
+      status: "ok",
+      type: "dependent",
+    };
+    await membersRepositoryInMemory.create(memberDelete);
 
-    await dependentsRepositoryInMemory.create({
-      name,
-      member_id,
-    });
-
-    const dependentCreated = await dependentsRepositoryInMemory.findByName(
-      name
+    const dependentCreated = await membersRepositoryInMemory.findByName(
+      memberDelete.name,
+      memberDelete.type
     );
 
     const { id } = dependentCreated;
 
-    const dependentsExpected = await dependentsRepositoryInMemory.list(
-      member_id
-    );
+    const dependentsExpected = await membersRepositoryInMemory.list();
 
     await deleteDependentUseCase.execute(id);
 

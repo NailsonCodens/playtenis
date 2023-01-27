@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
+import { ICreateMemberDependentDTO } from "@modules/dependents/dtos/ICreateMemberDependentDTO";
 import { IDependentsRepository } from "@modules/dependents/repositories/IDependentsRepository";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 
@@ -13,8 +14,15 @@ class CreateDependentUseCase {
     private memberRepository: IMembersRepository
   ) {}
 
-  async execute({ name, member_id }): Promise<void> {
-    const dependent = await this.dependentsRepository.findByName(name);
+  async execute({
+    name,
+    registration,
+    status,
+    member_id,
+  }: ICreateMemberDependentDTO): Promise<void> {
+    const type = "dependent";
+
+    const dependent = await this.memberRepository.findByName(name, type);
 
     if (dependent) {
       throw new AppError("Este dependente já existe");
@@ -28,7 +36,16 @@ class CreateDependentUseCase {
       );
     }
 
-    this.dependentsRepository.create({ name, member_id });
+    const dependentPlayer = await this.memberRepository.create({
+      name,
+      registration,
+      status,
+      type: "dependent",
+    });
+
+    const player_id = dependentPlayer.id;
+
+    this.dependentsRepository.create({ member_id, player_id });
   }
 }
 

@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class playersGame1674734326536 implements MigrationInterface {
+export class Games1674733335990 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "players_games",
+        name: "games",
         columns: [
           {
             name: "id",
@@ -12,12 +12,28 @@ export class playersGame1674734326536 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "player_id",
+            name: "court_id",
             type: "uuid",
           },
           {
-            name: "game_id",
+            name: "modality_id",
             type: "uuid",
+          },
+          {
+            name: "modality_time",
+            type: "varchar",
+          },
+          {
+            name: "start_time_game",
+            type: "timestamp",
+          },
+          {
+            name: "end_time_game",
+            type: "timestamp",
+          },
+          {
+            name: "date_game",
+            type: "varchar",
           },
           {
             name: "created_at",
@@ -37,18 +53,18 @@ export class playersGame1674734326536 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FKGamePlayers",
-            referencedTableName: "games",
+            name: "FKCourtGame",
+            referencedTableName: "courts",
             referencedColumnNames: ["id"],
-            columnNames: ["game_id"],
+            columnNames: ["court_id"],
             onDelete: "SET NULL",
             onUpdate: "SET NULL",
           },
           {
-            name: "FKMemberPlayersGame",
-            referencedTableName: "members",
+            name: "FKModalityGame",
+            referencedTableName: "modalities",
             referencedColumnNames: ["id"],
-            columnNames: ["player_id"],
+            columnNames: ["modality_id"],
             onDelete: "SET NULL",
             onUpdate: "SET NULL",
           },
@@ -58,6 +74,6 @@ export class playersGame1674734326536 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("players_games");
+    await queryRunner.dropTable("games");
   }
 }

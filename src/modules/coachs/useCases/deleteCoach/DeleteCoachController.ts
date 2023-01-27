@@ -9,7 +9,7 @@ class DeleteCoachController {
 
     const deleteCoachController = container.resolve(DeleteCoachUseCase);
 
-    deleteCoachController.execute({ id });
+    await deleteCoachController.execute(id);
 
     return response
       .status(201)

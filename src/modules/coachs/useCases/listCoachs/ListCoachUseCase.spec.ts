@@ -15,11 +15,16 @@ describe("Suite List Coachs", () => {
   });
 
   it("Shold be able to list coachs", async () => {
-    let name = "Coach 1";
-    await createCoachUseCase.execute({ name });
+    const coach = {
+      name: "coach1",
+      registration: "45566",
+      status: "ok",
+    };
 
-    name = "Coach 2";
-    await createCoachUseCase.execute({ name });
+    await createCoachUseCase.execute(coach);
+
+    coach.name = "Coach 2";
+    await createCoachUseCase.execute(coach);
 
     const coachs = await listCoachUseCase.execute();
 

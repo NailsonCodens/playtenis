@@ -8,13 +8,22 @@ import {
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity()
+@Entity("players")
 class Coachs {
   @PrimaryColumn("uuid")
   id: string;
 
   @Column("varchar")
   name: string;
+
+  @Column("varchar")
+  registration: string;
+
+  @Column("varchar")
+  type: string;
+
+  @Column("varchar")
+  status: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -29,6 +38,8 @@ class Coachs {
     if (!this.id) {
       this.id = uuidV4();
     }
+
+    this.type = "coach";
   }
 }
 

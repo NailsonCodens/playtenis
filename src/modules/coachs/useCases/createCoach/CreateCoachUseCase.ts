@@ -10,14 +10,25 @@ class CreateCoachUseCase {
     @inject("CoachsRepository") private coachsRepository: ICoachsRepository
   ) {}
 
-  async execute({ name }: ICreateCoachDTO): Promise<void> {
-    const user = await this.coachsRepository.findByName(name);
+  async execute({
+    name,
+    registration,
+    status,
+  }: ICreateCoachDTO): Promise<void> {
+    const playerAlreadyWithRegistration =
+      await this.coachsRepository.findByRegistration(registration);
 
-    if (user) {
-      throw new AppError("Este professor já existe");
+    if (playerAlreadyWithRegistration) {
+      throw new AppError("Já existe um jogador cadastrado com esta matrícula!");
     }
 
-    await this.coachsRepository.create({ name });
+    const coach = await this.coachsRepository.findByName(name);
+
+    if (coach) {
+      throw new AppError("Já existe um professor com este nome");
+    }
+
+    await this.coachsRepository.create({ name, registration, status });
   }
 }
 

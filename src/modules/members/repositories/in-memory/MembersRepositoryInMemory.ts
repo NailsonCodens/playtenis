@@ -4,30 +4,37 @@ import { Members } from "@modules/members/entities/Members";
 import { IMembersRepository } from "../IMembersRepository";
 
 class MembersRepositoryInMemory implements IMembersRepository {
-  private members: Members[] = [];
-
   async create({
     name,
     registration,
     status,
-  }: ICreateMemberDTO): Promise<void> {
+    type,
+  }: ICreateMemberDTO): Promise<Members> {
     const member = new Members();
-
     Object.assign(member, {
       name,
       registration,
       status,
+      type,
     });
 
     this.members.push(member);
+
+    return member;
   }
 
-  async findById(id: string): Promise<Members> {
-    return this.members.find((member) => member.id === id);
+  private members: Members[] = [];
+
+  async findById(id: string, type = "member" as string): Promise<Members> {
+    return this.members.find(
+      (member) => member.id === id && member.type === type
+    );
   }
 
-  async findByName(name: string): Promise<Members> {
-    return this.members.find((member) => member.name === name);
+  async findByName(name: string, type = "member" as string): Promise<Members> {
+    return this.members.find(
+      (member) => member.name === name && member.type === type
+    );
   }
 
   async findByRegistration(registration: string): Promise<Members> {

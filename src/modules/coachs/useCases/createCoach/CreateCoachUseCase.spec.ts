@@ -14,7 +14,8 @@ describe("Suite Create Coach", () => {
 
   it("Should be able to create a new coach", async () => {
     const name = "Coach one";
-    await createCoachUseCase.execute({ name });
+    const registration = "545555";
+    await createCoachUseCase.execute({ name, registration, status: "ok" });
 
     const coach = await coachsRepositoryInMemory.findByName(name);
 
@@ -25,9 +26,17 @@ describe("Suite Create Coach", () => {
     expect(async () => {
       const name = "Coach one";
 
-      await createCoachUseCase.execute({ name });
+      await createCoachUseCase.execute({
+        name,
+        registration: "45434",
+        status: "ok",
+      });
 
-      await createCoachUseCase.execute({ name });
+      await createCoachUseCase.execute({
+        name,
+        registration: "45434",
+        status: "ok",
+      });
     }).rejects.toBeInstanceOf(AppError);
   });
 });

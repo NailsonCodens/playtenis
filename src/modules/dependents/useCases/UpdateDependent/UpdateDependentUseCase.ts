@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
-import { ICreateDependentDTO } from "@modules/dependents/dtos/ICreateDependentDTO";
-import { Dependents } from "@modules/dependents/entities/Dependents";
+import { ICreateMemberDependentDTO } from "@modules/dependents/dtos/ICreateMemberDependentDTO";
 import { IDependentsRepository } from "@modules/dependents/repositories/IDependentsRepository";
+import { Members } from "@modules/members/entities/Members";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 
 @injectable()
@@ -16,9 +16,16 @@ class UpdateDependentUseCase {
   async execute({
     id,
     name,
+    registration,
+    status,
     member_id,
-  }: ICreateDependentDTO): Promise<Dependents> {
-    const depedentAlredyExists = await this.depentsRepository.findById(id);
+  }: ICreateMemberDependentDTO): Promise<Members> {
+    const type = "dependent";
+
+    const depedentAlredyExists = await this.membersRepository.findById(
+      id,
+      type
+    );
 
     if (!depedentAlredyExists) {
       throw new AppError("Este dependente não existe");
@@ -30,10 +37,11 @@ class UpdateDependentUseCase {
       throw new AppError("Este membro do clube não existe");
     }
 
-    const depedentUpdated = await this.depentsRepository.update({
+    const depedentUpdated = await this.membersRepository.update({
       id,
       name,
-      member_id,
+      registration,
+      status,
     });
 
     return depedentUpdated;

@@ -18,17 +18,22 @@ describe("Suite Delete Coach", () => {
   });
 
   it("Should be able to delete a coach an existing", async () => {
-    let name = "Coach to delete";
-    await createCoachUseCase.execute({ name });
+    const coachDelete = {
+      name: "coach1",
+      registration: "45566",
+      status: "ok",
+    };
 
-    name = "Coach to delete 2";
-    await createCoachUseCase.execute({ name });
+    await createCoachUseCase.execute(coachDelete);
 
-    const coach = await coachRepositoryInMemory.findByName(name);
+    coachDelete.name = "Coach to delete 2";
+    await createCoachUseCase.execute(coachDelete);
+
+    const coach = await coachRepositoryInMemory.findByName(coachDelete.name);
 
     const { id } = coach;
 
-    await deleteCoachUseCase.execute({ id });
+    await deleteCoachUseCase.execute(id);
 
     const coachsExpected = await coachRepositoryInMemory.list();
 
@@ -38,10 +43,14 @@ describe("Suite Delete Coach", () => {
   it("Should not be able to delete a coach if not exists", async () => {
     expect(async () => {
       const name = "Coach to delete";
-      await createCoachUseCase.execute({ name });
+      await createCoachUseCase.execute({
+        name,
+        registration: "45434",
+        status: "ok",
+      });
       const id = uuidV4();
 
-      await deleteCoachUseCase.execute({ id });
+      await deleteCoachUseCase.execute(id);
     }).rejects.toBeInstanceOf(AppError);
   });
 });

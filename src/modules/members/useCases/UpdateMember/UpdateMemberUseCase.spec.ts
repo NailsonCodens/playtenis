@@ -16,11 +16,13 @@ describe("Suite tests update member use case", () => {
 
   it("Should be able to update a member existent", async () => {
     let name = "Membro 1";
+    const type = "member";
 
     await membersRepositoryInMemory.create({
       name,
       registration: "72347",
       status: "ok",
+      type,
     });
 
     const memberAlredyExist = await membersRepositoryInMemory.findByName(name);

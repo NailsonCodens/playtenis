@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class dependents1674151639808 implements MigrationInterface {
+export class Dependents1674151639808 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -12,12 +12,12 @@ export class dependents1674151639808 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "member_id",
+            name: "player_id",
             type: "uuid",
           },
           {
-            name: "name",
-            type: "varchar",
+            name: "member_id",
+            type: "uuid",
           },
           {
             name: "created_at",
@@ -29,16 +29,19 @@ export class dependents1674151639808 implements MigrationInterface {
             type: "timestamp",
             default: "now()",
           },
-          {
-            name: "deleted_at",
-            type: "timestamp",
-            isNullable: true,
-          },
         ],
         foreignKeys: [
           {
+            name: "FKPlayerDependent",
+            referencedTableName: "players",
+            referencedColumnNames: ["id"],
+            columnNames: ["player_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+          },
+          {
             name: "FKMemberDependent",
-            referencedTableName: "members",
+            referencedTableName: "players",
             referencedColumnNames: ["id"],
             columnNames: ["member_id"],
             onDelete: "CASCADE",
