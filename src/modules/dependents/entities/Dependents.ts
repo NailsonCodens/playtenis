@@ -1,7 +1,6 @@
 import {
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   PrimaryColumn,
   UpdateDateColumn,
@@ -14,19 +13,16 @@ class Dependents {
   id: string;
 
   @Column("varchar")
-  member_id: string;
+  player_id: string;
 
   @Column("varchar")
-  name: string;
+  member_id: string;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  @DeleteDateColumn()
-  deleted_at: Date;
 
   constructor() {
     if (!this.id) {

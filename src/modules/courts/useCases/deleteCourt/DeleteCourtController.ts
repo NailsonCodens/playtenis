@@ -9,7 +9,7 @@ class DeleteCourtControler {
 
     const deleteCoutUseCase = container.resolve(DeleteCourtUseCase);
 
-    deleteCoutUseCase.execute({ id });
+    await deleteCoutUseCase.execute({ id });
 
     return response
       .status(201)

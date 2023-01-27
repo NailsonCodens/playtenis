@@ -13,15 +13,17 @@ describe("Suite create member", () => {
   });
 
   it("Should be able to create a new member", async () => {
-    const name = "Membro 1";
+    const name = "Membro";
+    const type = "member";
 
     await createMemberUseCase.execute({
       name,
       registration: "12345",
       status: "ok",
+      type,
     });
 
-    const member = await membersRepositoryInMemory.findByName(name);
+    const member = await membersRepositoryInMemory.findByName(name, type);
 
     expect(member).toHaveProperty("id");
   });
@@ -29,10 +31,13 @@ describe("Suite create member", () => {
   it("Should not ble able to create a new member if alredy exists with the same registration", async () => {
     expect(async () => {
       let name = "Membro 1";
+      const type = "member";
+
       await createMemberUseCase.execute({
         name,
         registration: "12345",
         status: "ok",
+        type,
       });
 
       name = "Membro 2";
@@ -41,6 +46,7 @@ describe("Suite create member", () => {
         name,
         registration: "12345",
         status: "ok",
+        type,
       });
     }).rejects.toBeInstanceOf(AppError);
   });
@@ -48,10 +54,13 @@ describe("Suite create member", () => {
   it("Should not ble able to create a new member if alredy exists with the same name", async () => {
     expect(async () => {
       let name = "Membro 1";
+      const type = "member";
+
       await createMemberUseCase.execute({
         name,
         registration: "12345",
         status: "ok",
+        type,
       });
 
       name = "Membro 1";
@@ -60,6 +69,7 @@ describe("Suite create member", () => {
         name,
         registration: "12444",
         status: "ok",
+        type,
       });
     }).rejects.toBeInstanceOf(AppError);
   });

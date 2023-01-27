@@ -18,4 +18,5 @@ generalRoutes.use("/coachs", coachsRoutes);
 generalRoutes.use("/members", membersRoute);
 generalRoutes.use("/dependents", dependentsRouter);
 generalRoutes.use("/games", gamesRouter);
+
 export default generalRoutes;

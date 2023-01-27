@@ -5,12 +5,17 @@ import { CreateDependentUseCase } from "./CreateDependentUseCase";
 
 class CreateDependentController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name } = request.body;
+    const { registration, status, name } = request.body;
     const { member_id } = request.params;
 
     const createDependentUseCase = container.resolve(CreateDependentUseCase);
 
-    await createDependentUseCase.execute({ member_id, name });
+    await createDependentUseCase.execute({
+      member_id,
+      name,
+      registration,
+      status,
+    });
 
     return response.send();
   }

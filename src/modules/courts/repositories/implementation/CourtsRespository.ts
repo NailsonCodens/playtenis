@@ -56,7 +56,7 @@ class CourtsRepository implements ICourtsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    console.log(id);
+    await this.repository.softDelete(id);
   }
 }
 

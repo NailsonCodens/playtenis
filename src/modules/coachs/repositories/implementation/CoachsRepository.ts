@@ -14,30 +14,56 @@ class CoachsRepository implements ICoachsRepository {
   }
 
   async findById(id: string): Promise<Coachs> {
-    const coach = await this.repository.findOneBy({ id });
+    const coach = await this.repository.findOne({
+      where: {
+        id,
+        type: "coach",
+      },
+    });
     return coach;
   }
 
   async findByName(name: string): Promise<Coachs> {
-    const coach = await this.repository.findOneBy({ name });
+    const coach = await this.repository.findOne({
+      where: {
+        name,
+        type: "coach",
+      },
+    });
+    return coach;
+  }
+
+  async findByRegistration(registration: string): Promise<Coachs> {
+    const coach = await this.repository.findOneBy({ registration });
     return coach;
   }
 
   async list(): Promise<Coachs[]> {
-    const coachs = await this.repository.find();
+    const coachs = await this.repository.find({
+      where: {
+        type: "coach",
+      },
+    });
     return coachs;
   }
 
-  async create({ name }: ICreateCoachDTO): Promise<void> {
+  async create({ name, registration, status }: ICreateCoachDTO): Promise<void> {
     const coach = this.repository.create({
       name,
+      registration,
+      status,
     });
 
     await this.repository.save(coach);
   }
 
-  async update({ id, name }: ICreateCoachDTO): Promise<Coachs> {
-    await this.repository.update(id, { name });
+  async update({
+    id,
+    name,
+    registration,
+    status,
+  }: ICreateCoachDTO): Promise<Coachs> {
+    await this.repository.update(id, { name, registration, status });
 
     const coachUpdated = await this.repository.findOneBy({ id });
 
@@ -45,7 +71,7 @@ class CoachsRepository implements ICoachsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.repository.softDelete(id);
+    await this.repository.delete(id);
   }
 }
 

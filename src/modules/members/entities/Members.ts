@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity("members")
+@Entity("players")
 class Members {
   @PrimaryColumn("uuid")
   id: string;
@@ -18,6 +18,9 @@ class Members {
 
   @Column("varchar")
   registration: string;
+
+  @Column("varchar")
+  type: string;
 
   @Column("varchar")
   status: string;
@@ -34,6 +37,10 @@ class Members {
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+    }
+
+    if (!this.type) {
+      this.type = "member";
     }
   }
 }
