@@ -1,7 +1,7 @@
 class CreatePlayersInGameUseCase {
   constructor() {}
 
-  async execute(): Promise<void> {}
+  async execute(player_id: string, game_id: string): Promise<void> {}
 }
 
 export { CreatePlayersInGameUseCase };
