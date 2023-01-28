@@ -20,6 +20,8 @@ class GamesRepository implements IGamesRepository {
     modality_time,
     start_time_game,
     end_time_game,
+    id,
+    players,
   }: ICreateGameDTO): Promise<Games> {
     const game = this.repository.create({
       court_id,
@@ -27,6 +29,8 @@ class GamesRepository implements IGamesRepository {
       modality_time,
       start_time_game,
       end_time_game,
+      players,
+      id,
     });
 
     await this.repository.save(game);
@@ -35,7 +39,9 @@ class GamesRepository implements IGamesRepository {
   }
 
   async findById(id: string): Promise<Games> {
-    throw new Error("Method not implemented.");
+    const game = await this.repository.findOneBy({ id });
+
+    return game;
   }
 
   async findGameTodayBetweenHours({
