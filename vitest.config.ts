@@ -17,5 +17,9 @@ export default defineConfig({
     globals: true,
     include: ["src/**/*.spec.ts", "test/**/*.spec.ts"],
     exclude: ["node_modules"],
+    coverage: {
+      provider: "c8",
+      reporter: ["lcov"],
+    },
   },
 });

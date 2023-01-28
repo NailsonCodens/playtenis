@@ -41,6 +41,10 @@ class MembersRepositoryInMemory implements IMembersRepository {
     return this.members.find((member) => member.registration === registration);
   }
 
+  findByIds(ids: string[]): Promise<Members[]> {
+    throw new Error("Method not implemented.");
+  }
+
   async list(): Promise<Members[]> {
     return this.members;
   }

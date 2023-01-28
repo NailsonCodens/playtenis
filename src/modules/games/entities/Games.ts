@@ -1,5 +1,15 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  ManyToOne,
+  JoinTable,
+  ManyToMany,
+} from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { Members } from "@modules/members/entities/Members";
 
 @Entity("games")
 class Games {
@@ -23,6 +33,14 @@ class Games {
 
   @Column("varchar")
   date_game: string;
+
+  @ManyToMany(() => Members)
+  @JoinTable({
+    name: "players_games",
+    joinColumns: [{ name: "game_id" }],
+    inverseJoinColumns: [{ name: "player_id" }],
+  })
+  players: Members[];
 
   @Column("varchar")
   created_at: Date;

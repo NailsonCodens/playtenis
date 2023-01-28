@@ -12,7 +12,6 @@ const generalRoutes = Router();
 
 generalRoutes.use("/users", userRoute);
 generalRoutes.use("/courts", courtRouter);
-generalRoutes.use("/players", membersRoute);
 generalRoutes.use("/modalities", modalitiesRoutes);
 generalRoutes.use("/coachs", coachsRoutes);
 generalRoutes.use("/members", membersRoute);
