@@ -15,6 +15,10 @@ class DependentsRepository implements IDependentsRepository {
 
   async list(player_id: string): Promise<Dependents[]> {
     const dependents = await this.repository.find({
+      relations: {
+        member: true,
+        player: true,
+      },
       where: {
         player_id,
       },

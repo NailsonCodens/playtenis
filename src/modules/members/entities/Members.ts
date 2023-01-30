@@ -3,10 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { Dependents } from "@modules/dependents/entities/Dependents";
 
 @Entity("players")
 class Members {
@@ -24,6 +28,9 @@ class Members {
 
   @Column("varchar")
   status: string;
+
+  @OneToMany(() => Dependents, (depedents) => depedents.member)
+  dependents: Dependents[];
 
   @CreateDateColumn()
   created_at: Date;
