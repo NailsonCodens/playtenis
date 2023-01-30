@@ -18,6 +18,20 @@ class CourtsRepository implements ICourtsRepository {
     return courts;
   }
 
+  async listWithGames(): Promise<Courts[]> {
+    const courts = await this.repository.find({
+      relations: {
+        games: true,
+      },
+      order: {
+        games: {
+          id: "DESC",
+        },
+      },
+    });
+    return courts;
+  }
+
   async findById(id: string): Promise<Courts> {
     const court = await this.repository.findOneBy({ id });
     return court;
