@@ -36,6 +36,22 @@ class QueueRepository implements IQueueRepository {
     return playersInQueue;
   }
 
+  async findQueueByPlayers(players: string): Promise<Queue> {
+    console.log(players);
+
+    const playersInQueue = await this.repository.findOne({
+      where: {
+        players,
+        played: "no",
+      },
+      order: {
+        id: "DESC",
+      },
+    });
+
+    return playersInQueue;
+  }
+
   async find(): Promise<Queue[]> {
     const all = await this.repository.find({
       where: {
