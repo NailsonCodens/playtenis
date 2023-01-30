@@ -23,7 +23,8 @@ class AddGameInQueueUseCase {
     players,
     modality_id,
   }: IRequestQueueDTO): Promise<void> {
-    const start_time_game = dayjs().toDate();
+    const date_now = dayjs();
+    const start_time_game = dayjs(date_now).toDate();
 
     const courtExists = await this.courtsRepository.findById(court_id);
 
@@ -72,19 +73,16 @@ class AddGameInQueueUseCase {
 
     const amoutPlayersInGameThisTime = findGame && findGame.players.length;
 
-    if (amoutPlayersInGameThisTime > 0) {
+    /* if (amoutPlayersInGameThisTime > 0) {
       throw new AppError(
         "Todos ou alguns destes jogadores estão jogando ainda. Só podem entrar na lista de espera após o seu jogo terminar"
       );
-    }
+    } */
 
     const playersInQueueGame =
-      await this.queueRepository.findPlayersInQueueGames(
-        players,
-        start_time_game
-      );
+      await this.queueRepository.findPlayersInQueueGames(players);
 
-    const amountplayerInQueue = playersInQueueGame.length;
+    const amountplayerInQueue = playersInQueueGame && playersInQueueGame.length;
 
     if (amountplayerInQueue > 0) {
       throw new AppError(

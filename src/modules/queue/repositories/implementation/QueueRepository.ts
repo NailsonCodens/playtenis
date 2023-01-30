@@ -27,19 +27,15 @@ class QueueRepository implements IQueueRepository {
     await this.repository.save(gameQueue);
   }
 
-  async findPlayersInQueueGames(
-    players: Array<string>,
-    date_start_game: Date
-  ): Promise<Queue[]> {
+  async findPlayersInQueueGames(players: Array<string>): Promise<Queue[]> {
     const playersRaw = players.map((player) => `players LIKE '%${player}%'`);
 
-    const teste = playersRaw.join(" OR ");
+    const condition = playersRaw.join(" OR ");
 
     const playersInQueue = await AppDataSource.getRepository(Queue)
       .createQueryBuilder("queue")
-      .where(teste)
+      .where(condition)
       .where("played = 'no'")
-      .where("created_at ")
       .getMany();
 
     return playersInQueue;
