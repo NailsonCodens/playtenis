@@ -4,6 +4,7 @@ import { DataSource } from "typeorm";
 import { Dependents } from "@modules/dependents/entities/Dependents";
 import { Games } from "@modules/games/entities/Games";
 import { Members } from "@modules/members/entities/Members";
+import { Queue } from "@modules/queue/entities/Queue";
 
 import { Coachs } from "../modules/coachs/entities/Coachs";
 import { Courts } from "../modules/courts/entities/Courts";
@@ -19,7 +20,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   migrations: ["./src/database/migrations/*.ts"],
-  entities: [Modalities, Courts, Coachs, Members, Dependents, Games],
+  entities: [Modalities, Courts, Coachs, Members, Dependents, Games, Queue],
 });
 
 AppDataSource.initialize();
