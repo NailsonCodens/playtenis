@@ -1,4 +1,4 @@
-import { In, LessThan, Like, MoreThan, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateQueueDTO } from "@modules/queue/dtos/ICreateQueueDTO";
