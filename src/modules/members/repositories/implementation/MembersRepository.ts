@@ -66,6 +66,9 @@ class MembersRepository implements IMembersRepository {
 
   async list(): Promise<Members[]> {
     const members = await this.repository.find({
+      relations: {
+        dependents: true,
+      },
       where: {
         type: "member",
       },
