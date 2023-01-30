@@ -1,4 +1,4 @@
-import { In, LessThan, Like, MoreThan, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateQueueDTO } from "@modules/queue/dtos/ICreateQueueDTO";
@@ -32,6 +32,22 @@ class QueueRepository implements IQueueRepository {
       .where(condition)
       .where("played = 'no'")
       .getMany();
+
+    return playersInQueue;
+  }
+
+  async findQueueByPlayers(players: string): Promise<Queue> {
+    console.log(players);
+
+    const playersInQueue = await this.repository.findOne({
+      where: {
+        players,
+        played: "no",
+      },
+      order: {
+        id: "DESC",
+      },
+    });
 
     return playersInQueue;
   }
