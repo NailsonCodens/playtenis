@@ -64,6 +64,33 @@ class QueueRepository implements IQueueRepository {
 
     return all;
   }
+
+  async findById(id: string): Promise<Queue> {
+    const queue = await this.repository.findOneBy({ id });
+
+    return queue;
+  }
+
+  async findByIdIsPlayedNo(id: string): Promise<Queue> {
+    const queue = await this.repository.findOne({
+      where: {
+        id,
+        played: "no",
+      },
+    });
+
+    return queue;
+  }
+
+  async updatedIsPlayed(id: string): Promise<Queue> {
+    await this.repository.update(id, {
+      played: "yes",
+    });
+
+    const court = await this.repository.findOneBy({ id });
+
+    return court;
+  }
 }
 
 export { QueueRepository };
