@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateMemberDTO } from "@modules/members/dtos/ICreateMemberDTO";
@@ -17,23 +17,45 @@ class MembersRepository implements IMembersRepository {
     name,
     registration,
     status,
-  }: ICreateMemberDTO): Promise<void> {
-    const member = await this.repository.create({
+    type,
+  }: ICreateMemberDTO): Promise<Members> {
+    const member = this.repository.create({
       name,
       registration,
       status,
+      type,
     });
 
-    this.repository.save(member);
-  }
+    await this.repository.save(member);
 
-  async findById(id: string): Promise<Members> {
-    const member = await this.repository.findOneBy({ id });
     return member;
   }
 
-  async findByName(name: string): Promise<Members> {
-    const member = await this.repository.findOneBy({ name });
+  async findById(id: string, type = "member" as string): Promise<Members> {
+    const member = await this.repository.findOne({
+      where: {
+        id,
+        type,
+      },
+    });
+    return member;
+  }
+
+  async findByIds(ids: string[]): Promise<Members[]> {
+    const members = await this.repository.find({
+      where: { id: In(ids) },
+    });
+
+    return members;
+  }
+
+  async findByName(name: string, type = "member" as string): Promise<Members> {
+    const member = await this.repository.findOne({
+      where: {
+        name,
+        type,
+      },
+    });
     return member;
   }
 
@@ -43,7 +65,14 @@ class MembersRepository implements IMembersRepository {
   }
 
   async list(): Promise<Members[]> {
-    const members = await this.repository.find();
+    const members = await this.repository.find({
+      relations: {
+        dependents: true,
+      },
+      where: {
+        type: "member",
+      },
+    });
     return members;
   }
   async update({

@@ -13,14 +13,19 @@ describe("Suite Update Dependent tests", () => {
 
   it("Should be able to delete a member with yours dependents", async () => {
     const name = "member delete";
+    const type = "member";
 
     await membersRepositoryInMemory.create({
       name,
       registration: "12345",
       status: "ok",
+      type,
     });
 
-    const memberCreated = await membersRepositoryInMemory.findByName(name);
+    const memberCreated = await membersRepositoryInMemory.findByName(
+      name,
+      type
+    );
 
     const { id } = memberCreated;
 

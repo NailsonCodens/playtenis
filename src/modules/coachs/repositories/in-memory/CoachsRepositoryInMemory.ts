@@ -17,6 +17,13 @@ class CoachsRepositoryInMemory implements ICoachsRepository {
     return coach;
   }
 
+  async findByRegistration(registration: string): Promise<Coachs> {
+    const coach = this.coachs.find(
+      (coach) => coach.registration === registration
+    );
+    return coach;
+  }
+
   async list(): Promise<Coachs[]> {
     return this.coachs;
   }

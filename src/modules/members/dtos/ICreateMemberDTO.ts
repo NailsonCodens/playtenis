@@ -3,6 +3,7 @@ interface ICreateMemberDTO {
   name: string;
   registration: string;
   status: string;
+  type?: string;
 }
 
 export { ICreateMemberDTO };

@@ -13,17 +13,17 @@ describe("Suite list members use case", () => {
 
   it("Should be able to list members", async () => {
     const name = "Membro 1";
+    const type = "member";
 
-    await membersRepositoryInMemory.create({
+    const test = await membersRepositoryInMemory.create({
       name,
       registration: "12345",
       status: "ok",
+      type,
     });
-
-    const memberExpected = await membersRepositoryInMemory.findByName(name);
 
     const member = await listMembersUseCase.execute();
 
-    expect(member).toEqual([memberExpected]);
+    expect(member).toEqual([test]);
   });
 });

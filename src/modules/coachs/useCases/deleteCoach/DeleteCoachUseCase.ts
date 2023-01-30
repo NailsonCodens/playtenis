@@ -9,12 +9,12 @@ class DeleteCoachUseCase {
     @inject("CoachsRepository") private coachsRepository: ICoachsRepository
   ) {}
 
-  async execute({ id }): Promise<void> {
+  async execute(id: string): Promise<void> {
     const coachAlredyExists = await this.coachsRepository.findById(id);
 
     if (!coachAlredyExists) {
       throw new AppError(
-        "Este professor não existe, por tanto não pode ser deletado"
+        "Este membro não existe, por tanto não pode ser deletado"
       );
     }
 

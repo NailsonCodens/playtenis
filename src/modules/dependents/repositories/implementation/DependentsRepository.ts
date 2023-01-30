@@ -13,44 +13,36 @@ class DependentsRepository implements IDependentsRepository {
     this.repository = AppDataSource.getRepository(Dependents);
   }
 
-  async list(member_id: string): Promise<Dependents[]> {
+  async list(player_id: string): Promise<Dependents[]> {
     const dependents = await this.repository.find({
+      relations: {
+        member: true,
+        player: true,
+      },
       where: {
-        member_id,
+        player_id,
       },
     });
     return dependents;
   }
 
-  async create({ member_id, name }: ICreateDependentDTO): Promise<void> {
-    const dependent = this.repository.create({ member_id, name });
+  async create({
+    player_id,
+    member_id,
+  }: ICreateDependentDTO): Promise<Dependents> {
+    const dependent = this.repository.create({
+      player_id,
+      member_id,
+    });
 
     await this.repository.save(dependent);
-  }
 
-  async findByName(name: string): Promise<Dependents> {
-    const dependent = await this.repository.findOneBy({ name });
     return dependent;
   }
 
   async findById(id: string): Promise<Dependents> {
     const dependent = await this.repository.findOneBy({ id });
     return dependent;
-  }
-
-  async update({
-    id,
-    name,
-    member_id,
-  }: ICreateDependentDTO): Promise<Dependents> {
-    await this.repository.update(id, {
-      name,
-      member_id,
-    });
-
-    const depedent = await this.repository.findOneBy({ id });
-
-    return depedent;
   }
 
   async delete(id: string): Promise<void> {

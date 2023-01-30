@@ -9,6 +9,7 @@ export class CreateCourts1672857888372 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "name",

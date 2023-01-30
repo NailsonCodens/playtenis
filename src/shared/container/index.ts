@@ -8,10 +8,14 @@ import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepositor
 import { CourtsRepository } from "@modules/courts/repositories/implementation/CourtsRespository";
 import { IDependentsRepository } from "@modules/dependents/repositories/IDependentsRepository";
 import { DependentsRepository } from "@modules/dependents/repositories/implementation/DependentsRepository";
+import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
+import { GamesRepository } from "@modules/games/repositories/implementation/GamesRepository";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 import { MembersRepository } from "@modules/members/repositories/implementation/MembersRepository";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { ModalitiesRespository } from "@modules/modalities/repositories/implementations/ModalitiesRespository";
+import { QueueRepository } from "@modules/queue/repositories/implementation/QueueRepository";
+import { IQueueRepository } from "@modules/queue/repositories/IQueueRepository";
 
 container.registerSingleton<IUserRepository>("UserRepository", UsersRepository);
 
@@ -38,4 +42,14 @@ container.registerSingleton<IMembersRepository>(
 container.registerSingleton<IDependentsRepository>(
   "DependentsRepository",
   DependentsRepository
+);
+
+container.registerSingleton<IGamesRepository>(
+  "GamesRepository",
+  GamesRepository
+);
+
+container.registerSingleton<IQueueRepository>(
+  "QueueRepository",
+  QueueRepository
 );

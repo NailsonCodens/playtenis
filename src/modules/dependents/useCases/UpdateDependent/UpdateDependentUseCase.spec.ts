@@ -18,81 +18,89 @@ describe("Suite Update Dependent tests", () => {
   });
 
   it("Should be able to update a dependent of the member", async () => {
-    let name = "Member 01";
-
-    await membersRepositoryInMemory.create({
-      name,
-      registration: "12222",
+    const memberUpdate = {
+      name: "member test",
+      registration: "232323",
       status: "ok",
-    });
+      type: "member",
+    };
+    const memberCreated = await membersRepositoryInMemory.create(memberUpdate);
 
-    const memberCreated = await membersRepositoryInMemory.findByName(name);
+    const dependentCreate = {
+      name: "dependent test",
+      registration: "555555",
+      status: "ok",
+      type: "dependent",
+    };
 
-    name = "dependent test";
-
-    await dependentsRepositoryInMemory.create({
-      member_id: memberCreated.id,
-      name,
-    });
-
-    const dependentCreated = await dependentsRepositoryInMemory.findByName(
-      name
+    const dependentCreated = await membersRepositoryInMemory.create(
+      dependentCreate
     );
 
-    const { id } = dependentCreated;
-
-    name = "dependent updated";
-
-    const depedentUpdated = await updateDepedentUseCase.execute({
-      id,
-      name,
+    const dependentUpdated = await updateDepedentUseCase.execute({
+      id: dependentCreated.id,
+      name: "dependent updated",
+      registration: "555555",
+      status: "ok",
       member_id: memberCreated.id,
     });
 
-    expect(depedentUpdated).toHaveProperty("id", id);
-    expect(depedentUpdated).toHaveProperty("name", name);
+    expect(dependentUpdated).toHaveProperty("id", dependentCreated.id);
+    expect(dependentUpdated).toHaveProperty("name", dependentUpdated.name);
   });
 
   it("Should not be able to update a dependent if non-existing", async () => {
-    const name = "Member 01";
-
-    await membersRepositoryInMemory.create({
-      name,
-      registration: "12222",
+    const memberUpdate = {
+      name: "member test",
+      registration: "232323",
       status: "ok",
-    });
+      type: "dependent",
+    };
 
-    const memberCreated = await membersRepositoryInMemory.findByName(name);
+    await membersRepositoryInMemory.create(memberUpdate);
+
+    const memberCreated = await membersRepositoryInMemory.findByName(
+      memberUpdate.name,
+      memberUpdate.type
+    );
 
     const { id } = memberCreated;
 
     expect(async () => {
       await updateDepedentUseCase.execute({
         id: "22222",
-        name,
+        name: "adasd",
+        registration: "6565656",
+        status: "123213",
         member_id: id,
       });
     }).rejects.toEqual(new AppError("Este dependente não existe"));
   });
 
   it("Should not be able to update a dependent if member non-existing ", async () => {
-    const name = "dependent";
-    await dependentsRepositoryInMemory.create({
-      name,
-      member_id: "1234",
-    });
+    const dependentCreate = {
+      name: "member test",
+      registration: "232323",
+      status: "ok",
+      type: "dependent",
+    };
 
-    const dependentCreated = await dependentsRepositoryInMemory.findByName(
-      name
+    await membersRepositoryInMemory.create(dependentCreate);
+
+    const memberCreated = await membersRepositoryInMemory.findByName(
+      dependentCreate.name,
+      dependentCreate.type
     );
 
-    const { id } = dependentCreated;
+    const { id } = memberCreated;
 
     expect(async () => {
       await updateDepedentUseCase.execute({
         id,
-        name: "depedent",
-        member_id: "2121321",
+        name: "adasd",
+        registration: "6565656",
+        status: "123213",
+        member_id: "12312321321",
       });
     }).rejects.toEqual(new AppError("Este membro do clube não existe"));
   });

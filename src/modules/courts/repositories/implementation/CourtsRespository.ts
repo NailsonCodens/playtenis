@@ -1,7 +1,8 @@
+import { Repository } from "typeorm";
+
 import { AppDataSource } from "@database/data-source";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
 import { Courts } from "@modules/courts/entities/Courts";
-import { Repository } from "typeorm";
 
 import { ICourtsRepository } from "../ICourtsRepository";
 
@@ -17,8 +18,29 @@ class CourtsRepository implements ICourtsRepository {
     return courts;
   }
 
+  async listWithGames(): Promise<Courts[]> {
+    const courts = await this.repository.find({
+      relations: {
+        games: true,
+      },
+      order: {
+        games: {
+          id: "DESC",
+        },
+      },
+    });
+    return courts;
+  }
+
   async findById(id: string): Promise<Courts> {
     const court = await this.repository.findOneBy({ id });
+    return court;
+  }
+
+  async findByIdAndStatusOK(id: string): Promise<Courts> {
+    const court = await this.repository.findOne({
+      where: { id, status: "ok" },
+    });
     return court;
   }
 
@@ -48,7 +70,7 @@ class CourtsRepository implements ICourtsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    console.log(id);
+    await this.repository.softDelete(id);
   }
 }
 

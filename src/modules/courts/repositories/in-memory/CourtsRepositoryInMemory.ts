@@ -17,6 +17,14 @@ class CourtsRepositoryInMemory implements ICourtsRepository {
     return court;
   }
 
+  async findByIdAndStatusOK(id: string): Promise<Courts> {
+    const court = this.courts.find(
+      (court) => court.id === id && court.status === "ok"
+    );
+
+    return court;
+  }
+
   async list(): Promise<Courts[]> {
     return this.courts;
   }
