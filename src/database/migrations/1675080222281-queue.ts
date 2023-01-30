@@ -16,10 +16,6 @@ export class queue1675080222281 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "court_id",
-            type: "uuid",
-          },
-          {
             name: "players",
             type: "varchar",
           },

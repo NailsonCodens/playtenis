@@ -5,11 +5,11 @@ import { AddGameInQueueUseCase } from "./AddGameInQueueUseCase";
 
 class AddGameInQueueController {
   async handle(request: Request, response: Response) {
-    const { court_id, modality_id, players } = request.body;
+    const { modality_id, players } = request.body;
 
     const addGameInQueueUseCase = container.resolve(AddGameInQueueUseCase);
 
-    await addGameInQueueUseCase.execute({ court_id, modality_id, players });
+    await addGameInQueueUseCase.execute({ modality_id, players });
 
     return response.json({
       message:

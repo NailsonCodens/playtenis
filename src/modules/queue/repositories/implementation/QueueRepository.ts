@@ -13,14 +13,9 @@ class QueueRepository implements IQueueRepository {
     this.repository = AppDataSource.getRepository(Queue);
   }
 
-  async create({
-    modality_id,
-    court_id,
-    players,
-  }: ICreateQueueDTO): Promise<void> {
+  async create({ modality_id, players }: ICreateQueueDTO): Promise<void> {
     const gameQueue = this.repository.create({
       modality_id,
-      court_id,
       players,
     });
 

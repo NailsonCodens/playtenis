@@ -18,23 +18,9 @@ class AddGameInQueueUseCase {
     private modalitiesRepository: IModalitiesRepository
   ) {}
 
-  async execute({
-    court_id,
-    players,
-    modality_id,
-  }: IRequestQueueDTO): Promise<void> {
+  async execute({ players, modality_id }: IRequestQueueDTO): Promise<void> {
     const date_now = dayjs();
     const start_time_game = dayjs(date_now).toDate();
-
-    const courtExists = await this.courtsRepository.findById(court_id);
-
-    if (!courtExists) {
-      throw new AppError("A quadra não existe");
-    }
-
-    if (courtExists.status !== "ok") {
-      throw new AppError("A quadra não está disponível para jogos");
-    }
 
     const modalityExists = await this.modalitiesRepository.findById(
       modality_id
@@ -93,7 +79,6 @@ class AddGameInQueueUseCase {
     const stringPlayers = players.join(",");
 
     await this.queueRepository.create({
-      court_id,
       players: stringPlayers,
       modality_id,
     });
