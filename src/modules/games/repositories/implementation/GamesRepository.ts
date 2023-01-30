@@ -48,8 +48,24 @@ class GamesRepository implements IGamesRepository {
     court_id,
     date_start_game,
   }: IFindGameDTO): Promise<Games> {
-    console.log(date_start_game);
     const game = await this.repository.findOne({
+      where: {
+        court_id,
+        start_time_game: LessThan(date_start_game),
+        end_time_game: MoreThan(date_start_game),
+      },
+    });
+
+    return game;
+  }
+
+  async findCurrentGameByCourt({ court_id, date_start_game }: IFindGameDTO) {
+    const game = await this.repository.findOne({
+      relations: {
+        players: true,
+        courts: true,
+        modality: true,
+      },
       where: {
         court_id,
         start_time_game: LessThan(date_start_game),
