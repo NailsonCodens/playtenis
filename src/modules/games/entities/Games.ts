@@ -6,10 +6,14 @@ import {
   ManyToOne,
   JoinTable,
   ManyToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
+import { Courts } from "@modules/courts/entities/Courts";
 import { Members } from "@modules/members/entities/Members";
+import { Modalities } from "@modules/modalities/entities/Modalities";
 
 @Entity("games")
 class Games {
@@ -41,6 +45,20 @@ class Games {
     inverseJoinColumns: [{ name: "player_id" }],
   })
   players: Members[];
+
+  @OneToOne(() => Courts, (court) => court.id)
+  @JoinColumn({
+    name: "court_id",
+    referencedColumnName: "id",
+  })
+  courts: Courts;
+
+  @OneToOne(() => Modalities, (modality) => modality.id)
+  @JoinColumn({
+    name: "modality_id",
+    referencedColumnName: "id",
+  })
+  modality: Modalities;
 
   @Column("varchar")
   created_at: Date;
