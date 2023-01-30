@@ -31,13 +31,13 @@ class CreatePlayersInGameUseCase {
 
     if (amountPlayers > amoutPlayersAllowed) {
       throw new AppError(
-        `Esta modalidade permite apenas ${amoutPlayersAllowed} jogadores`
+        `Esta modalidade permite apenas ${amoutPlayersAllowed} jogadores(as)`
       );
     }
 
     if (amountPlayers < amoutPlayersAllowed) {
       throw new AppError(
-        `Esta modalidade permite ${amoutPlayersAllowed} jogadores, por favor adicione outro jogador`
+        `Esta modalidade permite ${amoutPlayersAllowed} jogadores, por favor adicione outro(s) jogadores(as)`
       );
     }
     const players = await this.membersRepository.findByIds(player_ids);

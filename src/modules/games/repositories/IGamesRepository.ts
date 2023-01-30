@@ -8,6 +8,7 @@ interface IGamesRepository {
   findById(id: string): Promise<Games>;
   findGameTodayBetweenHours(data: IFindGameDTO);
   findCurrentGameByCourt({ court_id, date_start_game }: IFindGameDTO);
+  findGameWithPlayers(player_ids: string[], date_start_game: Date);
 }
 
 export { IGamesRepository };
