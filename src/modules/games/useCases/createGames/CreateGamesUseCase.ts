@@ -43,7 +43,9 @@ class CreateGamesUseCase {
       throw new AppError("A modalidade não está disponível para jogos");
     }
 
-    const gameTime = modalityExists.time;
+    const preparationAditionalTime = Number(10);
+
+    const gameTime = Number(modalityExists.time) + preparationAditionalTime;
 
     const date_now = dayjs();
 
