@@ -17,9 +17,6 @@ class Queue {
   modality_id: string;
 
   @Column("varchar")
-  court_id: string;
-
-  @Column("varchar")
   players: string;
 
   @Column("varchar")
