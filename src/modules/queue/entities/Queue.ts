@@ -6,6 +6,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { v4 as uuidV4 } from "uuid";
 
 @Entity("queue")
 class Queue {
@@ -21,6 +22,9 @@ class Queue {
   @Column("varchar")
   players: string;
 
+  @Column("varchar")
+  played: string;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -29,6 +33,12 @@ class Queue {
 
   @DeleteDateColumn()
   deleted_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuidV4();
+    }
+  }
 }
 
 export { Queue };
