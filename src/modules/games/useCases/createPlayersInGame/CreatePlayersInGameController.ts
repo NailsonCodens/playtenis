@@ -12,6 +12,8 @@ class CreatePlayersInGameController {
     );
 
     await createPlayersINGameUseCase.execute(players, game_id);
+
+    return response.send();
   }
 }
 
