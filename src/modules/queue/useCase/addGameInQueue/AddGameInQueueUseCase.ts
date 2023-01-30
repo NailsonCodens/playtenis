@@ -79,8 +79,7 @@ class AddGameInQueueUseCase {
       );
     }
 
-    const playersInQueueGame =
-      await this.queueRepository.findPlayersInQueueGames(players);
+    await this.queueRepository.findPlayersInQueueGames(players);
 
     const amountplayerInQueue = playersInQueueGame && playersInQueueGame.length;
 

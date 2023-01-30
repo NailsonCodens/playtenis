@@ -1,4 +1,4 @@
-import { LessThan, MoreThan, Repository } from "typeorm";
+import { In, LessThan, MoreThan, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateGameDTO } from "@modules/games/dtos/ICreateGameDTO";
@@ -68,6 +68,26 @@ class GamesRepository implements IGamesRepository {
       },
       where: {
         court_id,
+        start_time_game: LessThan(date_start_game),
+        end_time_game: MoreThan(date_start_game),
+      },
+    });
+
+    return game;
+  }
+
+  async findGameWithPlayers(
+    player_ids: string[],
+    date_start_game: Date
+  ): Promise<Games> {
+    const game = await this.repository.findOne({
+      relations: {
+        players: true,
+      },
+      where: {
+        players: {
+          id: In(player_ids),
+        },
         start_time_game: LessThan(date_start_game),
         end_time_game: MoreThan(date_start_game),
       },
