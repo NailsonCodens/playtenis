@@ -14,6 +14,8 @@ import { IMembersRepository } from "@modules/members/repositories/IMembersReposi
 import { MembersRepository } from "@modules/members/repositories/implementation/MembersRepository";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { ModalitiesRespository } from "@modules/modalities/repositories/implementations/ModalitiesRespository";
+import { QueueRepository } from "@modules/queue/repositories/implementation/QueueRepository";
+import { IQueueRepository } from "@modules/queue/repositories/IQueueRepository";
 
 container.registerSingleton<IUserRepository>("UserRepository", UsersRepository);
 
@@ -45,4 +47,9 @@ container.registerSingleton<IDependentsRepository>(
 container.registerSingleton<IGamesRepository>(
   "GamesRepository",
   GamesRepository
+);
+
+container.registerSingleton<IQueueRepository>(
+  "QueueRepository",
+  QueueRepository
 );
