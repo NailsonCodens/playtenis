@@ -13,7 +13,7 @@ class DeleteMemberController {
 
     return response
       .status(201)
-      .json({ message: "Membro deletado com sucesso" });
+      .json({ message: "Associado deletado com sucesso" });
   }
 }
 

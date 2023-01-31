@@ -16,7 +16,9 @@ class CreateModalityController {
       status,
     });
 
-    return response.status(201).send();
+    return response
+      .status(201)
+      .json({ message: "Modalidade Salva com sucesso" });
   }
 }
 

@@ -13,7 +13,7 @@ const listDependentController = new ListDependentsController();
 const deleteDependentController = new DeleteDependentController();
 
 dependentsRouter.post("/:member_id", createDependentController.handle);
-dependentsRouter.get("/:id", listDependentController.handle);
+dependentsRouter.get("/:member_id", listDependentController.handle);
 dependentsRouter.put("/:id", updateDepedentController.handle);
 dependentsRouter.delete("/:id", deleteDependentController.handle);
 

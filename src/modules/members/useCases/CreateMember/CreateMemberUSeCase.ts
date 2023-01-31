@@ -26,7 +26,7 @@ class CreateMemberUseCase {
     const memberAlreadyWithName = await this.memberRepository.findByName(name);
 
     if (memberAlreadyWithName) {
-      throw new AppError("um associado já existe com este nome!");
+      throw new AppError("Um associado já existe com este nome!");
     }
 
     this.memberRepository.create({ name, registration, status, type });

@@ -11,14 +11,24 @@ class UpdateCoachUseCase {
     @inject("CoachsRepository") private coachRepository: ICoachsRepository
   ) {}
 
-  async execute({ id, name }: ICreateCoachDTO): Promise<Coachs> {
+  async execute({
+    id,
+    name,
+    registration,
+    status,
+  }: ICreateCoachDTO): Promise<Coachs> {
     const coachAlredyExists = await this.coachRepository.findById(id);
 
     if (!coachAlredyExists) {
       throw new AppError("Este professor não existe");
     }
 
-    const coach = await this.coachRepository.update({ id, name });
+    const coach = await this.coachRepository.update({
+      id,
+      name,
+      registration,
+      status,
+    });
     return coach;
   }
 }

@@ -11,7 +11,9 @@ class CreateCoachController {
 
     await createCoachUseCase.execute({ name, registration, status });
 
-    return response.status(201).send();
+    return response
+      .status(201)
+      .json({ message: "Professor Salva com sucesso" });
   }
 }
 

@@ -7,9 +7,7 @@ class DeleteDependentController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const deleteDependentUseCase = await container.resolve(
-      DeleteDependentUseCase
-    );
+    const deleteDependentUseCase = container.resolve(DeleteDependentUseCase);
 
     await deleteDependentUseCase.execute(id);
 

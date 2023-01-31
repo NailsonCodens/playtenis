@@ -13,14 +13,14 @@ class DependentsRepository implements IDependentsRepository {
     this.repository = AppDataSource.getRepository(Dependents);
   }
 
-  async list(player_id: string): Promise<Dependents[]> {
+  async list(member_id: string): Promise<Dependents[]> {
     const dependents = await this.repository.find({
       relations: {
         member: true,
         player: true,
       },
       where: {
-        player_id,
+        member_id,
       },
     });
     return dependents;

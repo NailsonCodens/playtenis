@@ -4,6 +4,9 @@ import "express-async-errors";
 import "@database/data-source";
 import "@shared/container";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "swagger.json";
+
 import { AppError } from "@errors/AppError";
 
 import generalRoutes from "./routes/routes";
@@ -11,6 +14,7 @@ import generalRoutes from "./routes/routes";
 const app = express();
 
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(generalRoutes);
 
