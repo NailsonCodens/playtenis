@@ -10,6 +10,7 @@ export const AppDataSource = new DataSource({
   database: "playtenis",
   synchronize: false,
   logging: false,
+  useUTC: true,
   migrations: ["./src/database/migrations/*.ts"],
 });
 

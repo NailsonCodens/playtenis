@@ -19,6 +19,7 @@ export const AppDataSource = new DataSource({
   database: "playtenis",
   synchronize: false,
   logging: false,
+  useUTC: true,
   migrations: ["./src/database/migrations/*.ts"],
   entities: [Modalities, Courts, Coachs, Members, Dependents, Games, Queue],
 });

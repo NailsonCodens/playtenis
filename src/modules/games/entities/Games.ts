@@ -8,6 +8,9 @@ import {
   ManyToMany,
   OneToOne,
   JoinColumn,
+  DeleteDateColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
@@ -29,10 +32,28 @@ class Games {
   @Column("varchar")
   modality_time: number;
 
-  @Column("varchar")
+  @Column("varchar", {
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR", { timeZone: "UTC" });
+      },
+    },
+  })
   start_time_game: Date;
 
-  @Column("varchar")
+  @Column("varchar", {
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR", { timeZone: "UTC" });
+      },
+    },
+  })
   end_time_game: Date;
 
   @Column("varchar")
@@ -60,13 +81,40 @@ class Games {
   })
   modality: Modalities;
 
-  @Column("varchar")
+  @CreateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   created_at: Date;
 
-  @Column("varchar")
+  @UpdateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   updated_at: Date;
 
-  @Column("varchar")
+  @DeleteDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value == null ? value : value.toLocaleString("pt-BR");
+      },
+    },
+  })
   deleted_at: Date;
 
   constructor() {

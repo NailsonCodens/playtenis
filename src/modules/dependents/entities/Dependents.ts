@@ -37,10 +37,28 @@ class Dependents {
   })
   member: Members;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   updated_at: Date;
 
   constructor() {

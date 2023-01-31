@@ -32,13 +32,40 @@ class Members {
   @OneToMany(() => Dependents, (depedents) => depedents.member)
   dependents: Dependents[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   updated_at: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value == null ? value : value.toLocaleString("pt-BR");
+      },
+    },
+  })
   deleted_at: Date;
 
   constructor() {

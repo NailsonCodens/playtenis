@@ -11,12 +11,17 @@ import { AppError } from "@errors/AppError";
 
 import generalRoutes from "./routes/routes";
 
+process.env.TZ = "America/Sao_Paulo";
+
 const app = express();
 
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(generalRoutes);
+
+const date = new Date();
+console.log(date.toLocaleTimeString("pt-BR"));
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {

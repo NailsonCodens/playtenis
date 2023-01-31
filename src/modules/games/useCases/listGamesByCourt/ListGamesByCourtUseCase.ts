@@ -11,13 +11,11 @@ class ListGamesByCourtUseCase {
   ) {}
 
   async execute(court_id: string): Promise<Games> {
-    const date_start_game = dayjs().toDate();
+    const date_start_game = dayjs().format();
     const gameCourtCurrent = await this.gamesRepository.findCurrentGameByCourt({
       court_id,
       date_start_game,
     });
-
-    gameCourtCurrent.teste = "asd";
 
     return gameCourtCurrent;
   }
