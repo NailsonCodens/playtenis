@@ -24,16 +24,17 @@ class CreateDependentUseCase {
 
     const dependent = await this.memberRepository.findByName(name, type);
 
-    if (dependent) {
-      throw new AppError("Este dependente já existe");
-    }
-
     const member = await this.memberRepository.findById(member_id);
 
     if (!member) {
       throw new AppError(
-        "Este associado não existe, por tanto não é possível cadastrar um dependente a ele"
+        "Este associado não existe, por tanto não é possível cadastrar um dependente a ele",
+        404
       );
+    }
+
+    if (dependent) {
+      throw new AppError("Este dependente já existe");
     }
 
     const dependentPlayer = await this.memberRepository.create({

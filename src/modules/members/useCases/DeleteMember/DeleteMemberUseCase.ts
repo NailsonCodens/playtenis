@@ -15,7 +15,7 @@ class DeleteMemberUseCase {
 
     if (!memberAlredyExists) {
       throw new AppError(
-        "Este membro não existe, por tanto não pode ser deletado"
+        "Este associado não existe, por tanto não pode ser deletado"
       );
     }
 

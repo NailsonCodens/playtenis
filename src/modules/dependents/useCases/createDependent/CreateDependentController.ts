@@ -17,7 +17,9 @@ class CreateDependentController {
       status,
     });
 
-    return response.send();
+    return response
+      .status(201)
+      .json({ message: "Dependente Salvo com sucesso" });
   }
 }
 

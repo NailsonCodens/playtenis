@@ -17,21 +17,45 @@ class Queue {
   modality_id: string;
 
   @Column("varchar")
-  court_id: string;
-
-  @Column("varchar")
   players: string;
 
   @Column("varchar")
   played: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value.toLocaleString("pt-BR");
+      },
+    },
+  })
   updated_at: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        return value == null ? value : value.toLocaleString("pt-BR");
+      },
+    },
+  })
   deleted_at: Date;
 
   constructor() {

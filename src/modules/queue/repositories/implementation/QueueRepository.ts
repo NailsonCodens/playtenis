@@ -1,4 +1,4 @@
-import { In, LessThan, Like, MoreThan, Repository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateQueueDTO } from "@modules/queue/dtos/ICreateQueueDTO";
@@ -13,14 +13,9 @@ class QueueRepository implements IQueueRepository {
     this.repository = AppDataSource.getRepository(Queue);
   }
 
-  async create({
-    modality_id,
-    court_id,
-    players,
-  }: ICreateQueueDTO): Promise<void> {
+  async create({ modality_id, players }: ICreateQueueDTO): Promise<void> {
     const gameQueue = this.repository.create({
       modality_id,
-      court_id,
       players,
     });
 
@@ -39,6 +34,62 @@ class QueueRepository implements IQueueRepository {
       .getMany();
 
     return playersInQueue;
+  }
+
+  async findQueueByPlayers(players: string): Promise<Queue> {
+    console.log(players);
+
+    const playersInQueue = await this.repository.findOne({
+      where: {
+        players,
+        played: "no",
+      },
+      order: {
+        id: "DESC",
+      },
+    });
+
+    return playersInQueue;
+  }
+
+  async find(): Promise<Queue[]> {
+    const all = await this.repository.find({
+      where: {
+        played: "no",
+      },
+      order: {
+        id: "ASC",
+      },
+    });
+
+    return all;
+  }
+
+  async findById(id: string): Promise<Queue> {
+    const queue = await this.repository.findOneBy({ id });
+
+    return queue;
+  }
+
+  async findByIdIsPlayedNo(id: string): Promise<Queue> {
+    const queue = await this.repository.findOne({
+      where: {
+        id,
+        played: "no",
+      },
+    });
+
+    return queue;
+  }
+
+  async updatedIsPlayed(id: string): Promise<Queue> {
+    await this.repository.update(id, {
+      played: "yes",
+    });
+
+    const court = await this.repository.findOneBy({ id });
+
+    return court;
   }
 }
 

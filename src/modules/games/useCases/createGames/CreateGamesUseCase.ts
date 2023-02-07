@@ -49,11 +49,11 @@ class CreateGamesUseCase {
 
     const date_now = dayjs();
 
-    const start_time_game = dayjs(date_now).toDate();
+    const start_time_game = dayjs(date_now).format();
 
     const end_time_date = dayjs(start_time_game)
       .add(gameTime, "minute")
-      .toDate();
+      .format();
 
     const gameTodayBetweenHoursAlredyExists =
       await this.gamesRepository.findGameTodayBetweenHours({

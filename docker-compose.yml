@@ -9,12 +9,16 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=playtenis
       - POSTGRES_DB=playtenis
+      - TZ=America/Sao_Paulo
+      - PGTZ=America/Sao_Paulo
   api_playtenis:
     build: .  
     command: sh -c "yarn install && yarn run dev"
     container_name: api_playtenis
     ports:
       - 3000:3000
+    environment:
+      - TZ=America/Sao_Paulo      
     volumes:
       - .:/usr/api_playtenis
     depends_on:

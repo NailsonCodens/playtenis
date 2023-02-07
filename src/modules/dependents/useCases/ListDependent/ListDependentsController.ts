@@ -5,7 +5,7 @@ import { ListDependentsUseCase } from "@modules/dependents/useCases/ListDependen
 
 class ListDependentsController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { member_id } = request.body;
+    const { member_id } = request.params;
 
     const listDependentUseCase = container.resolve(ListDependentsUseCase);
 

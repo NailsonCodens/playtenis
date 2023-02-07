@@ -1,0 +1,952 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Play Tenis Api",
+    "description": "Esta é a api de controle de jogos de tenis em tempo real.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "nailson@codens.com.br"
+    }
+  },
+  "tags": [
+    {
+      "name": "Quadras",
+      "description": "Rotas de quadras para uso no painel administrativo"
+    },
+    {
+      "name": "Modalidades",
+      "description": "Rotas de modalidades para uso no painel administrativo"
+    },
+    {
+      "name": "Professores",
+      "description": "Rotas de professores para uso no painel administrativo"
+    },
+    {
+      "name": "Sócios do clube",
+      "description": "Rotas de sócios do clube para uso no painel administrativo"
+    },
+    {
+      "name": "Dependentes dos sócios do clube",
+      "description": "Rotas de dependentes dos sócios para uso no painel administrativo"
+    }        
+  ],  
+  "paths": {
+    "/courts/": {
+      "get": {
+        "tags": ["Quadras"],
+        "summary": "Lista quadras",
+        "description": "Lista todas as quadras cadastradas",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Quadras"],
+        "summary": "Cadastra quadra",
+        "description": "Cadastra a quadra disponível",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Quadra 01",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Quadra Salva com sucesso"
+          },
+          "400": {
+            "description": "Esta quadra já está cadastrada."
+          }
+        } 
+      }
+    },
+    "/courts/{id}": {
+      "put": {
+        "tags": ["Quadras"],
+        "summary": "Altera quadra",
+        "description": "Altera a quadra selecionada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quadra id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Quadra 01 atualizada",
+                  "status": "ok"
+                }                
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Quadra alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Esta quadra não existe"
+          }
+        }        
+      },
+      "delete": {
+        "tags": ["Quadras"],
+        "summary": "Deleta uma quadra",
+        "description": "Deleta a quadra selecionada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quadra id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Quadra deletada com sucesso"
+          },
+          "400": {
+            "description": "Esta quadra não existe"
+          }
+        }
+      } 
+    },
+    "/modalities/": {
+      "get": {
+        "tags": ["Modalidades"],
+        "summary": "Lista modalidades",
+        "description": "Lista todas as modalidades cadastradas",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "amount_players": {
+                        "type": "number",
+                        "default": "2"
+                      },                      
+                      "time": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Modalidades"],
+        "summary": "Cadastra modalidade",
+        "description": "Cadastra a modalidade disponível",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "amount_players": {
+                    "type": "number"
+                  },
+                  "time": {
+                    "type": "number"
+                  },      
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Ranking",
+                  "amount_players":  2,
+                  "time": 90,
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Modalidade Salva com sucesso"
+          },
+          "400": {
+            "description": "Esta modalidade já existe"
+          }
+        } 
+      }     
+    },
+    "/modalities/{id}": {
+      "put": {
+        "tags": ["Modalidades"],
+        "summary": "Altera modalidade",
+        "description": "Altera a modalidade selecionada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "modalidade id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "amount_players": {
+                    "type": "number"
+                  },
+                  "time": {
+                    "type": "number"
+                  },      
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Ranking",
+                  "amount_players": 2,
+                  "time": 90,
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Modalidade Alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "amount_players": {
+                        "type": "string"
+                      },
+                      "time":  {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      } 
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Esta modalidade não existe"
+          }
+        }         
+      },
+      "delete": {
+        "tags": ["Modalidades"],
+        "summary": "Deleta uma modalidade",
+        "description": "Deleta a modalidade selecionada",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Modalidade id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Quadra deletada com sucesso"
+          },
+          "400": {
+            "description": "Esta quadra não existe"
+          }
+        }
+      } 
+    },
+    "/coachs/": {
+      "get": {
+        "tags": ["Professores"],
+        "summary": "Lista professores",
+        "description": "Lista todos os professores cadastradas",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Professores"],
+        "summary": "Cadastra professor",
+        "description": "Cadastra o professor disponível",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },  
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Fábio",
+                  "registration": "12345",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Professor Salvo com sucesso"
+          },
+          "400": {
+            "description": "Já existe um jogador cadastrado com esta matrícula!"
+          }
+        } 
+      }     
+    },
+    "/coachs/{id}": {
+      "put": {
+        "tags": ["Professores"],
+        "summary": "Altera o professor",
+        "description": "Altera os dados do professor selecionado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "professor id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },      
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Professor atualizado",
+                  "registration": "09897",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Modalidade Alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "name": {
+                        "type": "string"
+                      },
+                      "registration": {
+                        "type": "string"
+                      },
+                      "status":  {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }            
+          },
+          "400": {
+            "description": "Esta modalidade não existe"
+          }
+        }         
+      },
+      "delete": {
+        "tags": ["Professores"],
+        "summary": "Deleta um professor",
+        "description": "Deleta um professor selecionado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Professor id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Professor deletado com sucesso"
+          },
+          "400": {
+            "description": "Esta quadra não existe"
+          }
+        }
+      } 
+    },
+    "/members/": {
+      "get": {
+        "tags": ["Sócios do clube"],
+        "summary": "Lista associados",
+        "description": "Lista todos os associados cadastrados",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      },
+                      "dependents": {
+                        "type": "array"
+                      }                  
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sócios do clube"],
+        "summary": "Cadastra associados",
+        "description": "Cadastra o associado disponível",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },  
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Fábio",
+                  "registration": "12345",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Associado Salva com sucesso"
+          },
+          "400": {
+            "description": "Este associado já existe!"
+          }
+        } 
+      }     
+    },
+    "/members/{id}": {
+      "put": {
+        "tags": ["Sócios do clube"],
+        "summary": "Altera o associado",
+        "description": "Altera os dados do associado selecionado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Associado id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },      
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Sócio atualizado",
+                  "registration": "09897",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sócio Alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "registration": {
+                        "type": "string"
+                      },
+                      "status":  {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }               
+          },
+          "400": {
+            "description": "Este sócio não existe"
+          }
+        }         
+      },
+      "delete": {
+        "tags": ["Sócios do clube"],
+        "summary": "Deleta um associado e seus dependentes",
+        "description": "Deleta um sócio selecionado e seus dependentes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Associado id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Sócio deletado com sucesso"
+          },
+          "400": {
+            "description": "Este membro não existe, por tanto não pode ser deletado"
+          }
+        }
+      } 
+    },
+    "/dependents/{id}": {
+      "get": {
+        "tags": ["Dependentes dos sócios do clube"],
+        "summary": "Lista de dependentes dos associados",
+        "description": "Lista todos os dependentes do associado cadastrado. Atenção: no array member, se encontra as informações do associado a quem estes dependentes pertencem. E em player, se encontra as informações do dependente. os dependentes tem o tipo: DEPENDENT",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Associado id, aqui colocamos o sócio que tem dependentes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "player_id": {
+                        "type": "string"
+                      },
+                      "member_id": {
+                        "type": "string"
+                      },                      
+                      "member": {
+                        "type": "array"
+                      },                      
+                      "player": {
+                        "type": "array"
+                      }                
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Dependentes dos sócios do clube"],
+        "summary": "Cadastro de dependentes do associado",
+        "description": "Cadastra dependente do associado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Sócio id, aqui colocamos o sócio para cadastrarmos dependentes a ele",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],          
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },  
+                  "status": {
+                    "type": "string"
+                  }                         
+                },
+                "example": {
+                  "name": "Denpendente 01",
+                  "registration": "87878",
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dependente Salvo com sucesso"
+          },
+          "400": {
+            "description": "Este associado não existe, por tanto não é possível cadastrar um dependente a ele!"
+          },
+          "404": {
+            "description": "Este associado não existe, por tanto não é possível cadastrar um dependente a ele!"
+          }          
+        } 
+      },
+      "put": {
+        "tags": ["Dependentes dos sócios do clube"],
+        "summary": "Altera os dados do dependente",
+        "description": "Altera os dados do dependente selecionado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do dependente que é o PLAYER_ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registration": {
+                    "type": "string"
+                  },      
+                  "status": {
+                    "type": "string"
+                  },
+                  "member_id": {
+                    "type": "string"
+                  }                          
+                },
+                "example": {
+                  "name": "Dependente atualizado",
+                  "registration": "29897",
+                  "status": "ok",
+                  "member_id": "f2e7e916-5314-4500-a53e-2385ee04566f"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dependente Alterado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "registration": {
+                        "type": "string"
+                      },
+                      "status":  {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }               
+          },
+          "400": {
+            "description": "Este dependente não existe"
+          },
+          "404": {
+            "description": "Este associado do clube não existe"
+          }        
+        }         
+      },
+      "delete": {
+        "tags": ["Dependentes dos sócios do clube"],
+        "summary": "Deleta os dados do dependente",
+        "description": "Deleta os dados do dependente selecionado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "dependent id que é player_id na listagem",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Dependente deletado com sucesso"
+          },
+          "400": {
+            "description": "Este dependente não existe, por tanto não pode ser deletado"
+          }
+        }
+      }   
+    }
+  }
+}

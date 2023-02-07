@@ -34,7 +34,7 @@ class UpdateDependentUseCase {
     const memberAlredyExists = await this.membersRepository.findById(member_id);
 
     if (!memberAlredyExists) {
-      throw new AppError("Este membro do clube não existe");
+      throw new AppError("Este associado do clube não existe");
     }
 
     const depedentUpdated = await this.membersRepository.update({
