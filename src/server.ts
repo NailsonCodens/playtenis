@@ -5,13 +5,13 @@ import "@database/data-source";
 import "@shared/container";
 
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "swagger.json";
 
 import { AppError } from "@errors/AppError";
 
 import cors from "cors";
 
 import generalRoutes from "./routes/routes";
+import swaggerFile from "./swagger.json";
 
 process.env.TZ = "America/Sao_Paulo";
 
