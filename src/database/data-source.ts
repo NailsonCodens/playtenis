@@ -12,15 +12,15 @@ import { Modalities } from "../modules/modalities/entities/Modalities";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "database_playtenis",
-  port: 5432,
-  username: "docker",
-  password: "playtenis",
-  database: "playtenis",
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB,
   synchronize: false,
   logging: false,
   useUTC: true,
-  migrations: ["./src/database/migrations/*.ts"],
+  migrations: [process.env.DB_PATH_MIGRATION],
   entities: [Modalities, Courts, Coachs, Members, Dependents, Games, Queue],
 });
 

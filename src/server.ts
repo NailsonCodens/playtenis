@@ -1,6 +1,6 @@
-import express, { Request, Response, NextFunction } from "express";
+import "dotenv/config";
 import "express-async-errors";
-
+import express, { Request, Response, NextFunction } from "express";
 import "@database/data-source";
 import "@shared/container";
 
@@ -8,6 +8,8 @@ import swaggerUi from "swagger-ui-express";
 import swaggerFile from "swagger.json";
 
 import { AppError } from "@errors/AppError";
+
+import cors from "cors";
 
 import generalRoutes from "./routes/routes";
 
@@ -18,6 +20,7 @@ const app = express();
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
+app.use(cors());
 app.use(generalRoutes);
 
 const date = new Date();
