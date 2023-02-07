@@ -1,5 +1,6 @@
 import "dotenv/config";
 import "express-async-errors";
+import cors from "cors";
 import express, { Request, Response, NextFunction } from "express";
 import "@database/data-source";
 import "@shared/container";
@@ -7,8 +8,6 @@ import "@shared/container";
 import swaggerUi from "swagger-ui-express";
 
 import { AppError } from "@errors/AppError";
-
-import cors from "cors";
 
 import generalRoutes from "./routes/routes";
 import swaggerFile from "./swagger.json";
