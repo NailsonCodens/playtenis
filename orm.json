@@ -7,3 +7,4 @@
   "DB": "playtenis",
   "DB_PATH_MIGRATION": "./src/database/migrations/*.ts"
 }
+
