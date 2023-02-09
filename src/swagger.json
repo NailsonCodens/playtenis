@@ -99,6 +99,48 @@
       }
     },
     "/courts/{id}": {
+      "get": {
+        "tags": ["Quadras"],
+        "summary": "Lista quadras",
+        "description": "Lista todas as quadras cadastradas",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Quadra id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },      
       "put": {
         "tags": ["Quadras"],
         "summary": "Altera quadra",
@@ -273,6 +315,55 @@
       }     
     },
     "/modalities/{id}": {
+      "get": {
+        "tags": ["Modalidades"],
+        "summary": "Lista modalidades",
+        "description": "Lista todas as modalidades cadastradas",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "modalidade id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "amount_players": {
+                        "type": "number",
+                        "default": "2"
+                      },                      
+                      "time": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": ["Modalidades"],
         "summary": "Altera modalidade",
@@ -456,6 +547,54 @@
       }     
     },
     "/coachs/{id}": {
+      "get": {
+        "tags": ["Professores"],
+        "summary": "Lista professores",
+        "description": "Lista todos os professores cadastradas",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "professor id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },      
       "put": {
         "tags": ["Professores"],
         "summary": "Altera o professor",
@@ -638,6 +777,57 @@
       }     
     },
     "/members/{id}": {
+      "get": {
+        "tags": ["Sócios do clube"],
+        "summary": "Lista associados",
+        "description": "Lista todos os associados cadastrados",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Associado id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      },
+                      "dependents": {
+                        "type": "array"
+                      }                  
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },      
       "put": {
         "tags": ["Sócios do clube"],
         "summary": "Altera o associado",
@@ -947,6 +1137,56 @@
           }
         }
       }   
-    }
+    },
+    "/dependents/dependent/{id}": {
+      "get": {
+        "tags": ["Dependentes dos sócios do clube"],
+        "summary": "Lista de dependentes dos associados",
+        "description": "Lista todos os dependentes do associado cadastrado. Atenção: no array member, se encontra as informações do associado a quem estes dependentes pertencem. E em player, se encontra as informações do dependente. os dependentes tem o tipo: DEPENDENT",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do dependente que é o PLAYER_ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],       
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "player_id": {
+                        "type": "string"
+                      },
+                      "member_id": {
+                        "type": "string"
+                      },                      
+                      "member": {
+                        "type": "array"
+                      },                      
+                      "player": {
+                        "type": "array"
+                      }                
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }    
   }
 }
