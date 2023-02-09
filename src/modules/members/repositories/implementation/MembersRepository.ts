@@ -37,6 +37,9 @@ class MembersRepository implements IMembersRepository {
         id,
         type,
       },
+      relations: {
+        dependents: true,
+      },
     });
     return member;
   }
