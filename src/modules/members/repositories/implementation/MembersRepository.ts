@@ -44,6 +44,19 @@ class MembersRepository implements IMembersRepository {
     return member;
   }
 
+  async findByIdNoRelation(
+    id: string,
+    type = "member" as string
+  ): Promise<Members> {
+    const member = await this.repository.findOne({
+      where: {
+        id,
+        type,
+      },
+    });
+    return member;
+  }
+
   async findByIds(ids: string[]): Promise<Members[]> {
     const members = await this.repository.find({
       where: { id: In(ids) },
