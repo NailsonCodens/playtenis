@@ -43,7 +43,15 @@ class Dependents {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR");
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })
@@ -55,7 +63,15 @@ class Dependents {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR");
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })
