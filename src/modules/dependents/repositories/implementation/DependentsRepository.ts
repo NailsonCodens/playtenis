@@ -46,7 +46,13 @@ class DependentsRepository implements IDependentsRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.repository.softDelete(id);
+    const dependents = await this.repository.find({
+      where: {
+        player_id: id,
+      },
+    });
+
+    await this.repository.softDelete(dependents[0].id);
   }
 }
 export { DependentsRepository };

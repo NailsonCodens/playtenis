@@ -10,10 +10,12 @@ class ListGamesByCourtUseCase {
     @inject("GamesRepository") private gamesRepository: IGamesRepository
   ) {}
 
-  async execute(court_id: string): Promise<Games> {
-    const date_start_game = dayjs().format();
+  async execute(id: string): Promise<Games> {
+    const date_now = dayjs();
+    const date_start_game = dayjs(date_now).toDate();
+
     const gameCourtCurrent = await this.gamesRepository.findCurrentGameByCourt({
-      court_id,
+      court_id: id,
       date_start_game,
     });
 

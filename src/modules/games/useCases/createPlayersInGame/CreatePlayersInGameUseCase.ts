@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
@@ -45,9 +46,6 @@ class CreatePlayersInGameUseCase {
     gameExists.players = players;
 
     await this.gamesRepository.create(gameExists);
-
-    // verificar aqui se os mesmo jogadores de um jogo em andamento, estão tentando se cadastrar num novo jogo
-    // nao deve permitir que isto aconteça
   }
 }
 

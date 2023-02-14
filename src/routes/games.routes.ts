@@ -12,5 +12,5 @@ const listGamesByCourtController = new ListGamesBYCourtController();
 
 gamesRouter.post("/", createGamesController.handle);
 gamesRouter.post("/players", createPlayersInGamesController.handle);
-gamesRouter.get("/game-court-current", listGamesByCourtController.handle);
+gamesRouter.get("/game-court-current/:id", listGamesByCourtController.handle);
 export { gamesRouter };

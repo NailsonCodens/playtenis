@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -76,6 +77,26 @@ class Dependents {
     },
   })
   updated_at: Date;
+
+  @DeleteDateColumn({
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
+      },
+    },
+  })
+  deleted_at: Date;
 
   constructor() {
     if (!this.id) {

@@ -42,6 +42,24 @@ class Games {
       },
     },
   })
+  @Column("varchar", {
+    transformer: {
+      to(value) {
+        return value;
+      },
+      from(value) {
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
+      },
+    },
+  })
   start_time_game: Date;
 
   @Column("varchar", {
@@ -50,7 +68,15 @@ class Games {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR", { timeZone: "UTC" });
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })
@@ -87,7 +113,15 @@ class Games {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR");
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })
@@ -99,7 +133,15 @@ class Games {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR");
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })
@@ -111,7 +153,15 @@ class Games {
         return value;
       },
       from(value) {
-        return value == null ? value : value.toLocaleString("pt-BR");
+        let newvalue = "";
+
+        if (value) {
+          newvalue = value.toLocaleString("pt-BR");
+        } else {
+          newvalue = value;
+        }
+
+        return newvalue;
       },
     },
   })

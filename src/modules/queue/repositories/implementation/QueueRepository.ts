@@ -27,18 +27,18 @@ class QueueRepository implements IQueueRepository {
 
     const condition = playersRaw.join(" OR ");
 
+    console.log(condition);
+
     const playersInQueue = await AppDataSource.getRepository(Queue)
       .createQueryBuilder("queue")
       .where(condition)
-      .where("played = 'no'")
+      .andWhere("played = 'no'")
       .getMany();
 
     return playersInQueue;
   }
 
   async findQueueByPlayers(players: string): Promise<Queue> {
-    console.log(players);
-
     const playersInQueue = await this.repository.findOne({
       where: {
         players,

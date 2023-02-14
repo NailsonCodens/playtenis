@@ -28,7 +28,15 @@
     {
       "name": "Dependentes dos sócios do clube",
       "description": "Rotas de dependentes dos sócios para uso no painel administrativo"
-    }        
+    },
+    {
+      "name": "Games",
+      "description": "Rotas dos jogos"
+    },
+    {
+      "name": "Queues",
+      "description": "Rotas da fila de espera"
+    }           
   ],  
   "paths": {
     "/courts/": {
@@ -1187,6 +1195,87 @@
           }
         }
       }
-    }    
+    },
+    "/queue/": {
+      "get": {
+        "tags": ["Queues"],
+        "summary": "Lista fila de espera",
+        "description": "Lista fila de espera",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "modality_id": {
+                        "type": "string"
+                      },
+                      "players": {
+                        "type": "string"
+                      },
+                      "played": {
+                        "type": "string"
+                      }                                         
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games/game-court-current/{id}": {
+      "get": {
+        "tags": ["Games"],
+        "summary": "Mostra se existe jogo no momento atual na quadra",
+        "description": "Mostra se existe jogo no momento atual na quadra",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da quadra",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],          
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string"},
+                      "date_game": {"type": "string"},
+                      "court_id": {"type": "string"},
+                      "modality_id": {"type": "string"},
+                      "modality_time": {"type": "string"},
+                      "start_time_game": {"type": "string"},
+                      "end_time_game": {"type": "string"},
+                      "players": {"type": "array"},
+                      "courts": {"type": "object"},
+                      "modality": {"type": "object"}                                          
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }     
   }
 }

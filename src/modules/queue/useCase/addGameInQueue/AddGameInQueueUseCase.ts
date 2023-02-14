@@ -70,6 +70,10 @@ class AddGameInQueueUseCase {
 
     const amountplayerInQueue = playersInQueueGame && playersInQueueGame.length;
 
+    console.log(playersInQueueGame);
+
+    console.log(amountplayerInQueue);
+
     if (amountplayerInQueue > 0) {
       throw new AppError(
         "Alguns ou todos estes jogadores, já estão na fila de espera para a próxima quadra livre"

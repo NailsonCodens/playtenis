@@ -27,6 +27,7 @@ class DeleteDependentUseCase {
     }
 
     await this.membersRepository.delete(id);
+    await this.dependentRepository.delete(id);
   }
 }
 
