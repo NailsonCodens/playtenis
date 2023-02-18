@@ -14,7 +14,11 @@ class CourtsRepository implements ICourtsRepository {
   }
 
   async list(): Promise<Courts[]> {
-    const courts = await this.repository.find();
+    const courts = await this.repository.find({
+      order: {
+        name: "ASC",
+      },
+    });
     return courts;
   }
 
