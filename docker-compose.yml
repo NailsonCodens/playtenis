@@ -25,6 +25,13 @@ services:
       - database_playtenis
     links:
       - database_playtenis
+  ngrok:
+    image: wernight/ngrok
+    volumes:
+      - ./ngrok.yml:/home/ngrok/.ngrok2/ngrok.yml
+    ports:
+      - "4040:4040"
+    command: ["ngrok", "http", "api_playtenis:3000"]
 volumes:
   pgdata:
     driver: local
