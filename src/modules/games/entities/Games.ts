@@ -1,9 +1,9 @@
+import { Expose } from "class-transformer";
+import dayjs from "dayjs";
 import {
   Column,
   Entity,
-  OneToMany,
   PrimaryColumn,
-  ManyToOne,
   JoinTable,
   ManyToMany,
   OneToOne,
@@ -38,20 +38,10 @@ class Games {
         return value;
       },
       from(value) {
-        return value.toLocaleString("pt-BR", { timeZone: "UTC" });
-      },
-    },
-  })
-  @Column("varchar", {
-    transformer: {
-      to(value) {
-        return value;
-      },
-      from(value) {
         let newvalue = "";
 
         if (value) {
-          newvalue = value.toLocaleString("pt-BR");
+          newvalue = value;
         } else {
           newvalue = value;
         }
@@ -61,6 +51,14 @@ class Games {
     },
   })
   start_time_game: Date;
+  @Expose({ name: "time" })
+  time(): number {
+    const endTime = dayjs(this.end_time_game);
+
+    const diffBetweenDate = endTime.diff(dayjs(), "minute");
+
+    return diffBetweenDate;
+  }
 
   @Column("varchar", {
     transformer: {
@@ -71,7 +69,7 @@ class Games {
         let newvalue = "";
 
         if (value) {
-          newvalue = value.toLocaleString("pt-BR");
+          newvalue = value;
         } else {
           newvalue = value;
         }

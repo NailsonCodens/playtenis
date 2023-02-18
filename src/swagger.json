@@ -1230,8 +1230,156 @@
             }
           }
         }
-      }
+      },
+      "post": {
+        "tags": ["Queues"],
+        "summary": "Cadastra jogadores e a modalidade na fila de espera",
+        "description": "Cadastra jogadores e a modalidade na fila de espera",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "modality_id": {
+                    "type": "string"
+                  },
+                  "players": {
+                    "type": "array"
+                  }
+                },
+                "example": {
+                  "modality_id": "c51b11b4-61a9-44cb-9f21-1ea0982b0368",                  
+                  "players": [
+                    "235276a7-c4ff-4a60-8434-628ff895ebb2",
+                    "2c584ebb-80aa-4a75-88fc-184c796ff29d"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Jogadores adicionados a fila de espera para entrar na próxima quadra livre"
+          },
+          "400": {
+            "description": "Alguns ou todos estes jogadores, já estão na fila de espera para a próxima quadra livre"
+          }
+        } 
+      } 
     },
+    "/queue/by-players/": {
+      "get": {
+        "tags": ["Queues"],
+        "summary": "Lista se existe ",
+        "description": "Lista fila de espera",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "modality_id": {
+                        "type": "string"
+                      },
+                      "players": {
+                        "type": "string"
+                      },
+                      "played": {
+                        "type": "string"
+                      }                                         
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }  
+    },
+    "/games/": {
+      "post": {
+        "tags": ["Games"],
+        "summary": "Cadastra um jogo",
+        "description": "Cadastra um jogo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cout_id": {
+                    "type": "string"
+                  },
+                  "modality_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "court_id": "c51b11b4-61a9-44cb-9f21-1ea0982b0368",                  
+                  "modality_id": "6308a78c-c129-4d95-a22e-a9af0468c991"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Jogo salvo com sucesso"
+          },
+          "400": {
+            "description": "Já existe um jogo em andamento neste momento para esta quadra"
+          }
+        } 
+      } 
+    },
+    "/games/players": {
+      "post": {
+        "tags": ["Games"],
+        "summary": "Cadastra os jogadores do jogo",
+        "description": "Cadastra os jogadores do jogo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "game_id": {
+                    "type": "string"
+                  },
+                  "players": {
+                    "type": "array"
+                  }
+                },
+                "example": {
+                  "game_id": "2e629cf6-a215-4ab3-b5a3-b557107eb899",                  
+                  "players": [
+                    "235276a7-c4ff-4a60-8434-628ff895ebb2",
+                    "2c584ebb-80aa-4a75-88fc-184c796ff29d"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Jogadores adicionados"
+          },
+          "400": {
+            "description": "Este jogo não existe"
+          }
+        } 
+      } 
+    },    
     "/games/game-court-current/{id}": {
       "get": {
         "tags": ["Games"],

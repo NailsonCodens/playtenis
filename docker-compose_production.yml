@@ -1,0 +1,30 @@
+version: "4.0"
+services:
+  database_playtenis:
+    image: postgres
+    container_name: database_playtenis
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=playtenis
+      - POSTGRES_DB=playtenis
+      - TZ=America/Sao_Paulo
+      - PGTZ=America/Sao_Paulo
+  api_playtenis:
+    build: .  
+    command: sh -c "yarn install && yarn run dev"
+    container_name: api_playtenis
+    ports:
+      - 3000:3000
+    environment:
+      - TZ=America/Sao_Paulo      
+    volumes:
+      - .:/usr/api_playtenis
+    depends_on:
+      - database_playtenis
+    links:
+      - database_playtenis
+volumes:
+  pgdata:
+    driver: local
