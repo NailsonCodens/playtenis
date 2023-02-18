@@ -16,10 +16,24 @@ class CreatePlayersInGameUseCase {
   ) {}
 
   async execute(player_ids: string[], game_id: string): Promise<void> {
+    const date_now = dayjs();
+    const start_time_game = dayjs(date_now).toDate();
+
     const gameExists = await this.gamesRepository.findById(game_id);
 
     if (!gameExists) {
       throw new AppError("Este jogo não existe");
+    }
+
+    const findGame = await this.gamesRepository.findGameWithPlayers(
+      player_ids,
+      start_time_game
+    );
+
+    if (findGame) {
+      throw new AppError(
+        "Todos ou alguns destes jogadores estão jogando ainda. Só podem entrar na lista de espera após o seu jogo terminar"
+      );
     }
 
     const modalityGame = await this.modalitiesRepository.findById(
@@ -27,6 +41,7 @@ class CreatePlayersInGameUseCase {
     );
 
     const amountPlayers = player_ids.length;
+
     const amoutPlayersAllowed =
       modalityGame.amount_players as unknown as number;
 
