@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateQueueDTO } from "@modules/queue/dtos/ICreateQueueDTO";
@@ -13,36 +13,42 @@ class QueueRepository implements IQueueRepository {
     this.repository = AppDataSource.getRepository(Queue);
   }
 
-  async create({ modality_id, players }: ICreateQueueDTO): Promise<void> {
-    const gameQueue = this.repository.create({
+  async create({ modality_id, players, id }: ICreateQueueDTO): Promise<void> {
+    const queue = this.repository.create({
+      id,
       modality_id,
+      played: "no",
       players,
     });
 
-    await this.repository.save(gameQueue);
+    await this.repository.save(queue);
   }
 
-  async findPlayersInQueueGames(players: Array<string>): Promise<Queue[]> {
-    const playersRaw = players.map((player) => `players LIKE '%${player}%'`);
-
-    const condition = playersRaw.join(" OR ");
-
-    console.log(condition);
-
-    const playersInQueue = await AppDataSource.getRepository(Queue)
-      .createQueryBuilder("queue")
-      .where(condition)
-      .andWhere("played = 'no'")
-      .getMany();
+  async findPlayersInQueueGames(players: string[]): Promise<Queue> {
+    const playersInQueue = this.repository.findOne({
+      relations: {
+        players: true,
+      },
+      where: {
+        players: {
+          id: In(players),
+        },
+      },
+    });
 
     return playersInQueue;
   }
 
-  async findQueueByPlayers(players: string): Promise<Queue> {
+  async findQueueByPlayers(players: string[]): Promise<Queue> {
     const playersInQueue = await this.repository.findOne({
+      relations: {
+        players: true,
+      },
       where: {
-        players,
         played: "no",
+        players: {
+          id: In(players),
+        },
       },
       order: {
         id: "DESC",
@@ -54,6 +60,9 @@ class QueueRepository implements IQueueRepository {
 
   async find(): Promise<Queue[]> {
     const all = await this.repository.find({
+      relations: {
+        players: true,
+      },
       where: {
         played: "no",
       },
@@ -66,7 +75,9 @@ class QueueRepository implements IQueueRepository {
   }
 
   async findById(id: string): Promise<Queue> {
-    const queue = await this.repository.findOneBy({ id });
+    const queue = await this.repository.findOne({
+      where: { id, played: "no" },
+    });
 
     return queue;
   }

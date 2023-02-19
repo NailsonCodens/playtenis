@@ -1,39 +1,19 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class Games1674733335990 implements MigrationInterface {
+export class playersQueue1676765638163 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "games",
+        name: "players_queue",
         columns: [
           {
-            name: "id",
+            name: "player_id",
             type: "uuid",
             isPrimary: true,
           },
           {
-            name: "court_id",
+            name: "queue_id",
             type: "uuid",
-          },
-          {
-            name: "modality_id",
-            type: "uuid",
-          },
-          {
-            name: "modality_time",
-            type: "varchar",
-          },
-          {
-            name: "start_time_game",
-            type: "timestamp",
-          },
-          {
-            name: "end_time_game",
-            type: "timestamp",
-          },
-          {
-            name: "date_game",
-            type: "varchar",
           },
           {
             name: "created_at",
@@ -53,18 +33,18 @@ export class Games1674733335990 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FKCourtGame",
-            referencedTableName: "courts",
+            name: "FKQueuePlayers",
+            referencedTableName: "queue",
             referencedColumnNames: ["id"],
-            columnNames: ["court_id"],
+            columnNames: ["queue_id"],
             onDelete: "CASCADE",
             onUpdate: "CASCADE",
           },
           {
-            name: "FKModalityGame",
-            referencedTableName: "modalities",
+            name: "FKPlayersQueue",
+            referencedTableName: "players",
             referencedColumnNames: ["id"],
-            columnNames: ["modality_id"],
+            columnNames: ["player_id"],
             onDelete: "CASCADE",
             onUpdate: "CASCADE",
           },
@@ -74,6 +54,6 @@ export class Games1674733335990 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("games");
+    await queryRunner.dropTable("players_queue");
   }
 }

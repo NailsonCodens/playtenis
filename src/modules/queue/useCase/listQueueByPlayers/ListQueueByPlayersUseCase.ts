@@ -9,7 +9,7 @@ class ListQueueByPlayersUseCase {
     @inject("QueueRepository") private queueRepository: IQueueRepository
   ) {}
 
-  async execute(players: string): Promise<Queue> {
+  async execute(players: Array<string>): Promise<Queue> {
     const queue = await this.queueRepository.findQueueByPlayers(players);
 
     return queue;

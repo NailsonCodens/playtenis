@@ -1,12 +1,17 @@
+import { Expose } from "class-transformer";
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { Members } from "@modules/members/entities/Members";
 
 @Entity("queue")
 class Queue {
@@ -17,10 +22,15 @@ class Queue {
   modality_id: string;
 
   @Column("varchar")
-  players: string;
-
-  @Column("varchar")
   played: string;
+
+  @ManyToMany(() => Members)
+  @JoinTable({
+    name: "players_queue",
+    joinColumns: [{ name: "queue_id" }],
+    inverseJoinColumns: [{ name: "player_id" }],
+  })
+  players: Members[];
 
   @CreateDateColumn({
     transformer: {

@@ -5,8 +5,8 @@ import { ICreateQueueDTO } from "../dtos/ICreateQueueDTO";
 interface IQueueRepository {
   findById(id: string): Promise<Queue>;
   create(data: ICreateQueueDTO): Promise<void>;
-  findPlayersInQueueGames(players: Array<string>): Promise<Queue[]>;
-  findQueueByPlayers(players: string): Promise<Queue>;
+  findPlayersInQueueGames(players: string[]): Promise<Queue>;
+  findQueueByPlayers(players: string[]): Promise<Queue>;
   find(): Promise<Queue[]>;
   findByIdIsPlayedNo(id: string): Promise<Queue>;
   updatedIsPlayed(id: string): Promise<Queue>;

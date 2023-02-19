@@ -9,6 +9,7 @@ export class PlayersGame1674734326536 implements MigrationInterface {
           {
             name: "player_id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "game_id",

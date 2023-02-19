@@ -56,6 +56,7 @@ class CreatePlayersInGameUseCase {
         `Esta modalidade permite ${amoutPlayersAllowed} jogadores, por favor adicione outro(s) jogadores(as)`
       );
     }
+
     const players = await this.membersRepository.findByIds(player_ids);
 
     gameExists.players = players;

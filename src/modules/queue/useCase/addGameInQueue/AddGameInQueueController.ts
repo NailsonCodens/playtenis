@@ -5,15 +5,14 @@ import { AddGameInQueueUseCase } from "./AddGameInQueueUseCase";
 
 class AddGameInQueueController {
   async handle(request: Request, response: Response) {
-    const { modality_id, players } = request.body;
+    const { modality_id } = request.body;
 
     const addGameInQueueUseCase = container.resolve(AddGameInQueueUseCase);
 
-    await addGameInQueueUseCase.execute({ modality_id, players });
+    await addGameInQueueUseCase.execute({ modality_id });
 
     return response.json({
-      message:
-        "Jogadores adicionados a fila de espera para entrar na próxima quadra livre",
+      message: "Fila de espera criada",
     });
   }
 }
