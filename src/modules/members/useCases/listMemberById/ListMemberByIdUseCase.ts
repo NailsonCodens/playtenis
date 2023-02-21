@@ -15,7 +15,7 @@ class ListMemberByIdUseCase {
     const member = await this.membersRepository.findById(id);
 
     if (!member) {
-      throw new AppError("Este sócio não existe");
+      throw new AppError("Este sócio não existe ou está inativo");
     }
 
     return member;

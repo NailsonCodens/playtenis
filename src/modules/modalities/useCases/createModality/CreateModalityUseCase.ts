@@ -19,6 +19,14 @@ export class CreateModalityUseCase {
   }: ICreateModalityDTO): Promise<void> {
     const modality = await this.modalitiesRepository.findByName(name);
 
+    const amount_players_number = Number(amount_players);
+
+    if (amount_players_number > 4) {
+      throw new AppError(
+        "Não é permitido cadastrar uma modalidade com mais de 4 jogadores"
+      );
+    }
+
     if (modality) {
       throw new AppError("Esta modalidade já existe");
     }

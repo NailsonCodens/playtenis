@@ -59,7 +59,10 @@ class MembersRepository implements IMembersRepository {
 
   async findByIds(ids: string[]): Promise<Members[]> {
     const members = await this.repository.find({
-      where: { id: In(ids) },
+      where: {
+        id: In(ids),
+        status: "ok",
+      },
     });
 
     return members;
@@ -76,7 +79,14 @@ class MembersRepository implements IMembersRepository {
   }
 
   async findByRegistration(registration: string): Promise<Members> {
-    const member = await this.repository.findOneBy({ registration });
+    const member = await this.repository.findOne({
+      relations: {
+        dependents: true,
+      },
+      where: {
+        registration,
+      },
+    });
     return member;
   }
 
