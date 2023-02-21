@@ -39,7 +39,16 @@ class GamesRepository implements IGamesRepository {
   }
 
   async findById(id: string): Promise<Games> {
-    const game = await this.repository.findOneBy({ id });
+    const game = await this.repository.findOne({
+      relations: {
+        players: true,
+        courts: true,
+        modality: true,
+      },
+      where: {
+        id,
+      },
+    });
 
     return game;
   }
@@ -94,6 +103,10 @@ class GamesRepository implements IGamesRepository {
     });
 
     return game;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
   }
 }
 

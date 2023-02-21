@@ -9,7 +9,6 @@ export class playersQueue1676765638163 implements MigrationInterface {
           {
             name: "player_id",
             type: "uuid",
-            isPrimary: true,
           },
           {
             name: "queue_id",

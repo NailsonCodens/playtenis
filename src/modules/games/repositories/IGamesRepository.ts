@@ -15,6 +15,7 @@ interface IGamesRepository {
     player_ids: string[],
     date_start_game: Date
   ): Promise<Games>;
+  delete(id: string): Promise<void>;
 }
 
 export { IGamesRepository };

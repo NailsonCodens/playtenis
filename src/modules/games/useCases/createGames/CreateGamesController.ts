@@ -9,6 +9,7 @@ class CreateGamesController {
       court_id,
       modality_id,
       modality_time,
+      players,
       start_time_game,
       end_time_game,
     } = request.body;
@@ -19,6 +20,7 @@ class CreateGamesController {
       court_id,
       modality_id,
       modality_time,
+      players,
       start_time_game,
       end_time_game,
     });

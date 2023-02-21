@@ -5,8 +5,10 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@errors/AppError";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 import { ICreateGameDTO } from "@modules/games/dtos/ICreateGameDTO";
+import { ICreateGameWithPlayerDTO } from "@modules/games/dtos/ICreateGameWithPlayerDTO";
 import { Games } from "@modules/games/entities/Games";
 import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
+import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 
 dayjs.extend(utc);
@@ -16,11 +18,16 @@ class CreateGamesUseCase {
   constructor(
     @inject("GamesRepository") private gamesRepository: IGamesRepository,
     @inject("CourtsRepository") private courtsRepository: ICourtsRepository,
+    @inject("MembersRepository") private membersRepository: IMembersRepository,
     @inject("ModalitiesRespository")
     private modalitiesRepository: IModalitiesRepository
   ) {}
 
-  async execute({ court_id, modality_id }: ICreateGameDTO): Promise<Games> {
+  async execute({
+    court_id,
+    modality_id,
+    players,
+  }: ICreateGameWithPlayerDTO): Promise<Games> {
     const courtExists = await this.courtsRepository.findById(court_id);
 
     if (!courtExists) {
@@ -48,7 +55,6 @@ class CreateGamesUseCase {
     const gameTime = Number(modalityExists.time) + preparationAditionalTime;
 
     const date_now = dayjs();
-
     const start_time_game = dayjs(date_now).toDate();
 
     const end_time_date = dayjs(start_time_game)
@@ -69,10 +75,43 @@ class CreateGamesUseCase {
       );
     }
 
+    const findGame = await this.gamesRepository.findGameWithPlayers(
+      players,
+      start_time_game
+    );
+
+    if (findGame) {
+      throw new AppError(
+        "Todos ou alguns destes jogadores estão jogando ainda. Só podem entrar na lista de espera após o seu jogo terminar"
+      );
+    }
+
+    const modalityGame = await this.modalitiesRepository.findById(modality_id);
+
+    const amountPlayers = players.length;
+
+    const amoutPlayersAllowed =
+      modalityGame.amount_players as unknown as number;
+
+    if (amountPlayers > amoutPlayersAllowed) {
+      throw new AppError(
+        `Esta modalidade permite apenas ${amoutPlayersAllowed} jogadores(as)`
+      );
+    }
+
+    if (amountPlayers < amoutPlayersAllowed) {
+      throw new AppError(
+        `Esta modalidade permite ${amoutPlayersAllowed} jogadores, por favor adicione outro(s) jogadores(as)`
+      );
+    }
+
+    const playersGame = await this.membersRepository.findByIds(players);
+
     const game = await this.gamesRepository.create({
       court_id,
       modality_id,
       modality_time: gameTime,
+      players: playersGame,
       start_time_game,
       end_time_game: end_time_date,
     });

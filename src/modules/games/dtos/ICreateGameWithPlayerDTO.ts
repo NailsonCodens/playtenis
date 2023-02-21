@@ -1,14 +1,13 @@
 import { Members } from "@modules/members/entities/Members";
 
-interface ICreateGameDTO {
+interface ICreateGameWithPlayerDTO {
   court_id: string;
   modality_id: string;
   modality_time: number;
   start_time_game: Date;
   end_time_game: Date;
-  players?: Members[];
-  player_ids?: string[];
+  players?: string[];
   id?: string;
 }
 
-export { ICreateGameDTO };
+export { ICreateGameWithPlayerDTO };
