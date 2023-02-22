@@ -82,7 +82,7 @@ class CreateGamesUseCase {
 
     if (findGame) {
       throw new AppError(
-        "Todos ou alguns destes jogadores estão jogando ainda. Só podem entrar na lista de espera após o seu jogo terminar"
+        "Todos ou alguns destes jogadores estão jogando ainda."
       );
     }
 
