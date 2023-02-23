@@ -67,7 +67,7 @@ class QueueRepository implements IQueueRepository {
         played: "no",
       },
       order: {
-        id: "ASC",
+        created_at: "ASC",
       },
     });
 
@@ -81,6 +81,7 @@ class QueueRepository implements IQueueRepository {
       },
       where: {
         played: "no",
+        id,
       },
       order: {
         id: "ASC",

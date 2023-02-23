@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { LessThan, MoreThan, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
@@ -15,9 +15,18 @@ class CourtsRepository implements ICourtsRepository {
 
   async list(): Promise<Courts[]> {
     const courts = await this.repository.find({
+      /* relations: {
+        games: true,
+      }, */
       order: {
         name: "ASC",
       },
+      /* where: {
+        games: {
+          start_time_game: LessThan(date_start_game),
+          end_time_game: MoreThan(date_start_game),
+        },
+      }, */
     });
     return courts;
   }

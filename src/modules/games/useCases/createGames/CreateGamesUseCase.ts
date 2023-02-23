@@ -34,8 +34,12 @@ class CreateGamesUseCase {
       throw new AppError("A quadra não existe");
     }
 
+    console.log("teste");
+
     if (courtExists.status !== "ok") {
-      throw new AppError("A quadra não está disponível para jogos");
+      throw new AppError(
+        `A quadra não está disponível para jogos sadasd ${courtExists.status}`
+      );
     }
 
     const modalityExists = await this.modalitiesRepository.findById(
