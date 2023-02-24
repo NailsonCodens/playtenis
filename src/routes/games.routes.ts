@@ -8,13 +8,13 @@ import { ListGamesBYCourtController } from "@modules/games/useCases/listGamesByC
 const gamesRouter = Router();
 
 const createGamesController = new CreateGamesController();
-const createPlayersInGamesController = new CreatePlayersInGameController();
+/* const createPlayersInGamesController = new CreatePlayersInGameController(); */
 const listGamesByCourtController = new ListGamesBYCourtController();
-const deleteGameController = new DeleteGameController();
+/* const deleteGameController = new DeleteGameController(); */
 
 gamesRouter.post("/", createGamesController.handle);
-gamesRouter.post("/players", createPlayersInGamesController.handle);
+/* gamesRouter.post("/players", createPlayersInGamesController.handle); */
 gamesRouter.get("/game-court-current/:id", listGamesByCourtController.handle);
-gamesRouter.delete("/:id", deleteGameController.handle);
+/* gamesRouter.delete("/:id", deleteGameController.handle); */
 
 export { gamesRouter };

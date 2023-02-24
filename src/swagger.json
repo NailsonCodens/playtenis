@@ -787,8 +787,8 @@
     "/members/{id}": {
       "get": {
         "tags": ["Sócios do clube"],
-        "summary": "Lista associados",
-        "description": "Lista todos os associados cadastrados",
+        "summary": "Lista associado",
+        "description": "Lista associado cadastrado",
         "parameters": [
           {
             "name": "id",
@@ -937,6 +937,59 @@
         }
       } 
     },
+    "/members/{registration}": {
+      "get": {
+        "tags": ["Sócios do clube"],
+        "summary": "Lista associado",
+        "description": "Lista o associado ou dependente cadastrado com base na sua matrícula",
+        "parameters": [
+          {
+            "name": "registration",
+            "in": "path",
+            "description": "matrícula do associado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      },
+                      "dependents": {
+                        "type": "array"
+                      }                  
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },    
     "/dependents/{id}": {
       "get": {
         "tags": ["Dependentes dos sócios do clube"],
@@ -1218,7 +1271,7 @@
                         "type": "string"
                       },
                       "players": {
-                        "type": "string"
+                        "type": "array"
                       },
                       "played": {
                         "type": "string"
@@ -1269,11 +1322,22 @@
         } 
       } 
     },
-    "/queue/by-players/": {
+    "/queue/{id}": {
       "get": {
         "tags": ["Queues"],
-        "summary": "Lista se existe ",
-        "description": "Lista fila de espera",
+        "summary": "Exibe a linha da fila de espera por id",
+        "description": "Exibe a linha da fila de espera por id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id da queue",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],       
         "responses": {
           "200": {
             "description": "Success",
@@ -1291,11 +1355,11 @@
                         "type": "string"
                       },
                       "players": {
-                        "type": "string"
+                        "type": "array"
                       },
                       "played": {
                         "type": "string"
-                      }                                         
+                      }               
                     }
                   }
                 }
@@ -1303,8 +1367,8 @@
             }
           }
         }
-      }  
-    },
+      }
+    },    
     "/games/": {
       "post": {
         "tags": ["Games"],
@@ -1321,11 +1385,18 @@
                   },
                   "modality_id": {
                     "type": "string"
-                  }
+                  },
+                  "players": {
+                    "type": "array"
+                  }                  
                 },
                 "example": {
                   "court_id": "c51b11b4-61a9-44cb-9f21-1ea0982b0368",                  
-                  "modality_id": "6308a78c-c129-4d95-a22e-a9af0468c991"
+                  "modality_id": "6308a78c-c129-4d95-a22e-a9af0468c991",
+                  "players": [
+                    "235276a7-c4ff-4a60-8434-628ff895ebb2",
+                    "2c584ebb-80aa-4a75-88fc-184c796ff29d"
+                  ]                  
                 }
               }
             }
@@ -1341,45 +1412,6 @@
         } 
       } 
     },
-    "/games/players": {
-      "post": {
-        "tags": ["Games"],
-        "summary": "Cadastra os jogadores do jogo",
-        "description": "Cadastra os jogadores do jogo",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "game_id": {
-                    "type": "string"
-                  },
-                  "players": {
-                    "type": "array"
-                  }
-                },
-                "example": {
-                  "game_id": "2e629cf6-a215-4ab3-b5a3-b557107eb899",                  
-                  "players": [
-                    "235276a7-c4ff-4a60-8434-628ff895ebb2",
-                    "2c584ebb-80aa-4a75-88fc-184c796ff29d"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Jogadores adicionados"
-          },
-          "400": {
-            "description": "Este jogo não existe"
-          }
-        } 
-      } 
-    },    
     "/games/game-court-current/{id}": {
       "get": {
         "tags": ["Games"],

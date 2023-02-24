@@ -2,6 +2,8 @@ import "dotenv/config";
 import "express-async-errors";
 import cors from "cors";
 import express, { Request, Response, NextFunction } from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import "@database/data-source";
 import "@shared/container";
 
@@ -41,4 +43,22 @@ app.use(
   }
 );
 
-app.listen(3000, () => console.log("Server sis running!"));
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("hello", function (msg) {
+    console.log(msg);
+    io.emit("messageResponse", msg);
+  });
+  socket.on("hello", function (msg) {
+    console.log(msg);
+  });
+});
+
+httpServer.listen(3000, () => console.log("Server sis running!"));

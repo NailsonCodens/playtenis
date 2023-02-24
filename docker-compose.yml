@@ -18,7 +18,9 @@ services:
     ports:
       - 3000:3000
     environment:
-      - TZ=America/Sao_Paulo      
+      - TZ=America/Sao_Paulo 
+      - NODE_TLS_REJECT_UNAUTHORIZED=0    
+      - DEBUG=socket*            
     volumes:
       - .:/usr/api_playtenis
     depends_on:

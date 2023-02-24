@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@errors/AppError";
 import { Courts } from "@modules/courts/entities/Courts";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
+import { socketio } from "@shared/socket.io";
 
 @injectable()
 class UpdateCourtUseCase {
@@ -28,6 +29,7 @@ class UpdateCourtUseCase {
     }
 
     const court = await this.courtsRepository.update({ id, name, status });
+    socketio.emit("hello", "enviado mensagem quando atualiza a quadra");
 
     return court;
   }

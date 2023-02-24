@@ -14,10 +14,10 @@ const listQueueController = new ListQueueController();
 const listQueueByPlayersController = new ListQueueByPlayersController();
 const listQueueByIdController = new ListQueueByIdController();
 const updateQueueIslPlayed = new UpdateQueueIsPlayedController();
-const addPlayersInQueueController = new AddPlayersInQueueController();
+/* const addPlayersInQueueController = new AddPlayersInQueueController(); */
 
 queueRoutes.post("/", addGameInQueueController.handle);
-queueRoutes.post("/players", addPlayersInQueueController.handle);
+/* queueRoutes.post("/players", addPlayersInQueueController.handle); */
 queueRoutes.get("/", listQueueController.handle);
 queueRoutes.get("/:id", listQueueByIdController.handle);
 queueRoutes.get("/by-players", listQueueByPlayersController.handle);
