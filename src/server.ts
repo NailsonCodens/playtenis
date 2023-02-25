@@ -48,12 +48,14 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {});
 
 io.on("connection", (socket) => {
-  socket.on("hello", function (msg) {
+  socket.on("reloadApp", function (msg) {
     console.log(msg);
-    io.emit("messageResponse", msg);
+    io.emit("reloadResponse", msg);
   });
-  socket.on("hello", function (msg) {
+
+  socket.on("WarningWebApp", function (msg) {
     console.log(msg);
+    io.emit("warningWebAppResponse", msg);
   });
 });
 

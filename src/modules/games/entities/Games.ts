@@ -32,6 +32,9 @@ class Games {
   @Column("varchar")
   modality_time: number;
 
+  @Column("varchar")
+  status: string;
+
   @Column("varchar", {
     transformer: {
       to(value) {

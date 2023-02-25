@@ -1,4 +1,4 @@
-import { In, LessThan, MoreThan, Repository } from "typeorm";
+import { In, IsNull, LessThan, MoreThan, Not, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateGameDTO } from "@modules/games/dtos/ICreateGameDTO";
@@ -47,6 +47,7 @@ class GamesRepository implements IGamesRepository {
       },
       where: {
         id,
+        status: IsNull(),
       },
     });
 
@@ -62,6 +63,7 @@ class GamesRepository implements IGamesRepository {
         court_id,
         start_time_game: LessThan(date_start_game),
         end_time_game: MoreThan(date_start_game),
+        status: IsNull(),
       },
     });
 
@@ -76,9 +78,13 @@ class GamesRepository implements IGamesRepository {
         modality: true,
       },
       where: {
+        courts: {
+          status: "ok",
+        },
         court_id,
         start_time_game: LessThan(date_start_game),
         end_time_game: MoreThan(date_start_game),
+        status: IsNull(),
       },
     });
 
@@ -99,6 +105,7 @@ class GamesRepository implements IGamesRepository {
         },
         start_time_game: LessThan(date_start_game),
         end_time_game: MoreThan(date_start_game),
+        status: IsNull(),
       },
     });
 
@@ -107,6 +114,12 @@ class GamesRepository implements IGamesRepository {
 
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
+  }
+
+  async update(id: string): Promise<void> {
+    await this.repository.update(id, {
+      status: "off",
+    });
   }
 }
 
