@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { Queue } from "@modules/queue/entities/Queue";
 import { IQueueRepository } from "@modules/queue/repositories/IQueueRepository";
+import { socketio } from "@shared/socket.io";
 
 import { AppError } from "../../../../errors/AppError";
 
@@ -21,6 +22,7 @@ class UpdateQueueIsPlayedUseCase {
     }
 
     const queue = await this.queueRepository.updatedIsPlayed(id);
+    socketio.emit("reloadApp", "Atualizou a fila de espera");
 
     return queue;
   }

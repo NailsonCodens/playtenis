@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
+import { socketio } from "@shared/socket.io";
 
 @injectable()
 class DeleteCourtUseCase {
@@ -17,6 +18,7 @@ class DeleteCourtUseCase {
     }
 
     await this.courtsRepository.delete(id);
+    socketio.emit("reloadApp", "Deletou a quadra");
   }
 }
 

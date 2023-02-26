@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@errors/AppError";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
+import { socketio } from "@shared/socket.io";
 
 @injectable()
 class CreateCourtUseCase {
@@ -19,6 +20,7 @@ class CreateCourtUseCase {
     }
 
     this.courtsRepository.create({ name, status });
+    socketio.emit("reloadApp", "Casdastrou a quadra");
   }
 }
 

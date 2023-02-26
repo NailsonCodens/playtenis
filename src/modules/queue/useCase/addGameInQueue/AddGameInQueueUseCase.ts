@@ -8,6 +8,7 @@ import { IMembersRepository } from "@modules/members/repositories/IMembersReposi
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
 import { IRequestQueueDTO } from "@modules/queue/dtos/IRequestQueueDTO";
 import { IQueueRepository } from "@modules/queue/repositories/IQueueRepository";
+import { socketio } from "@shared/socket.io";
 
 @injectable()
 class AddGameInQueueUseCase {
@@ -82,6 +83,8 @@ class AddGameInQueueUseCase {
       played: "no",
       players: playersQueue,
     });
+
+    socketio.emit("reloadApp", "Cadastrou a fila de espera");
   }
 }
 

@@ -4,12 +4,12 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@errors/AppError";
 import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
-import { ICreateGameDTO } from "@modules/games/dtos/ICreateGameDTO";
 import { ICreateGameWithPlayerDTO } from "@modules/games/dtos/ICreateGameWithPlayerDTO";
 import { Games } from "@modules/games/entities/Games";
 import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { IMembersRepository } from "@modules/members/repositories/IMembersRepository";
 import { IModalitiesRepository } from "@modules/modalities/repositories/IModalitiesRepository";
+import { socketio } from "@shared/socket.io";
 
 dayjs.extend(utc);
 
@@ -119,6 +119,7 @@ class CreateGamesUseCase {
       start_time_game,
       end_time_game: end_time_date,
     });
+    socketio.emit("reloadApp", "Cadastro de um jogo");
 
     return game;
   }

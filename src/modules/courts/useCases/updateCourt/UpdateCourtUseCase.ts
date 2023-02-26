@@ -45,8 +45,8 @@ class UpdateCourtUseCase {
       await this.gamesRepository.update(gameCourtCurrent.id);
     }
 
-    socketio.emit("reloadApp", "Atualiza a quadra");
     const court = await this.courtsRepository.update({ id, name, status });
+    socketio.emit("reloadApp", "Atualiza a quadra");
 
     return court;
   }
