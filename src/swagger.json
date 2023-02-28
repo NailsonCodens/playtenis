@@ -1371,7 +1371,54 @@
           }
         }
       }
-    },    
+    },   
+    "/queue/is-played/{id}": {
+      "put": {
+        "tags": ["Queues"],
+        "summary": "Marca jogo da fila de esperado como: 'Foi para jogo'",
+        "description": "Marca jogo da fila de esperado como: 'Foi para jogo'",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Queue",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Quadra alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "modality_id": {
+                        "type": "string"
+                      },
+                      "played": {
+                        "type": "string"
+                      }                     
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Esta quadra não existe"
+          }
+        }        
+      }      
+    },
     "/games/": {
       "post": {
         "tags": ["Games"],
