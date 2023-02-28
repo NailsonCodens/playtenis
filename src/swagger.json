@@ -784,58 +784,7 @@
         } 
       }     
     },
-    "/members/{id}": {
-      "get": {
-        "tags": ["Sócios do clube"],
-        "summary": "Lista associado",
-        "description": "Lista associado cadastrado",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Associado id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }  
-          }
-        ],        
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      },                      
-                      "registration": {
-                        "type": "string"
-                      },                      
-                      "status": {
-                        "type": "string"
-                      },
-                      "dependents": {
-                        "type": "array"
-                      }                  
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },      
+    "/members/{id}": {     
       "put": {
         "tags": ["Sócios do clube"],
         "summary": "Altera o associado",
@@ -937,6 +886,59 @@
         }
       } 
     },
+    "/members/byid/{id}": {
+      "get": {
+        "tags": ["Sócios do clube"],
+        "summary": "Lista associado",
+        "description": "Lista o associado ou dependente cadastrado com base na sua matrícula",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "matrícula do associado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },                      
+                      "registration": {
+                        "type": "string"
+                      },                      
+                      "status": {
+                        "type": "string"
+                      },
+                      "dependents": {
+                        "type": "array"
+                      }                  
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },    
     "/members/{registration}": {
       "get": {
         "tags": ["Sócios do clube"],
@@ -989,7 +991,8 @@
           }
         }
       }
-    },    
+    },
+     
     "/dependents/{id}": {
       "get": {
         "tags": ["Dependentes dos sócios do clube"],

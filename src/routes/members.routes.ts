@@ -23,7 +23,7 @@ membersRoute.post("/", createMemberController.handle);
 membersRoute.post("/players", listMembersByIdsController.handle);
 membersRoute.get("/", listMembersController.handle);
 membersRoute.get("/:registration", listMemberByRegistrationController.handle);
-membersRoute.get("/:id", listMemberByIdController.handle);
+membersRoute.get("/byid/:id", listMemberByIdController.handle);
 membersRoute.put("/:id", updateMemberController.handle);
 membersRoute.delete("/:id", deleteMemberController.handle);
 
