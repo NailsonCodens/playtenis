@@ -30,6 +30,7 @@ class QueueRepository implements IQueueRepository {
         players: true,
       },
       where: {
+        played: "no",
         players: {
           id: In(players),
         },

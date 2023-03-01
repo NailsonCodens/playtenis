@@ -38,7 +38,7 @@ class CreateGamesUseCase {
 
     if (courtExists.status !== "ok") {
       throw new AppError(
-        `A quadra não está disponível para jogos sadasd ${courtExists.status}`
+        `A quadra não está disponível para jogos ${courtExists.status}`
       );
     }
 
