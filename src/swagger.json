@@ -240,6 +240,33 @@
         }
       } 
     },
+    "/courts/count/with-games": {
+      "get": {
+        "tags": ["Courts"],
+        "summary": "Lista a quantidade de quadras em uso no momento atual",
+        "description": "Lista a quantidade de quadras em uso no momento atual",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }                 
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }      
+    },
     "/modalities/": {
       "get": {
         "tags": ["Modalidades"],

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { inject, injectable } from "tsyringe";
 
 import { CourtsRepository } from "@modules/courts/repositories/implementation/CourtsRespository";
@@ -9,9 +10,14 @@ class ListAllCourtsWithGamesUseCase {
   ) {}
 
   async execute() {
-    const list = await this.courtsRepository.listWithGames();
+    const date_now = dayjs();
+    const date_start_game = dayjs(date_now).toDate();
 
-    return list;
+    const list = await this.courtsRepository.listWithGames(date_start_game);
+
+    const count = list.length;
+
+    return count;
   }
 }
 

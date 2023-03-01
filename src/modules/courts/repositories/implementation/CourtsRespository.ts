@@ -31,7 +31,8 @@ class CourtsRepository implements ICourtsRepository {
     return courts;
   }
 
-  async listWithGames(): Promise<Courts[]> {
+  async listWithGames(start_date: Date): Promise<Courts[]> {
+    console.log(start_date);
     const courts = await this.repository.find({
       relations: {
         games: true,
@@ -39,6 +40,12 @@ class CourtsRepository implements ICourtsRepository {
       order: {
         games: {
           id: "DESC",
+        },
+      },
+      where: {
+        games: {
+          start_time_game: LessThan(start_date),
+          end_time_game: MoreThan(start_date),
         },
       },
     });

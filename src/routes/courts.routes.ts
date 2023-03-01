@@ -19,7 +19,7 @@ const deleteCourtController = new DeleteCourtControler();
 courtRouter.post("/", createCourtController.handle);
 courtRouter.get("/", listCourtController.handle);
 courtRouter.get("/:id", listCourtByidController.handle);
-courtRouter.get("/with-games", listAllCourtsWithGamesController.handle);
+courtRouter.get("/count/with-games", listAllCourtsWithGamesController.handle);
 courtRouter.put("/:id", updateCourtController.handle);
 courtRouter.delete("/:id", deleteCourtController.handle);
 
