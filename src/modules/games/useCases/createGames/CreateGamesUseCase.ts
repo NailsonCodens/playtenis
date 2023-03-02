@@ -54,7 +54,7 @@ class CreateGamesUseCase {
       throw new AppError("A modalidade não está disponível para jogos");
     }
 
-    const preparationAditionalTime = Number(10);
+    const preparationAditionalTime = Number(5);
 
     const gameTime = Number(modalityExists.time) + preparationAditionalTime;
 

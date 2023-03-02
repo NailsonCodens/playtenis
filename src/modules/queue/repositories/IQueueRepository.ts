@@ -10,6 +10,7 @@ interface IQueueRepository {
   find(): Promise<Queue[]>;
   findByIdIsPlayedNo(id: string): Promise<Queue>;
   updatedIsPlayed(id: string): Promise<Queue>;
+  delete(id: string): Promise<void>;
 }
 
 export { IQueueRepository };

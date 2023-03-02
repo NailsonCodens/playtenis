@@ -1397,7 +1397,31 @@
             }
           }
         }
-      }
+      },
+      "delete": {
+        "tags": ["Queues"],
+        "summary": "Deleta uma fila de espera que não foi jogada e ficou obsoleta",
+        "description": "Atenção: aos tentar deletar quadras com played = yes, vai mostrar um erro de que a fila não existe. Quadras para serem deletas são obsoletas, entraram mas não foram para jogo.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Queue id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Queue deletada com sucesso"
+          },
+          "400": {
+            "description": "Esta Queue não existe"
+          }
+        }
+      } 
     },   
     "/queue/is-played/{id}": {
       "put": {

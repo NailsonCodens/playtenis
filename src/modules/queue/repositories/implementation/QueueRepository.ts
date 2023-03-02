@@ -112,6 +112,10 @@ class QueueRepository implements IQueueRepository {
 
     return court;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.softDelete(id);
+  }
 }
 
 export { QueueRepository };
