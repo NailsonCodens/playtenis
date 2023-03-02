@@ -61,6 +61,16 @@ io.on("connection", (socket) => {
     console.log(msg);
     io.emit("warningWebAppResponse", msg);
   });
+
+  socket.on("AbleButtonQeue", function (msg) {
+    console.log(msg);
+    io.emit("responseAbleButtonQeue", msg);
+  });
+
+  socket.on("hideModalWeb", function (msg) {
+    console.log(msg);
+    io.emit("responseHideModalWeb", msg);
+  });
 });
 
 httpServer.listen(3000, () => console.log("Server sis running!"));

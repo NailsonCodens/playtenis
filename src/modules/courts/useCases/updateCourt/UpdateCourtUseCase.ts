@@ -47,7 +47,10 @@ class UpdateCourtUseCase {
 
     const court = await this.courtsRepository.update({ id, name, status });
     socketio.emit("reloadApp", "Atualiza a quadra");
-    socketio.emit("WarningWebApp", name);
+
+    if (court.status) {
+      socketio.emit("AbleButtonQeue", court.status);
+    }
 
     return court;
   }
