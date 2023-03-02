@@ -11,7 +11,9 @@ class DeleteQueueController {
 
     await deleteQueueUseCase.execute(id);
 
-    response.status(200).send();
+    return response
+      .status(201)
+      .json({ message: "Fila de espera deletada com sucesso" });
   }
 }
 

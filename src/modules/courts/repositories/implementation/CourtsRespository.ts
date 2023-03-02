@@ -52,6 +52,15 @@ class CourtsRepository implements ICourtsRepository {
     return courts;
   }
 
+  async listCourtsWithStatusOk(): Promise<Courts[]> {
+    const courts = await this.repository.find({
+      where: {
+        status: "ok",
+      },
+    });
+    return courts;
+  }
+
   async findById(id: string): Promise<Courts> {
     const court = await this.repository.findOneBy({ id });
     return court;

@@ -9,6 +9,7 @@ interface ICourtsRepository {
   create({ name }: ICourtDTO): Promise<void>;
   update({ id, name }: ICourtDTO): Promise<Courts>;
   listWithGames(start_date: Date): Promise<Courts[]>;
+  listCourtsWithStatusOk(): Promise<Courts[]>;
   delete(id: string): Promise<void>;
 }
 

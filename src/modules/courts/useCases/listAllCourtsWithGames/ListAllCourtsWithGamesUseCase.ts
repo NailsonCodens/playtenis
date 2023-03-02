@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import { inject, injectable } from "tsyringe";
 
-import { CourtsRepository } from "@modules/courts/repositories/implementation/CourtsRespository";
+import { ICourtsRepository } from "@modules/courts/repositories/ICourtsRepository";
 
 @injectable()
 class ListAllCourtsWithGamesUseCase {
   constructor(
-    @inject("CourtsRepository") private courtsRepository: CourtsRepository
+    @inject("CourtsRepository") private courtsRepository: ICourtsRepository
   ) {}
 
   async execute() {
@@ -17,7 +17,18 @@ class ListAllCourtsWithGamesUseCase {
 
     const count = list.length;
 
-    return count;
+    const courtsOk = await this.courtsRepository.listCourtsWithStatusOk();
+
+    const amountCourtsOk = courtsOk.length;
+
+    console.log(amountCourtsOk);
+
+    const amounts = {
+      courtsOk: amountCourtsOk,
+      countWithGame: count,
+    };
+
+    return amounts;
   }
 }
 
