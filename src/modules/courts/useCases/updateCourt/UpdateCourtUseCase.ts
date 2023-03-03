@@ -33,16 +33,17 @@ class UpdateCourtUseCase {
       }
     }
 
-    const gameCourtCurrent = await this.gamesRepository.findCurrentGameByCourt({
-      court_id: courtAlredyExistsWithName.id,
-      date_start_game,
-    });
+    if (courtAlredyExistsWithName) {
+      const gameCourtCurrent =
+        await this.gamesRepository.findCurrentGameByCourt({
+          court_id: courtAlredyExistsWithName.id,
+          date_start_game,
+        });
 
-    console.log(gameCourtCurrent);
-
-    if (gameCourtCurrent) {
-      console.log("temgame");
-      await this.gamesRepository.update(gameCourtCurrent.id);
+      if (gameCourtCurrent) {
+        console.log("temgame");
+        await this.gamesRepository.update(gameCourtCurrent.id);
+      }
     }
 
     const court = await this.courtsRepository.update({ id, name, status });
