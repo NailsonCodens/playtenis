@@ -1513,6 +1513,100 @@
         } 
       } 
     },
+    "/games/{id}": {
+      "put": {
+        "tags": ["Interrompe o jogo em andamento"],
+        "summary": "adiciona off ao status do jogo.",
+        "description": "Enquanto estiver NULL, o jogo está em andamento. Quando off, é o por que o jogo foi interrompido. Um jogo só é finalizado e não interrompido, baseado no seu tempo decorrido ser finalizado. O status do jogo só será off por casos de interrupção.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Game id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }  
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "date_game": {
+                    "type": "string"
+                  },      
+                  "court_id": {
+                    "type": "string"
+                  },
+                  "modality_id": {
+                    "type": "string"
+                  },
+                  "modality_time": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "start_time_game": {
+                    "type": "string"
+                  },
+                  "end_time_game": {
+                    "type": "string"
+                  },
+                  "players": {
+                    "type": "array"
+                  },
+                  "courts": {
+                    "type": "object"
+                  },
+                  "modality": {
+                    "type": "object"
+                  }                                                                  
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sócio Alterada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "registration": {
+                        "type": "string"
+                      },
+                      "status":  {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }               
+          }
+        }         
+      }      
+    },    
     "/games/game-court-current/{id}": {
       "get": {
         "tags": ["Games"],
