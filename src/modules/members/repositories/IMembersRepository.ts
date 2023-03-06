@@ -12,7 +12,8 @@ interface IMembersRepository {
   list(
     perPage: number,
     page: number,
-    order: string
+    order: string,
+    search: string
   ): Promise<[Members[], number]>;
   update(data: ICreateMemberDTO): Promise<Members>;
   delete(id: string): Promise<void>;

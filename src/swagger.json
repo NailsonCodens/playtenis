@@ -754,7 +754,16 @@
             "schema": {
               "type": "string"
             }
-          }          
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "busca por nome e por matrícula, porém para matrículas o código precisa ser completo.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }                    
         ],        
         "responses": {
           "200": {

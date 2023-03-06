@@ -1,4 +1,4 @@
-import { In, Repository } from "typeorm";
+import { ILike, In, Repository } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICreateMemberDTO } from "@modules/members/dtos/ICreateMemberDTO";
@@ -93,8 +93,11 @@ class MembersRepository implements IMembersRepository {
   async list(
     perPage: number,
     page: number,
-    order: string
+    order: string,
+    search: string
   ): Promise<[Members[], number]> {
+    console.log(search);
+
     const ppage = perPage > 0 ? perPage : 10;
     const pageM = page > 0 ? page : 1;
 
@@ -104,13 +107,16 @@ class MembersRepository implements IMembersRepository {
       relations: {
         dependents: true,
       },
-      where: {
-        type: "member",
-      },
+      where: [
+        { type: "member", name: ILike(`%${search}%`) },
+        {
+          registration: ILike(`%${search}%`),
+        },
+      ],
       take: ppage,
       skip,
       order: {
-        id: order === "asc" ? "asc" : "desc",
+        name: order === "asc" ? "asc" : "desc",
       },
     });
     return members;

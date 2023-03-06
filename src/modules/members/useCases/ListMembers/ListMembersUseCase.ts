@@ -12,9 +12,15 @@ class ListMembersUseCase {
   async execute(
     perPage: number,
     page: number,
-    order: string
+    order: string,
+    search: string
   ): Promise<[Members[], number]> {
-    const members = await this.membersRepository.list(perPage, page, order);
+    const members = await this.membersRepository.list(
+      perPage,
+      page,
+      order,
+      search
+    );
 
     return members;
   }
