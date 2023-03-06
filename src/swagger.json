@@ -736,6 +736,26 @@
         "tags": ["Sócios do clube"],
         "summary": "Lista associados",
         "description": "Lista todos os associados cadastrados",
+        "parameters": [
+          {
+            "name": "perpage",
+            "in": "query",
+            "description": "numero de membros por página",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "numero da página",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }          
+        ],        
         "responses": {
           "200": {
             "description": "Success",
@@ -825,7 +845,7 @@
             "schema": {
               "type": "string"
             }  
-          }
+          }          
         ],
         "requestBody": {
           "content": {

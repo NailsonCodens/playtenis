@@ -9,7 +9,11 @@ interface IMembersRepository {
   findByRegistration(registration: string): Promise<Members>;
   findByIdNoRelation(id: string, type?: string): Promise<Members>;
   findByIds(ids: string[]): Promise<Members[]>;
-  list(): Promise<Members[]>;
+  list(
+    perPage: number,
+    page: number,
+    order: string
+  ): Promise<[Members[], number]>;
   update(data: ICreateMemberDTO): Promise<Members>;
   delete(id: string): Promise<void>;
 }

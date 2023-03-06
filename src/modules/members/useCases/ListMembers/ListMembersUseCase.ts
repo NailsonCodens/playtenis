@@ -9,8 +9,12 @@ class ListMembersUseCase {
     @inject("MembersRepository") private membersRepository: IMembersRepository
   ) {}
 
-  async execute(): Promise<Members[]> {
-    const members = await this.membersRepository.list();
+  async execute(
+    perPage: number,
+    page: number,
+    order: string
+  ): Promise<[Members[], number]> {
+    const members = await this.membersRepository.list(perPage, page, order);
 
     return members;
   }

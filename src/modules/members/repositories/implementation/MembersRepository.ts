@@ -90,13 +90,27 @@ class MembersRepository implements IMembersRepository {
     return member;
   }
 
-  async list(): Promise<Members[]> {
-    const members = await this.repository.find({
+  async list(
+    perPage: number,
+    page: number,
+    order: string
+  ): Promise<[Members[], number]> {
+    const ppage = perPage > 0 ? perPage : 10;
+    const pageM = page > 0 ? page : 1;
+
+    const skip = ppage * pageM - ppage;
+
+    const members = await this.repository.findAndCount({
       relations: {
         dependents: true,
       },
       where: {
         type: "member",
+      },
+      take: ppage,
+      skip,
+      order: {
+        id: order === "asc" ? "asc" : "desc",
       },
     });
     return members;

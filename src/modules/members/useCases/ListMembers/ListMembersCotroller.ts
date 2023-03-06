@@ -5,9 +5,15 @@ import { ListMembersUseCase } from "./ListMembersUseCase";
 
 class ListMembersController {
   async handle(request: Request, response: Response): Promise<Response> {
+    const { perpage, page, order } = request.query;
+
     const listMembersUseCase = container.resolve(ListMembersUseCase);
 
-    const members = await listMembersUseCase.execute();
+    const members = await listMembersUseCase.execute(
+      Number(perpage),
+      Number(page),
+      String(order)
+    );
 
     return response.status(201).json({ members });
   }
