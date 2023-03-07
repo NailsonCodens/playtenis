@@ -1,4 +1,4 @@
-import { LessThan, MoreThan, Repository } from "typeorm";
+import { LessThan, MoreThan, Repository, IsNull } from "typeorm";
 
 import { AppDataSource } from "@database/data-source";
 import { ICourtDTO } from "@modules/courts/dtos/ICourtDTO";
@@ -46,6 +46,7 @@ class CourtsRepository implements ICourtsRepository {
         games: {
           start_time_game: LessThan(start_date),
           end_time_game: MoreThan(start_date),
+          status: IsNull(),
         },
       },
     });
