@@ -11,10 +11,18 @@ Esta é uma api desenvolvida com as tecnologias para o backend de um aplicativo 
 ## Como funciona?
 A api PlayTenis gerencia os dados que trafegam no aplicativo. Quadras, jogadores, modalidades de jogos, estatus dos jogos no momento, interdição de jogos e muito mais.
 
+## Juntando todas as partes
+Para ter um funcionamento completo do projeto, você precisa também, baixar e executar a versão web e o aplicativo.
+
+<a href="https://github.com/NailsonCodens/playtenisapp" target="_blank">App PlayTenis</a>
+<a href="https://github.com/NailsonCodens/playtenisweb" target="_blank">PlayTenis Web</a>
+
+
+
 ## Tecnologias utilizadas
 O projeto foi desenvolvido usando as linguagens e ferramentas abaixo.
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![Ngix](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white) ![PostGreSql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![TypeScript](https://img.shields.io/badge/Ngrok-000?style=for-the-badge&logo=ngrok&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![Ngix](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white) ![PostGreSql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![TypeScript](https://img.shields.io/badge/Ngrok-000?style=for-the-badge&logo=ngrok&logoColor=white) ![Socket.io](https://img.shields.io/badge/Socket.io-fff?style=for-the-badge&logo=socket.io&logoColor=000)
 
 ## Como baixar o projeto usando Docker
 
