@@ -99,11 +99,11 @@ O projeto foi desenvolvido usando as linguagens e ferramentas abaixo.
 ```
 
 ## Print Insominia
-<img title="a title" alt="Alt text" src="https://github.com/NailsonCodens/rentx_final/blob/main/prints/ba686f34-348e-412e-b4c6-0165a794fbad.png?raw=true">
+<img title="a title" alt="Alt text" src="https://github.com/NailsonCodens/playtenis/blob/main/prints/print-insominia.jpeg?raw=true">
 
 
 ## Print Documentação api Swagger
-<img title="a title" alt="Alt text" src="https://github.com/NailsonCodens/rentx_final/blob/main/prints/2c6810c8-1de9-4134-ad12-63c12be67d42.png?raw=true
+<img title="a title" alt="Alt text" src="https://github.com/NailsonCodens/playtenis/blob/main/prints/9b370146-13ab-4293-a849-240735206c8e.png?raw=true
 ">
 
 </br></br></br>
