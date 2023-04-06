@@ -54,7 +54,7 @@ O projeto foi desenvolvido usando as linguagens e ferramentas abaixo.
 ```
 
 ## Ngrok
-Caso você precisa tornar esta api publica mesmo sem servidor, você pode usar um container do Ngrok que já está pronto para ser executado dentro do <a target="_blank" href="https://github.com/NailsonCodens/playtenis/blob/main/docker-compose.yml">docker-compose.yml</a>, bastando apenas descomentar as linhas necessárias:
+Caso você precisa tornar esta api publica mesmo sem servidor, você pode usar um container do Ngrok para fazer um tunelamento da api para algum endereço gerado  pelo Ngrok, que já está pronto para ser executado dentro do <a target="_blank" href="https://github.com/NailsonCodens/playtenis/blob/main/docker-compose.yml">docker-compose.yml</a>, bastando apenas descomentar as linhas necessárias:
 
 ##### Desconte este trecho do arquivo docker-compose.yml.
 ```
@@ -65,6 +65,11 @@ Caso você precisa tornar esta api publica mesmo sem servidor, você pode usar u
     #ports:
       #- "4040:4040"
     #command: ["ngrok", "http", "api_playtenis:3000"]
+```
+##### Acessando o ngrok para acessar o link tunelado
+###### ATENÇÃO: 4040 é a porta que foi escolhida pro Ngrok no container, assim como a porta da própria api em localhost.
+```bash
+    $ https://localhost:4040
 ```
 
 ## Funcionalidades
